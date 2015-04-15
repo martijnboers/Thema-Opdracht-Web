@@ -1,7 +1,6 @@
 package atd.database;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
@@ -11,10 +10,6 @@ public class Database {
 	private static Connection con = null;
 	private static Statement st = null;
 	private static ResultSet rs = null;
-
-	private static String url = "jdbc:mysql://db.plebian.nl:3306/autototaaldienst";
-	private static String user = "atd";
-	private static String password = "AutoTotaalDienst"; // VERANDER DIT
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
