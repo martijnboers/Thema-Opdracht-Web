@@ -1,6 +1,11 @@
 package atd.database;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
+import java.util.Properties;
 
 public class Database {
 	private static Connection con = null;
@@ -9,14 +14,21 @@ public class Database {
 
 	private static String url = "jdbc:mysql://db.plebian.nl:3306/autototaaldienst";
 	private static String user = "atd";
-	private static String password = "wachtwoord"; // VERANDER DIT
-	
+	private static String password = "AutoTotaalDienst"; // VERANDER DIT
+
+	private static Properties prop = new Properties();
+	private static InputStream config = null;
+
 	public static void main(String[] args) {
 		sqlQuery("SELECT VERSION()");
 	}
-	public static boolean sqlQuery(String input){
+
+	public static boolean sqlQuery(String input) {
 		try {
-			con = DriverManager.getConnection(url, user, password);
+			config = new FileInputStream("config/database.properties");
+			prop.load(config);
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery(input);
 
@@ -24,7 +36,7 @@ public class Database {
 				System.out.println(rs.getString(1));
 			}
 
-		} catch (SQLException ex) {
+		} catch (SQLException | IOException ex) {
 			System.out.println(ex.getMessage());
 			return false;
 		} finally {
