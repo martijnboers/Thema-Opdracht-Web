@@ -2,7 +2,7 @@ package atd.domein;
 
 import java.io.Serializable;
 
-public class Product implements Serializable{
+public class Onderdelen implements Serializable{
 	
 	private int artikelNummer;
 	private String naam;
@@ -11,7 +11,7 @@ public class Product implements Serializable{
 	private int voorraad;
 	private double prijs;
 	
-	public Product(int artikelNummer, String naam, String type,
+	public Onderdelen(int artikelNummer, String naam, String type,
 			int minimumVoorraad, int voorraad, double prijs) {
 		this.artikelNummer = artikelNummer;
 		this.naam = naam;
