@@ -1,13 +1,11 @@
 package atd.domein;
 
 public class User {
-	private int id;
 	private String naam;
 	private String username;
 	private Privilege priv;
 	
-	public User(int id, String naam, String username, Privilege priv){
-		this.setId(id);
+	public User(String naam, String username, Privilege priv){
 		this.naam = naam;
 		this.username = username;
 		this.priv = priv;
@@ -35,13 +33,5 @@ public class User {
 
 	public void setPriv(Privilege priv) {
 		this.priv = priv;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 }
