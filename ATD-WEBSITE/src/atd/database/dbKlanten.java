@@ -33,10 +33,6 @@ public class dbKlanten {
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
 
-	public static void main(String[] args) throws SQLException {
-		//
-	}
-
 	/**
 	 * Maakt nieuwe Klant gebruiker aan in database
 	 * @param klantIn	Ingegeven Klant
