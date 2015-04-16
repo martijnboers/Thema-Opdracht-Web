@@ -7,42 +7,27 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class Klant implements Serializable{
-    private String voornaam;
-    private String achternaam;
-    private String straatnaam;
-    private int huisnummer;
-    private String postcode;
-    private String plaatsnaam;
     private Auto deAuto;
+    private String email;
+    private String postcode;
+    private String volledigeNaam;
+    private String username;
     private ArrayList<Afspraak> alleAfspraken;
+    private Privilege priv;
 
-    public Klant(String voornaam, String achternaam, String straatnaam, int huisnummer, String postcode, String plaatsnaam, Auto deAuto)
+    public Klant(String volledigeNaam, String username, String postcode, String email, Auto deAuto, Privilege priv)
     {
-        this.voornaam = voornaam;
-        this.achternaam = achternaam;
-        this.straatnaam = straatnaam;
-        this.huisnummer = huisnummer;
         this.postcode = postcode;
+        this.volledigeNaam = volledigeNaam;
+        this.username = username;
         this.deAuto = deAuto;
-        this.plaatsnaam = plaatsnaam;
+        this.email = email;
+        this.priv = priv;
         alleAfspraken = new ArrayList<Afspraak>();
     }
-
-    public String getAchternaam()
-    {
-        return achternaam;
+    public Privilege getPriv(){
+    	return priv;
     }
-
-    public String getAdres()
-    {
-        return voornaam + " " + achternaam + "\n" + straatnaam + " " + huisnummer + "\n" + postcode + " " + plaatsnaam;
-    }
-
-    public Auto getAuto()
-    {
-        return deAuto;
-    }
-
     public boolean onderhoud() //Hier wordt gekeken of er onderhoud nodig is
     {
         boolean b = false;
@@ -99,9 +84,6 @@ public class Klant implements Serializable{
     {
         alleAfspraken.add(a);
     }
-
-
-
     public Afspraak laatsteOnderhoudsAfspraak()//In deze methode worden de onderhoudsafspraken gescheiden van de andere afspraken en vervolgens gesorteerd met ook weer een custom Comparator, om te kijken wat de laatste onderhoudsafspraak was
     {
 
@@ -130,6 +112,33 @@ public class Klant implements Serializable{
 
     public String toString()
     {
-        return voornaam + " " + achternaam;
+        return "";
     }
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPostcode() {
+		return postcode;
+	}
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+	public String getVolledigeNaam() {
+		return volledigeNaam;
+	}
+	public void setVolledigeNaam(String volledigeNaam) {
+		this.volledigeNaam = volledigeNaam;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public void setPriv(Privilege priv) {
+		this.priv = priv;
+	}
 }

@@ -9,7 +9,6 @@ public class Afspraak implements Serializable{
     private Monteur mon;
     private Calendar beginTijd;
     private Calendar eindTijd;
-    
 
     /**
      * Maakt een nieuwe afspraak. Let op: Voeg afspraak toe aan afsprakenbestand
@@ -105,6 +104,6 @@ public class Afspraak implements Serializable{
     }
     public String toString()
     {
-        return "Klant: " + klant.toString() + " \n" + klant.getAuto().getKenteken() + " \nMonteur: " + mon.getNaam() + " \n" + type ;
-    }
+		return "";
+	}
 }

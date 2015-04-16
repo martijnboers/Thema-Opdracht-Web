@@ -2,32 +2,20 @@ package atd.domein;
 
 import java.io.Serializable;
 
-public class Onderdelen implements Serializable{
-	
-	private int artikelNummer;
+public class Onderdelen implements Serializable {
+
 	private String naam;
 	private String type;
 	private int minimumVoorraad;
 	private int voorraad;
 	private double prijs;
-	
-	public Onderdelen(int artikelNummer, String naam, String type,
-			int minimumVoorraad, int voorraad, double prijs) {
-		this.artikelNummer = artikelNummer;
+
+	public Onderdelen(String naam, String type, int minimumVoorraad, int voorraad, double prijs) {
 		this.naam = naam;
 		this.type = type;
 		this.minimumVoorraad = minimumVoorraad;
 		this.voorraad = voorraad;
 		this.prijs = prijs;
-	}
-
-
-	public int getArtikelNummer() {
-		return artikelNummer;
-	}
-
-	public void setArtikelNummer(int artikelNummer) {
-		this.artikelNummer = artikelNummer;
 	}
 
 	public String getNaam() {
@@ -69,11 +57,4 @@ public class Onderdelen implements Serializable{
 	public void setPrijs(double prijs) {
 		this.prijs = prijs;
 	}
-	
-	public String toString(){
-		return "artnr: "+artikelNummer + "\nnaam: "+naam+"\ntype: "+type+"\nminvrd: "+minimumVoorraad+"\nvrd: "+voorraad+"\nprijs: "+prijs;
-	}
-	
-	
-
 }
