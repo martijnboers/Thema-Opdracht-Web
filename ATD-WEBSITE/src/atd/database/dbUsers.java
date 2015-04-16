@@ -16,6 +16,14 @@ import atd.domein.Privilege;
 import atd.domein.StatusDB;
 import atd.domein.User;
 
+/**
+ * @author Martijn
+ *  
+ * TODO: Heel veel code kan hieruit weg
+ * TODO: Auth moet veilig zijn (MD5 + SALT)
+ *
+ */
+
 public class dbUsers {
 	private static Connection con = null;
 	private static Statement st = null;
@@ -25,17 +33,10 @@ public class dbUsers {
 	private static InputStream config = null;
 
 	public static void main(String[] args) throws SQLException {
-		ArrayList<User> x1 = getAllUsers();
-		for (User s : x1) {
-			System.out.println(s.getNaam());
-		}
-		setUser(new User(0, "henkie2", "Henka", Privilege.ADMIN));
+		System.out.println(authUser("martijn", "pwd"));
 	}
 
-	public static StatusDB setUser(User usrIn) {
-//		if (userExist(usrIn.getUsername())){
-//			return StatusDB.EXIST;
-//		}
+	public static StatusDB setUser(User usrIn, String password) {
 		try {
 			config = new FileInputStream("config/database.properties");
 			prop.load(config);
@@ -49,13 +50,13 @@ public class dbUsers {
 			} else if (usrIn.getPriv() == Privilege.MONTEUR) {
 				priv = 2;
 			}
-			String query = "INSERT INTO Users(username, naam, priv) VALUES(?, ?, ?)";
+			String query = "INSERT INTO Users(username, naam, priv, password) VALUES(?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.setString(1, usrIn.getUsername());
 			preparedStmt.setString(2, usrIn.getNaam());
 			preparedStmt.setInt(3, priv);
+			preparedStmt.setString(4, password);
 			preparedStmt.execute();
-			return StatusDB.SUCCESS;
 
 		} catch (SQLException | IOException ex) {
 			System.out.println(ex.getMessage());
@@ -75,6 +76,7 @@ public class dbUsers {
 				System.out.println(ex.getMessage());
 			}
 		}
+		return StatusDB.UNKOWN;
 	}
 
 	/**
@@ -106,7 +108,7 @@ public class dbUsers {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				return new User(rs.getInt(1), rs.getString(2), rs.getString(3), priv);
+				return new User(rs.getString(2), rs.getString(3), priv);
 			}
 
 		} catch (SQLException | IOException ex) {
@@ -157,7 +159,7 @@ public class dbUsers {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				allUsers.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), priv));
+				allUsers.add(new User(rs.getString(2), rs.getString(3), priv));
 			}
 			return allUsers;
 
@@ -180,31 +182,71 @@ public class dbUsers {
 		}
 		return null;
 	}
-	
+
 	/**
-	 * Functie controlleerd of gebruiker bestaat, zo ja return hij true
+	 * Hiermee kun je eigen SQLQueries uitvoeren. Wordt voornamelijk gebruikt in Database.java
 	 * 
 	 * @param input
-	 *            id van gebruiker
+	 *            Rauwe SQL query, geen ; invoeren!
 	 * @return boolean
 	 */
-	public static boolean userExist(String username) {
+	public static boolean userExist(int id) {
 		try {
 			config = new FileInputStream("config/database.properties");
 			prop.load(config);
 			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
 					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Users WHERE username='" + username + "'");
-			if (rs.next()){
-				if (rs.getString(1).equals(null)){
+			rs = st.executeQuery("SELECT * FROM Users WHERE id='" + id + "'");
+			if (rs.next()) {
+				if (rs.getString(1).equals(null)) {
 					return false;
 				}
-				else {
+
+			}
+
+		} catch (SQLException | IOException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Controleert gebruikerswachtwoord met database, return als goed is true
+	 * 
+	 * @param username
+	 * @param password
+	 * @return boolean
+	 */
+	public static boolean authUser(String username, String password) {
+		try {
+			config = new FileInputStream("config/database.properties");
+			prop.load(config);
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT password FROM Users WHERE username='" + username + "'");
+			if (rs.next()) {
+				if (rs.getString(1).equals(password)) {
 					return true;
 				}
+			} else {
+				return false;
 			}
-			return false;
 
 		} catch (SQLException | IOException ex) {
 			System.out.println(ex.getMessage());
@@ -224,5 +266,57 @@ public class dbUsers {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Zoek gebruiker in database en return User object
+	 * 
+	 * @param username
+	 *            Gebruikernaam gebruiker
+	 * @param fullName
+	 *            Volledige naam gebruiker
+	 * @return
+	 */
+	public static User searchUser(String username, String fullName) {
+		try {
+			config = new FileInputStream("config/database.properties");
+			prop.load(config);
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT * FROM Users WHERE username='" + username + "' AND naam='" + fullName + "'");
+			if (rs.next()) {
+				Privilege priv = Privilege.KLANT;
+				switch (rs.getInt(4)) {
+				case 1:
+					priv = Privilege.ADMIN;
+					break;
+				case 2:
+					priv = Privilege.MONTEUR;
+					break;
+				case 3:
+					priv = Privilege.KLANT;
+				}
+				return new User(rs.getString(2), rs.getString(3), priv);
+			}
+
+		} catch (SQLException | IOException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		return null;
 	}
 }
