@@ -1,1 +1,112 @@
 @CHARSET "UTF-8";
+
+/* basic mockup styles */
+body {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+h1, h2, h3 {
+	font-family: 'Montserrat', sans-serif;
+}
+
+p {
+	font-family: 'open-sans', sans-serif;
+}
+
+.header, .marketing, .footer {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.header h3 {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 50px;
+	color: white;
+	line-height: 45px;
+}
+
+/* footer */
+.footer {
+	padding-top: 19px;
+	color: #777;
+	background-color: brand-dark;
+	border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow>hr {
+	margin: 30px 0;
+}
+
+/* promo style voor de index */
+.jumbotron {
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5;
+}
+/* index styles */
+.jumbotron .btn {
+	font-size: 21px;
+	padding: 14px 24px;
+}
+
+.marketing {
+	margin: 40px 0;
+}
+
+.marketing p+h4 {
+	margin-top: 28px;
+}
+
+.input-group {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+/* menu centreren */
+li {
+	text-align: center;
+}
+/* van de forms goed zetten */
+.input-group {
+	width: 100%;
+}
+
+.input-group .input-group-addon {
+	width: 120px;
+}
+
+.master-form {
+	margin-bottom: 15px;
+}
+
+/* laat de tabel clickable lijken */
+tr {
+	cursor: pointer;
+}
+
+/* voor het highlight effect in de voorraad beheer  */
+.highlight-table {
+	background-color: #d7ffcf;
+	border-bottom: 2px solid #5cb85c;
+}
+
+/* media queries */
+@media screen and (min-width: 768px) {
+	.container {
+		max-width: 730px;
+	}
+	.input-group {
+		width: 100%;
+	}
+	.input-group .input-group-addon {
+		width: 170px;
+	}
+	.header, .footer {
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.jumbotron {
+		border-bottom: 0;
+	}
+}
