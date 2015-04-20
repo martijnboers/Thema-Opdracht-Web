@@ -1,8 +1,10 @@
 package atd.database;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,9 +20,8 @@ import atd.domein.User;
 
 /**
  * @author Martijn
- *  
- * TODO: Heel veel code kan hieruit weg
- * TODO: Auth moet veilig zijn (MD5 + SALT)
+ * 
+ *         TODO: Heel veel code kan hieruit weg TODO: Auth moet veilig zijn (MD5 + SALT)
  *
  */
 
@@ -38,16 +39,18 @@ public class dbUsers {
 
 	/**
 	 * Maakt nieuwe User gebruiker aan in database
-	 * @param usrIn	Ingegeven user
-	 * @param password Wachtwoord word niet opgeslagen in User object
+	 * 
+	 * @param usrIn
+	 *            Ingegeven user
+	 * @param password
+	 *            Wachtwoord word niet opgeslagen in User object
 	 * @return
 	 */
 	public static StatusDB setUser(User usrIn, String password) {
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new FileInputStream("/config/database.properties");
 			prop.load(config);
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			int priv = 3;
@@ -95,10 +98,9 @@ public class dbUsers {
 	 */
 	public static User getUser(int id) throws SQLException {
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Users WHERE id='" + id + "'");
 
@@ -146,10 +148,9 @@ public class dbUsers {
 	public static ArrayList<User> getAllUsers() throws SQLException {
 		ArrayList<User> allUsers = new ArrayList<>();
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Users");
 
@@ -198,10 +199,9 @@ public class dbUsers {
 	 */
 	public static boolean userExist(int id) {
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Users WHERE id='" + id + "'");
 			if (rs.next()) {
@@ -240,10 +240,10 @@ public class dbUsers {
 	 */
 	public static boolean authUser(String username, String password) {
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT password FROM Users WHERE username='" + username + "'");
 			if (rs.next()) {
@@ -254,7 +254,7 @@ public class dbUsers {
 				return false;
 			}
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		} finally {
 			try {
@@ -283,14 +283,13 @@ public class dbUsers {
 	 *            Volledige naam gebruiker
 	 * @return
 	 */
-	public static User searchUser(String username, String fullName) {
+	public static User searchUser(String username) {
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Users WHERE username='" + username + "' AND naam='" + fullName + "'");
+			rs = st.executeQuery("SELECT * FROM Users WHERE username='" + username + "'");
 			if (rs.next()) {
 				Privilege priv = Privilege.KLANT;
 				switch (rs.getInt(4)) {

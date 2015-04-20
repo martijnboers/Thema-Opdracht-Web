@@ -31,7 +31,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <!--         gebruikers naam -->
-              <li><a href="#">gebruikersNaam</a></li>
+              <%@ page import="atd.domein.User" %>
+              <li><a href="#"><% User user = (User)request.getAttribute("user"); out.print(user.getNaam()); %></a></li>
             </ul>
           </div>
         </div>
