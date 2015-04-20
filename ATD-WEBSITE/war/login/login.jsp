@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login pagina</title>
@@ -51,11 +50,19 @@
 		<div class="master-login clearfix">
 			<h1>Login</h1>
 			<p>Log hier in om gebruik te maken van het ATD systeem</p>
-			<form action="Login.do" method="post">
+			<form action="/ATD-WEBSITE/Login.do" method="post">
 				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1">
-						Gebruikersnaam </span> <input name="username" type="text" class="form-control"
-						aria-describedby="basic-addon1">
+					<span class="input-group-addon" id="basic-addon1"> <%
+ 	String userName = "";
+ 	for (Cookie c : request.getCookies()) {
+ 		if (c.getName().equals("username")) {
+ 			userName = c.getValue();
+ 			break;
+ 		}
+ 	}
+ %> Gebruikersnaam
+					</span> <input name="username" type="text" class="form-control"
+						aria-describedby="basic-addon1" value="<%= userName %>">
 				</div>
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1">Wachtwoord</span>

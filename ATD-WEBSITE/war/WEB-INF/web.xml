@@ -18,6 +18,17 @@
  
  <servlet-mapping>
  	<servlet-name>Login</servlet-name>
- 	<url-pattern>/login/Login.do</url-pattern>
+ 	<url-pattern>/Login.do</url-pattern>
+ </servlet-mapping>
+
+  <servlet>
+ 	<servlet-name>Logout</servlet-name>
+ 	<servlet-class>atd.backend.Logout
+	</servlet-class>
+   </servlet>
+ 
+ <servlet-mapping>
+ 	<servlet-name>Logout</servlet-name>
+ 	<url-pattern>/Logout.do</url-pattern>
  </servlet-mapping>
 </web-app>

@@ -48,7 +48,7 @@ public class dbUsers {
 	 */
 	public static StatusDB setUser(User usrIn, String password) {
 		try {
-			config = new FileInputStream("/config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
 			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();

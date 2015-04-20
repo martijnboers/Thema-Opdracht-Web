@@ -17,7 +17,8 @@ public class Login extends HttpServlet {
 		
 		if (dbUsers.authUser(username, pass)) {
 			rd = req.getRequestDispatcher("/voorraad/voorraad.jsp");
-			req.setAttribute("user", dbUsers.searchUser(username));
+			req.getSession().setAttribute("username", username);
+			resp.addCookie(new Cookie("username", username));
 			rd.forward(req, resp);
 		} else {
 			rd = req.getRequestDispatcher("/login/login.jsp");
