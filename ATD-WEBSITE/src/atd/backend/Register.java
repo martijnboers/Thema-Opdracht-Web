@@ -32,7 +32,7 @@ public class Register extends HttpServlet {
 		}
 		String wachtwoord = org.apache.commons.codec.digest.DigestUtils.sha256Hex(req.getParameter("password"));
 		dbUsers.setUser(new User(realName, username, Privilege.ADMIN), wachtwoord);
-		
+		req.setAttribute("error", "<div class=\"alert alert-success\" role=\"alert\"> <span class=\"sr-only\">Info:</span> nieuwe gebruiker is aangemaakt </div>");
 		rd = req.getRequestDispatcher("login/login.jsp");
 		rd.forward(req, resp);
 	}

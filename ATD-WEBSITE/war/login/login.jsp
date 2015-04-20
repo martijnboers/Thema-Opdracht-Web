@@ -35,7 +35,7 @@
 					<input type="password" name="password" class="form-control"
 						aria-describedby="basic-addon1">
 				</div>
-				<input type="submit" class="btn btn-success navbar-btn pull-right"
+				<input type="submit" class="btn btn-success btn-lg pull-right"
 					value="aanmelden">
 				<%
 					Object msgs = request.getAttribute("error");

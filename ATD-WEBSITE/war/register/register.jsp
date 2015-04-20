@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Register</title>
+<title>Registreer</title>
 <jsp:include page="/include/style.jsp" />
 </head>
 <body>
@@ -32,8 +32,8 @@
 						placeholder="wachtwoord123" aria-describedby="basic-addon1">
 				</div>
 
-				<button type="button" value="Submit"
-					class="btn btn-success btn-lg pull-right">aanmelden</button>
+				<input type="submit" value="Registreren"
+					class="btn btn-success btn-lg pull-right">
 		</div>
 		</form>
 		<jsp:include page="/include/footer.jsp" />
