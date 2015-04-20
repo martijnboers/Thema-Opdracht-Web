@@ -12,6 +12,13 @@ import atd.database.dbUsers;
 import atd.domein.Privilege;
 import atd.domein.User;
 
+/**
+ * TODO: Register form voor Klant object toevoegen
+ * 
+ * Register formulier met SHA256 support
+ * @author martijn
+ *
+ */
 public class Register extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher rd = null;
