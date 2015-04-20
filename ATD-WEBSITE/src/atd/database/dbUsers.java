@@ -50,6 +50,7 @@ public class dbUsers {
 		try {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
@@ -67,7 +68,7 @@ public class dbUsers {
 			preparedStmt.setString(4, password);
 			preparedStmt.execute();
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 			return StatusDB.INCORRECT;
 		} finally {
@@ -100,6 +101,7 @@ public class dbUsers {
 		try {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Users WHERE id='" + id + "'");
@@ -119,7 +121,7 @@ public class dbUsers {
 				return new User(rs.getString(2), rs.getString(3), priv);
 			}
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		} finally {
 			try {
@@ -150,6 +152,7 @@ public class dbUsers {
 		try {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Users");
@@ -170,7 +173,7 @@ public class dbUsers {
 			}
 			return allUsers;
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		} finally {
 			try {
@@ -201,6 +204,7 @@ public class dbUsers {
 		try {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Users WHERE id='" + id + "'");
@@ -211,7 +215,7 @@ public class dbUsers {
 
 			}
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		} finally {
 			try {
@@ -287,6 +291,7 @@ public class dbUsers {
 		try {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Users WHERE username='" + username + "'");
@@ -305,7 +310,7 @@ public class dbUsers {
 				return new User(rs.getString(2), rs.getString(3), priv);
 			}
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		} finally {
 			try {

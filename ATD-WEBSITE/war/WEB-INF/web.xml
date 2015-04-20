@@ -31,4 +31,16 @@
  	<servlet-name>Logout</servlet-name>
  	<url-pattern>/Logout.do</url-pattern>
  </servlet-mapping>
+ 
+   <servlet>
+ 	<servlet-name>Register</servlet-name>
+ 	<servlet-class>atd.backend.Register
+	</servlet-class>
+   </servlet>
+ 
+ <servlet-mapping>
+ 	<servlet-name>Register</servlet-name>
+ 	<url-pattern>/Register.do</url-pattern>
+ </servlet-mapping>
+
 </web-app>

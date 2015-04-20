@@ -6,13 +6,18 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
-import atd.backend.*;
 import atd.database.dbUsers;
 
 public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String username = req.getParameter("username");
-		String pass = req.getParameter("password");
+		try {
+			Class.forName("org.apache.commons.codec.digest.DigestUtils");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String pass = org.apache.commons.codec.digest.DigestUtils.sha256Hex(req.getParameter("password"));
 		RequestDispatcher rd = null;
 		
 		if (dbUsers.authUser(username, pass)) {
