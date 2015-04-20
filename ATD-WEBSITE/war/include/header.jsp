@@ -16,13 +16,14 @@
 				<li><a href="#">Parkeren</a></li>
 				<li><a href="#">Reparatie</a></li>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Login</a></li>
-				<li>
-					<!-- aanmeld button -->
-					<button type="button" class="btn btn-success navbar-btn">aanmelden</button>
-				</li>
-			</ul>
+			<%
+				// Controlleer of ingelogd
+				if (request.getSession().getAttribute("username") == null) {
+					out.print("<ul class=\"nav navbar-nav navbar-right\"> <li><a href=\"#\">Login</a></li> <li> <!-- aanmeld button --> <button type=\"button\" class=\"btn btn-success navbar-btn\">aanmelden</button> </li> </ul>");
+				} else {
+					out.print("<ul class=\"nav navbar-nav navbar-right\"> <li><a href=\"/ATD-WEBSITE/Logout.do\">" + request.getSession().getAttribute("username") + "</a></li> </ul>");
+				}
+			%>
 		</div>
 	</div>
 	<!-- navbar-einde -->
