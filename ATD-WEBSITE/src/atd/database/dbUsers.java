@@ -118,7 +118,7 @@ public class dbUsers {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				return new User(rs.getString(2), rs.getString(3), priv);
+				return new User(rs.getInt(1), rs.getString(2), rs.getString(3), priv);
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
@@ -169,7 +169,7 @@ public class dbUsers {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				allUsers.add(new User(rs.getString(2), rs.getString(3), priv));
+				allUsers.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), priv));
 			}
 			return allUsers;
 
@@ -307,7 +307,7 @@ public class dbUsers {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				return new User(rs.getString(2), rs.getString(3), priv);
+				return new User(rs.getInt(1), rs.getString(2), rs.getString(3), priv);
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {

@@ -22,7 +22,7 @@ import atd.domein.User;
 public class Register extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher rd = null;
-		String username = req.getParameter("username");
+		String username = req.getParameter("username").toLowerCase();
 		String realName = req.getParameter("realname");
 		try {
 			Class.forName("org.apache.commons.codec.digest.DigestUtils");
@@ -31,7 +31,7 @@ public class Register extends HttpServlet {
 			e.printStackTrace();
 		}
 		String wachtwoord = org.apache.commons.codec.digest.DigestUtils.sha256Hex(req.getParameter("password"));
-		dbUsers.setUser(new User(realName, username, Privilege.ADMIN), wachtwoord);
+		dbUsers.setUser(new User(0, realName, username, Privilege.ADMIN), wachtwoord);
 		req.setAttribute("error", "<div class=\"alert alert-success\" role=\"alert\"> <span class=\"sr-only\">Info:</span> nieuwe gebruiker is aangemaakt </div>");
 		rd = req.getRequestDispatcher("login/login.jsp");
 		rd.forward(req, resp);

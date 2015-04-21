@@ -35,7 +35,7 @@ public class Login extends HttpServlet {
 	 * Vangt het POST request van de login.jsp en controlleerd deze met de database
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String username = req.getParameter("username");
+		String username = req.getParameter("username").toLowerCase();
 
 		try {
 			Class.forName("org.apache.commons.codec.digest.DigestUtils");
@@ -47,8 +47,8 @@ public class Login extends HttpServlet {
 		RequestDispatcher rd = null;
 
 		if (dbUsers.authUser(username, pass) || (username.equals(adminUser)) && req.getParameter("password").equals(adminPwd)) {
-			rd = req.getRequestDispatcher("/voorraad/voorraad.jsp");
-			req.getSession().setAttribute("username", username);
+			rd = req.getRequestDispatcher("/index.jsp");
+			req.getSession().setAttribute("username", dbUsers.searchUser(username));
 			resp.addCookie(new Cookie("username", username));
 			rd.forward(req, resp);
 		} else {

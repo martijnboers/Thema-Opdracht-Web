@@ -56,4 +56,21 @@
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>FilterForSecurity</filter-name>
+        <url-pattern>/index.jsp</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    
+    <servlet>
+        <servlet-name>BlogPost</servlet-name>
+        <servlet-class>atd.home.BlogPost
+	</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BlogPost</servlet-name>
+        <url-pattern>/BlogPost.do</url-pattern>
+    </servlet-mapping>
 </web-app>
