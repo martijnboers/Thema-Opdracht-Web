@@ -87,7 +87,7 @@ public class dbBerichten {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Berichten ORDER BY id DESC");
+			rs = st.executeQuery("SELECT * FROM Berichten ORDER BY id DESC LIMIT 0, 6");
 
 			while (rs.next()) {
 				alleBerichten.add(new Bericht(rs.getString(2), rs.getString(3), dbUsers.getUser(rs.getInt(4))));
