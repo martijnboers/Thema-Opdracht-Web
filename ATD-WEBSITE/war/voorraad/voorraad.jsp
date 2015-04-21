@@ -11,15 +11,6 @@
 </head>
 
 <body>
-
-	<%
-		// Securitycheck 
-		if (request.getSession().getAttribute("username") == null) {
-			response.sendRedirect("/ATD-WEBSITE/login/login.jsp");
-			return;
-		}
-	%>
-
 	<!--   main container -->
 	<div class="container">
 		<jsp:include page="/include/header.jsp" />

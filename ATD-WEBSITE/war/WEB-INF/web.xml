@@ -46,4 +46,14 @@
         <servlet-name>Register</servlet-name>
         <url-pattern>/Register.do</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>FilterForSecurity</filter-name>
+        <filter-class>atd.backend.SecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FilterForSecurity</filter-name>
+        <url-pattern>/voorraad/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
 </web-app>
