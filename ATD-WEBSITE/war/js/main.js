@@ -1,13 +1,24 @@
 // javascript voor de voorraad beheer!
 // dit vuld de velden met de waarde uit de tabel
 // scheeld een hoop werk
+
+console.log('main js');
+
+$('#checkbox').change(function() {
+	if (this.checked)
+		$('#auto').fadeOut('normal');
+	else
+		$('#auto').fadeIn('normal');
+
+});
+
 (function() {
 	if (window.addEventListener) {
 		window.addEventListener('load', run, false);
 	} else if (window.attachEvent) {
 		window.attachEvent('onload', run);
 	}
-	// zetten
+
 	function run() {
 		var t = document.getElementById('voorraad-table');
 		var rows = t.rows;
@@ -36,8 +47,7 @@ $("td").click(function() {
 	$(this).parents("tr").toggleClass("highlight-table", this.clicked);
 });
 
-//datepicker
-$(function()
-        {
-          $('#datetimepicker1').datetimepicker();
-        });
+// datepicker
+$(function() {
+	$('#datetimepicker1').datetimepicker();
+});
