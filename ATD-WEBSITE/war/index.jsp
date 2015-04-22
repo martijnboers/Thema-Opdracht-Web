@@ -18,25 +18,31 @@
 		<form action="/ATD-WEBSITE/BlogPost.do" method="POST">
 
 			<div class="input-group">
-				<span class="input-group-addon" style="width: 150px" id="basic-addon1"> Bericht </span> <input
-					type="text" class="form-control" name="bericht"
-					placeholder="Input text" aria-describedby="basic-addon1">
+				<span class="input-group-addon" style="width: 150px"
+					id="basic-addon1"> Bericht </span> <input type="text"
+					class="form-control" name="bericht" placeholder="Input text"
+					aria-describedby="basic-addon1">
 			</div>
 			<input type="submit" value="Bericht toevoegen"
 				class="btn btn-success btn-lg pull-right">
-	</form><br><br>
-	<h2>Nieuwe berichten:</h2>
-	<br>
+		</form>
+		<br>
+		<br>
+		<h2>Nieuwe berichten:</h2>
+		<br>
 
-	<%
-		for (Bericht ber : dbBerichten.getAllBerichten()) {
-			out.print("<div class=\"jumbotron\"></p><p><a style=\"float:right; display:inline-block; margin:-60px -47px;\" href=\"DeletePost.do?id="+ ber.getID() + "\">x</a>" + ber.getBericht() + "</p><p><em><small>- " + ber.getOwner().getNaam() + " @ "+ ber.getDate() +"</small></em></div><br>");
-			
-		}
-	%>
-	<jsp:include page="/include/footer.jsp" />
-	</div>
-	<script src="${pageContext.request.contextPath}/js/jquery-1.11.2.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+		<%
+			for (Bericht ber : dbBerichten.getAllBerichten()) {
+				out.print("<div class=\"jumbotron\"></p><p><a style=\"float:right; display:inline-block; margin:-60px -47px;\" href=\"DeletePost.do?id="
+						+ ber.getID()
+						+ "\">x</a>"
+						+ ber.getBericht()
+						+ "</p><p><em><small>- "
+						+ ber.getOwner().getNaam()
+						+ " @ " + ber.getDate() + "</small></em></div><br>");
+
+			}
+		%>
+		<jsp:include page="/include/footer.jsp" />
 </body>
 </html>
