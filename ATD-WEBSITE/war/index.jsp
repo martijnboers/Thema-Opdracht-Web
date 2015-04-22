@@ -30,7 +30,8 @@
 
 	<%
 		for (Bericht ber : dbBerichten.getAllBerichten()) {
-			out.print("<div class=\"jumbotron\"><p>" + ber.getBericht() + "</p><p><em><small>- " + ber.getOwner().getNaam() + " @ "+ ber.getDate() +"</small></em></p></div><br>");
+			out.print("<div class=\"jumbotron\"></p><p><a style=\"float:right; display:inline-block; margin:-60px -47px;\" href=\"DeletePost.do?id="+ ber.getID() + "\">x</a>" + ber.getBericht() + "</p><p><em><small>- " + ber.getOwner().getNaam() + " @ "+ ber.getDate() +"</small></em></div><br>");
+			
 		}
 	%>
 	<jsp:include page="/include/footer.jsp" />

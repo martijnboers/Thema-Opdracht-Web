@@ -7,6 +7,7 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import atd.database.dbLog;
 import atd.database.dbUsers;
 
 /**
@@ -50,6 +51,10 @@ public class Login extends HttpServlet {
 			rd = req.getRequestDispatcher("/index.jsp");
 			req.getSession().setAttribute("username", dbUsers.searchUser(username));
 			resp.addCookie(new Cookie("username", username));
+			java.util.Date dt = new java.util.Date();
+			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String currentTime = sdf.format(dt);
+			dbLog.setLog(req.getRemoteAddr(), currentTime, dbUsers.searchUser(username));
 			rd.forward(req, resp);
 		} else {
 			rd = req.getRequestDispatcher("/login/login.jsp");
