@@ -14,9 +14,10 @@ public class SecurityFilter implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest r2 = (HttpServletRequest) req;
 		HttpServletResponse httpResponse = (HttpServletResponse) resp;
-
+		
 		if (r2.getSession().getAttribute("username") == null) {
-			httpResponse.sendRedirect("/ATD-WEBSITE/login/login.jsp");
+			r2.setAttribute("redirect", r2.getRequestURI());
+			r2.getRequestDispatcher("/login/login.jsp").forward(req, resp);
 			return;
 		} else {
 			chain.doFilter(req, resp);

@@ -20,10 +20,12 @@
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1"> <%
  	String userName = "";
- 	for (Cookie c : request.getCookies()) {
- 		if (c.getName().equals("username")) {
- 			userName = c.getValue();
- 			break;
+ 	if (request.getCookies() != null) {
+ 		for (Cookie c : request.getCookies()) {
+ 			if (c.getName().equals("username")) {
+ 				userName = c.getValue();
+ 				break;
+ 			}
  		}
  	}
  %> Gebruikersnaam
