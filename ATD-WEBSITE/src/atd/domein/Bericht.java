@@ -3,11 +3,13 @@ package atd.domein;
 import atd.domein.User;
 
 public class Bericht {
+	private int id;
 	private String bericht;
 	private User owner;
 	private String date;
 	
-	public Bericht(String bericht, String date, User owner){
+	public Bericht(int id, String bericht, String date, User owner){
+		this.id = id;
 		this.date = date;
 		this.setBericht(bericht);
 		this.setOwner(owner);
@@ -31,5 +33,9 @@ public class Bericht {
 
 	public String getDate() {
 		return date;
+	}
+	
+	public int getID(){
+		return id;
 	}
 }

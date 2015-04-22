@@ -73,4 +73,14 @@
         <servlet-name>BlogPost</servlet-name>
         <url-pattern>/BlogPost.do</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DeletePost</servlet-name>
+        <servlet-class>atd.home.DeletePost
+	</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeletePost</servlet-name>
+        <url-pattern>/DeletePost.do</url-pattern>
+    </servlet-mapping>
 </web-app>
