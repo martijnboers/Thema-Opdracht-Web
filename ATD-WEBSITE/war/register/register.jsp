@@ -9,10 +9,11 @@
 <jsp:include page="/include/style.jsp" />
 </head>
 <body>
-	<div class="container">
+	
 		<jsp:include page="/include/header.jsp" />
 		<div class="master-login clearfix">
 			<h1>Registreer</h1>
+			<input type="checkbox" checked data-toggle="toggle">
 			<p>Maak hier een account voor het ATD systeem</p>
 			<form action="/ATD-WEBSITE/Register.do" method="POST">
 
@@ -34,11 +35,9 @@
 
 				<input type="submit" value="Registreren"
 					class="btn btn-success btn-lg pull-right">
-		</div>
-		</form>
+		
+
 		<jsp:include page="/include/footer.jsp" />
-	</div>
-	<script src="${pageContext.request.contextPath}/js/jquery-1.11.2.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+
 </body>
 </html>

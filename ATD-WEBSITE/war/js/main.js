@@ -35,3 +35,9 @@ $("td").click(function() {
 	$(this).closest("tr").siblings().removeClass("highlight-table");
 	$(this).parents("tr").toggleClass("highlight-table", this.clicked);
 });
+
+//datepicker
+$(function()
+        {
+          $('#datetimepicker1').datetimepicker();
+        });
