@@ -47,26 +47,27 @@
 					type="text" class="form-control" placeholder="yourmail@gmail.com"
 					aria-describedby="basic-addon1">
 			</div>
-			<div id="auto">
-				<h2>De auto</h2>
-				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1 "> Kenteken
-					</span> <input type="text" class="form-control" placeholder="15-XS-2"
-						aria-describedby="basic-addon1">
-				</div>
-				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1 ifemploye">
-						Merk </span> <input type="text" class="form-control" placeholder="audi"
-						aria-describedby="basic-addon1">
-				</div>
-				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1 ifemploye">
-						Type </span> <input type="text" class="form-control" placeholder="cabrio"
-						aria-describedby="basic-addon1">
-				</div>
+
+			<h2>De auto</h2>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1"> Kenteken </span>
+				<input type="text" id="block1" class="block form-control"
+					placeholder="15-XS-2" aria-describedby="basic-addon1">
 			</div>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1"> Merk </span> <input
+					type="text" id="block2" class="block form-control" placeholder="audi"
+					aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1"> Type </span> <input
+					type="text" id="block3" class="block form-control" placeholder="cabrio"
+					aria-describedby="basic-addon1">
+			</div>
+
 			<button type="button" value="Registreren"
 				class="btn btn-success btn-lg pull-right">aanmelden</button>
+		</form>
 	</div>
 	</form>
 

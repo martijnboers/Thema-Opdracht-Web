@@ -5,11 +5,16 @@
 console.log('main js');
 
 $('#checkbox').change(function() {
-	if (this.checked)
-		$('#auto').fadeOut('normal');
-	else
-		$('#auto').fadeIn('normal');
+	if (this.checked) {
+		document.getElementById('block1').disabled = true;
+		document.getElementById('block2').disabled = true;
+		document.getElementById('block3').disabled = true;
+	} else {
 
+		document.getElementById('block1').disabled = false;
+		document.getElementById('block2').disabled = false;
+		document.getElementById('block3').disabled = false;
+	}
 });
 
 (function() {
