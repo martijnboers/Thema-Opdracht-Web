@@ -51,7 +51,7 @@ public class Login extends HttpServlet {
 
 		if (dbUsers.authUser(username, pass) || (username.equals(adminUser)) && req.getParameter("password").equals(adminPwd)) {
 			// Controlleer of het filter een redirect gezet heeft
-			if (req.getAttribute("redirect").equals("")) {
+			if (req.getAttribute("redirect") == null || req.getAttribute("redirect").equals("")) {
 				rd = req.getRequestDispatcher("/index.jsp");
 			} else {
 				rd = req.getRequestDispatcher((String) req.getAttribute("redirect"));
