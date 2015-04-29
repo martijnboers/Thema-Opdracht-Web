@@ -74,6 +74,17 @@
         <url-pattern>/BlogPost.do</url-pattern>
     </servlet-mapping>
     
+    
+    <servlet>
+        <servlet-name>Voorraad</servlet-name>
+        <servlet-class>atd.vorraad.Voorraad
+	</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Voorraad</servlet-name>
+        <url-pattern>/Voorraad.do</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>DeletePost</servlet-name>
         <servlet-class>atd.home.DeletePost

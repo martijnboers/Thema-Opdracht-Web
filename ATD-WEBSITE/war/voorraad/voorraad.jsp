@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="atd.backend.*, atd.database.dbOnderdelen, atd.domein.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -43,10 +46,12 @@
 						placeholder="geef aantal op"> <span
 						class="input-group-btn">
 						<button class="btn btn-success" type="button">bestellen</button>
+
 					</span>
 				</div>
 			</div>
 			<table class="table table-default" id="voorraad-table">
+
 				<thead>
 					<tr>
 						<th>Naam</th>
@@ -55,11 +60,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Wiel</td>
-						<td>32</td>
-						<td>$43.40</td>
-					</tr>
+					<c:forEach var="Onderdeel"
+						items="${dbOnderdelen.getAllOnderdelen()}">
+						<tr>
+							<td>${Onderdeel.naam}</td>
+							<td>${Onderdeel.voorraad }</td>
+							<td>${Onderdeel.prijs }</td>
+						</tr>
+					</c:forEach>
+
 					<tr>
 						<td>auto dak</td>
 						<td>43</td>
