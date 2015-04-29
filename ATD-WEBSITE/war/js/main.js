@@ -9,11 +9,15 @@ $('#checkbox').change(function() {
 		document.getElementById('block1').disabled = true;
 		document.getElementById('block2').disabled = true;
 		document.getElementById('block3').disabled = true;
+		document.getElementById('postcode').disabled = true;
+		document.getElementById('email').disabled = true;
 	} else {
 
 		document.getElementById('block1').disabled = false;
 		document.getElementById('block2').disabled = false;
 		document.getElementById('block3').disabled = false;
+		document.getElementById('postcode').disabled = false;
+		document.getElementById('email').disabled = false;
 	}
 });
 

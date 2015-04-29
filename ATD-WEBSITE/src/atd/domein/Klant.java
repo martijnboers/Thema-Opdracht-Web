@@ -7,7 +7,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class Klant implements Serializable{
-    private Auto deAuto;
+    private int id;
+	private Auto deAuto;
     private String email;
     private String postcode;
     private String volledigeNaam;
@@ -15,12 +16,13 @@ public class Klant implements Serializable{
     private ArrayList<Afspraak> alleAfspraken;
     private Privilege priv;
 
-    public Klant(String volledigeNaam, String username, String postcode, String email, Auto deAuto, Privilege priv)
+    public Klant(int id, String volledigeNaam, String username, String postcode, String email, Auto deAuto, Privilege priv)
     {
+    	this.id = id;
         this.postcode = postcode;
         this.volledigeNaam = volledigeNaam;
         this.username = username;
-        this.deAuto = deAuto;
+        this.setDeAuto(deAuto);
         this.email = email;
         this.priv = priv;
         alleAfspraken = new ArrayList<Afspraak>();
@@ -140,5 +142,14 @@ public class Klant implements Serializable{
 	}
 	public void setPriv(Privilege priv) {
 		this.priv = priv;
+	}
+	public Auto getDeAuto() {
+		return deAuto;
+	}
+	public void setDeAuto(Auto deAuto) {
+		this.deAuto = deAuto;
+	}
+	public int getId() {
+		return id;
 	}
 }

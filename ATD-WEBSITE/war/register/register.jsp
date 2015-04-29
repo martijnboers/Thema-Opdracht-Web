@@ -13,60 +13,59 @@
 	<jsp:include page="/include/header.jsp" />
 	<div class="master-login clearfix">
 		<h1>Registreer</h1>
-		<p>
-			<input type="checkbox" id="checkbox"> als werknemen
-			aanmelden?
-		</p>
 		<form action="/ATD-WEBSITE/Register.do" method="POST">
-
+			<p>
+				<input type="checkbox" id="checkbox" name="checkbox"> als werknemen
+				aanmelden?
+			</p>
 			<p>Om een afraak te maken bij ATD dient u een account aan te
 				maken, Geef hier onder uw gegevens op een gewenste datum voor een
 				afspraak</p>
 			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1"> Username </span>
-				<input type="text" class="form-control" placeholder="Jantje32"
+				<span class="input-group-addon"> Username </span>
+				<input name="username" type="text" class="form-control" placeholder="Jantje32"
 					aria-describedby="basic-addon1">
 			</div>
 			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1"> Password </span>
-				<input type="password" class="form-control"
+				<span class="input-group-addon"> Password </span>
+				<input name="password" type="password" class="form-control"
 					placeholder="wachtwoord123" aria-describedby="basic-addon1">
 			</div>
 			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1"> Naam </span> <input
-					type="text" class="form-control" placeholder="Jan kees"
+				<span class="input-group-addon"> Naam </span> <input
+					 name="realname" type="text" class="form-control" placeholder="Jan kees"
 					aria-describedby="basic-addon1">
 			</div>
 			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1">Postcode</span> <input
-					type="text" class="form-control" placeholder="1541TW"
+				<span class="input-group-addon">Postcode</span> <input
+					type="text" class="form-control" id="postcode" name="postcode" placeholder="1541TW"
 					aria-describedby="basic-addon1">
 			</div>
 			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1">Email</span> <input
-					type="text" class="form-control" placeholder="yourmail@gmail.com"
+				<span class="input-group-addon">Email</span> <input
+					type="text" class="form-control" id="email" name="email" placeholder="yourmail@gmail.com"
 					aria-describedby="basic-addon1">
 			</div>
 
 			<h2>De auto</h2>
 			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1"> Kenteken </span>
-				<input type="text" id="block1" class="block form-control"
+				<span class="input-group-addon"> Kenteken </span>
+				<input type="text" id="block1" name="kenteken" class="block form-control"
 					placeholder="15-XS-2" aria-describedby="basic-addon1">
 			</div>
 			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1"> Merk </span> <input
-					type="text" id="block2" class="block form-control" placeholder="audi"
-					aria-describedby="basic-addon1">
+				<span class="input-group-addon"> Merk </span> <input
+					type="text" id="block2" class="block form-control"
+					placeholder="audi" name="merk" aria-describedby="basic-addon1">
 			</div>
 			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1"> Type </span> <input
-					type="text" id="block3" class="block form-control" placeholder="cabrio"
-					aria-describedby="basic-addon1">
+				<span class="input-group-addon"> Type </span> <input
+					type="text" id="block3" name="type" class="block form-control"
+					placeholder="cabrio" aria-describedby="basic-addon1">
 			</div>
 
-			<button type="button" value="Registreren"
-				class="btn btn-success btn-lg pull-right">aanmelden</button>
+			<input type="submit" value="Registreren"
+				class="btn btn-success btn-lg pull-right">
 		</form>
 	</div>
 	</form>

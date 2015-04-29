@@ -3,6 +3,7 @@ package atd.database;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,7 +16,6 @@ import java.util.Properties;
 import atd.domein.Privilege;
 import atd.domein.StatusDB;
 import atd.domein.Klant;
-import atd.domein.Auto;
 
 /**
  * @author Martijn
@@ -41,8 +41,9 @@ public class dbKlanten {
 	 */
 	public static StatusDB setKlant(Klant klantIn, String password) {
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
 					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
@@ -60,11 +61,11 @@ public class dbKlanten {
 			preparedStmt.setString(3, klantIn.getVolledigeNaam());
 			preparedStmt.setString(4, klantIn.getPostcode());
 			preparedStmt.setString(5, klantIn.getEmail());
-			preparedStmt.setInt(6, 1);
+			preparedStmt.setInt(6, klantIn.getDeAuto().getId());
 			preparedStmt.setInt(7, priv);
 			preparedStmt.execute();
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 			return StatusDB.INCORRECT;
 		} finally {
@@ -95,8 +96,9 @@ public class dbKlanten {
 	 */
 	public static Klant getKlant(int id) throws SQLException {
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
 					prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
@@ -114,10 +116,10 @@ public class dbKlanten {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				return new Klant(rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv);
+				return new Klant(rs.getInt(0), rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv);
 			}
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		} finally {
 			try {
@@ -146,8 +148,9 @@ public class dbKlanten {
 	public static ArrayList<Klant> getAllKlanten() throws SQLException {
 		ArrayList<Klant> allKlanten = new ArrayList<>();
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
 					prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
@@ -165,11 +168,11 @@ public class dbKlanten {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				allKlanten.add(new Klant(rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv));
+				allKlanten.add(new Klant(rs.getInt(0), rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv));
 			}
 			return allKlanten;
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		} finally {
 			try {
@@ -198,12 +201,13 @@ public class dbKlanten {
 	 */
 	public static boolean KlantExist(int id) {
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
 					prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Klants WHERE id='" + id + "'");
+			rs = st.executeQuery("SELECT * FROM Klanten WHERE id='" + id + "'");
 			if (rs.next()) {
 				if (rs.getString(1).equals(null)) {
 					return false;
@@ -211,7 +215,7 @@ public class dbKlanten {
 
 			}
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		} finally {
 			try {
@@ -240,8 +244,9 @@ public class dbKlanten {
 	 */
 	public static boolean authKlant(String username, String password) {
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
 					prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
@@ -254,7 +259,7 @@ public class dbKlanten {
 				return false;
 			}
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		} finally {
 			try {
@@ -283,14 +288,15 @@ public class dbKlanten {
 	 *            Volledige naam gebruiker
 	 * @return
 	 */
-	public static Klant searchKlant(String Klantname, String fullName) {
+	public static Klant searchKlant(String Klantname) {
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
 					prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Klanten WHERE username='" + Klantname + "' AND naam='" + fullName + "'");
+			rs = st.executeQuery("SELECT * FROM Klanten WHERE username='" + Klantname + "'");
 			if (rs.next()) {
 				Privilege priv = Privilege.KLANT;
 				switch (rs.getInt(4)) {
@@ -303,10 +309,10 @@ public class dbKlanten {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				return new Klant(rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv);
+				return new Klant(rs.getInt(0), rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv);
 			}
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		} finally {
 			try {

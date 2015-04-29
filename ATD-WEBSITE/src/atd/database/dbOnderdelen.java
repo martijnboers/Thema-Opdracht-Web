@@ -3,6 +3,7 @@ package atd.database;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -40,8 +41,9 @@ public class dbOnderdelen {
 	 */
 	public static StatusDB setOnderdeel(Onderdeel onderdeelIn) {
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
 					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
@@ -54,7 +56,7 @@ public class dbOnderdelen {
 			preparedStmt.setDouble(4, onderdeelIn.getPrijs());
 			preparedStmt.execute();
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 			return StatusDB.INCORRECT;
 		} finally {
@@ -83,10 +85,11 @@ public class dbOnderdelen {
 	 * @return Onderdeel
 	 * @throws SQLException
 	 */
-	public static Onderdeel getKlant(int id) throws SQLException {
+	public static Onderdeel getOnderdeel(int id) throws SQLException {
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
 					prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
@@ -96,7 +99,7 @@ public class dbOnderdelen {
 				return new Onderdeel(rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDouble(5));
 			}
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		} finally {
 			try {
@@ -125,8 +128,9 @@ public class dbOnderdelen {
 	public static ArrayList<Onderdeel> getAllOnderdelen() throws SQLException {
 		ArrayList<Onderdeel> alleOnderdelen = new ArrayList<>();
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
 					prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
@@ -137,7 +141,7 @@ public class dbOnderdelen {
 			}
 			return alleOnderdelen;
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		} finally {
 			try {
@@ -164,8 +168,9 @@ public class dbOnderdelen {
 	 */
 	public static StatusDB updateOnderdeel(Onderdeel onderdeelIn) {
 		try {
-			config = new FileInputStream("config/database.properties");
+			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
 					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
@@ -178,7 +183,7 @@ public class dbOnderdelen {
 			preparedStmt.setDouble(4, onderdeelIn.getPrijs());
 			preparedStmt.execute();
 
-		} catch (SQLException | IOException ex) {
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
 			return StatusDB.INCORRECT;
 		} finally {

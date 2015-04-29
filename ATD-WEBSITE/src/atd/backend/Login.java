@@ -7,6 +7,7 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import atd.database.dbKlanten;
 import atd.database.dbLog;
 import atd.database.dbUsers;
 
@@ -62,7 +63,21 @@ public class Login extends HttpServlet {
 			java.util.Date dt = new java.util.Date();
 			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String currentTime = sdf.format(dt);
-			dbLog.setLog(req.getRemoteAddr(), currentTime, dbUsers.searchUser(username));
+			dbLog.setLog(req.getRemoteAddr(), currentTime, dbUsers.searchUser(username), null);
+			rd.forward(req, resp);
+		} else if (dbKlanten.authKlant(username, pass)){
+			if (req.getAttribute("redirect") == null || req.getAttribute("redirect").equals("")) {
+				rd = req.getRequestDispatcher("/index.jsp");
+			} else {
+				rd = req.getRequestDispatcher((String) req.getAttribute("redirect"));
+				req.removeAttribute("redirect");
+			}
+			req.getSession().setAttribute("username", dbUsers.searchUser(username));
+			resp.addCookie(new Cookie("username", username));
+			java.util.Date dt = new java.util.Date();
+			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String currentTime = sdf.format(dt);
+			dbLog.setLog(req.getRemoteAddr(), currentTime, null, dbKlanten.searchKlant(username));
 			rd.forward(req, resp);
 		} else {
 			rd = req.getRequestDispatcher("/login/login.jsp");

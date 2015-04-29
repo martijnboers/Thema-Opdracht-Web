@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import atd.domein.Klant;
 import atd.domein.StatusDB;
 import atd.domein.User;
 
@@ -34,7 +35,7 @@ public class dbLog {
 	 * 
 	 * @return StatusDB Status
 	 */
-	public static StatusDB setLog(String ip, String tijd, User user) {
+	public static StatusDB setLog(String ip, String tijd, User user, Klant klant) {
 		try {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
@@ -42,11 +43,18 @@ public class dbLog {
 			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
-			String query = "INSERT INTO Log(IP, Tijd, User) VALUES(?, ?, ?)";
+			String query = "INSERT INTO Log(IP, Tijd, User, Klant) VALUES(?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.setString(1, ip);
 			preparedStmt.setString(2, tijd);
-			preparedStmt.setInt(3, user.getId());
+			if (user != null){
+				preparedStmt.setInt(3, user.getId());
+				preparedStmt.setInt(4, 0);
+			}
+			else {
+				preparedStmt.setInt(3, 0);
+				preparedStmt.setInt(4, klant.getId());
+			}
 			preparedStmt.execute();
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
