@@ -44,8 +44,7 @@ public class dbOnderdelen {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			String query = "INSERT INTO Onderdeel(Naam, Type, Voorraad, Prijs) VALUES(?, ?, ?, ?)";
@@ -90,8 +89,7 @@ public class dbOnderdelen {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Onderdeel WHERE id='" + id + "'");
 
@@ -131,8 +129,7 @@ public class dbOnderdelen {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Onderdeel");
 
@@ -171,8 +168,7 @@ public class dbOnderdelen {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			String query = "UPDATE Onderdeel(Naam, Type, Voorraad, Prijs) VALUES(?, ?, ?, ?)";

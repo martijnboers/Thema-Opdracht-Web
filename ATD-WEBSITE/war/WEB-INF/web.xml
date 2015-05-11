@@ -11,6 +11,10 @@
         <welcome-file>default.htm</welcome-file>
         <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>
+   <listener>
+   <listener-class>atd.backend.MyContextListener</listener-class>
+   </listener>
+   
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>atd.backend.Login

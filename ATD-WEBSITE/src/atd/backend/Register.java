@@ -71,4 +71,5 @@ public class Register extends HttpServlet {
 			rd.forward(req, resp);
 		}
 	}
+	//public sendRegMail(String username)
 }

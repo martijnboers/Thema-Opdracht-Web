@@ -19,9 +19,8 @@ import atd.domein.Klant;
 
 /**
  * @author Martijn
- *  
- * TODO: Heel veel code kan hieruit weg
- * TODO: Auth moet veilig zijn (MD5 + SALT)
+ * 
+ *         TODO: Heel veel code kan hieruit weg TODO: Auth moet veilig zijn (MD5 + SALT)
  *
  */
 
@@ -35,8 +34,11 @@ public class dbKlanten {
 
 	/**
 	 * Maakt nieuwe Klant gebruiker aan in database
-	 * @param klantIn	Ingegeven Klant
-	 * @param password Wachtwoord word niet opgeslagen in User object
+	 * 
+	 * @param klantIn
+	 *            Ingegeven Klant
+	 * @param password
+	 *            Wachtwoord word niet opgeslagen in User object
 	 * @return StatusDB Status
 	 */
 	public static StatusDB setKlant(Klant klantIn, String password) {
@@ -44,8 +46,7 @@ public class dbKlanten {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			int priv = 3;
@@ -99,14 +100,13 @@ public class dbKlanten {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Klanten WHERE id='" + id + "'");
 
 			if (rs.next()) {
 				Privilege priv = Privilege.KLANT;
-				switch (rs.getInt(4)) {
+				switch (rs.getInt(7)) {
 				case 1:
 					priv = Privilege.ADMIN;
 					break;
@@ -151,14 +151,13 @@ public class dbKlanten {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Klanten");
 
 			while (rs.next()) {
 				Privilege priv = Privilege.KLANT;
-				switch (rs.getInt(4)) {
+				switch (rs.getInt(7)) {
 				case 1:
 					priv = Privilege.ADMIN;
 					break;
@@ -204,15 +203,13 @@ public class dbKlanten {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Klanten WHERE id='" + id + "'");
 			if (rs.next()) {
 				if (rs.getString(1).equals(null)) {
 					return false;
 				}
-
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
@@ -247,10 +244,9 @@ public class dbKlanten {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT password FROM Klanten WHERE Klantname='" + username + "'");
+			rs = st.executeQuery("SELECT password FROM Klanten WHERE Username='" + username + "'");
 			if (rs.next()) {
 				if (rs.getString(1).equals(password)) {
 					return true;
@@ -293,13 +289,12 @@ public class dbKlanten {
 			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"),
-					prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Klanten WHERE username='" + Klantname + "'");
+			rs = st.executeQuery("SELECT * FROM Klanten WHERE Username='" + Klantname + "'");
 			if (rs.next()) {
 				Privilege priv = Privilege.KLANT;
-				switch (rs.getInt(4)) {
+				switch (rs.getInt(7)) {
 				case 1:
 					priv = Privilege.ADMIN;
 					break;
