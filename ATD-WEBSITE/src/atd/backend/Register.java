@@ -93,7 +93,7 @@ public class Register extends HttpServlet {
 			msg.setSentDate(Calendar.getInstance().getTime());
 			msg.setText("Beste " + k.getVolledigeNaam() + ", \n\n Uw account " + k.getEmail() + " is aangemaakt\n");
 			// TODO: Heeft OAUTH nodig, maarja we zijn al niet erg netjes met wachtwoorden
-			Transport.send(msg, "autototaaldienst.robot@gmail.com", "wautototaaldienst.robot!!");
+			Transport.send(msg, "autototaaldienst.robot@gmail.com", "autototaaldienst.robot!!");
 		} catch (Exception e) {
 			Logger.getLogger("sp.lesson5").warning("send failed: " + e.getMessage());
 		}
