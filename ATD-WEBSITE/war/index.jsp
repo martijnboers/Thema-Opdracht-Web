@@ -26,20 +26,13 @@
 			<input type="submit" value="Bericht toevoegen"
 				class="btn btn-success btn-lg pull-right">
 		</form>
-		<br>
-		<br>
+		<br> <br>
 		<h2>Nieuwe berichten:</h2>
 		<br>
 
 		<%
 			for (Bericht ber : dbBerichten.getAllBerichten()) {
-				out.print("<div class=\"jumbotron\"></p><p><a style=\"float:right; display:inline-block; margin:-60px -47px;\" href=\"DeletePost.do?id="
-						+ ber.getID()
-						+ "\">x</a>"
-						+ ber.getBericht()
-						+ "</p><p><em><small>- "
-						+ ber.getOwner().getNaam()
-						+ " @ " + ber.getDate() + "</small></em></div><br>");
+				out.print("<div class=\"jumbotron\"></p><p><a style=\"float:right; display:inline-block; margin:-60px -47px;\" href=\"DeletePost.do?id=" + ber.getID() + "\">x</a>" + ber.getBericht() + "</p><p><em><small>- " + ber.getOwner().getNaam() + " @ " + ber.getDate() + "</small></em></div><br>");
 
 			}
 		%>

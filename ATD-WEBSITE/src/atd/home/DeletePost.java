@@ -30,7 +30,7 @@ public class DeletePost extends HttpServlet {
 		dbBerichten.removeBericht(id);
 		RequestDispatcher rd = null;
 		rd = req.getRequestDispatcher("/index.jsp");
-		Logger.getLogger("atd.blog").info("Bericht: " + id + "  is verwijderd");
+		Logger.getLogger("atd.log").info("Bericht: " + id + "  is verwijderd");
 		rd.forward(req, resp);
 	}
 }

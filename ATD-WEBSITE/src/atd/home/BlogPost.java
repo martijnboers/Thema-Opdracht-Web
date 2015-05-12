@@ -29,7 +29,7 @@ public class BlogPost extends HttpServlet {
 		try {
 			Class.forName("org.apache.commons.lang3");
 		} catch (ClassNotFoundException e) {
-			Logger.getLogger("atd.blog").warning("Kan niet lib importeren");
+			Logger.getLogger("atd.log").warning("Kan niet lib importeren");
 			e.printStackTrace();
 		}
 		String bericht = req.getParameter("bericht");
@@ -41,7 +41,7 @@ public class BlogPost extends HttpServlet {
 		dbBerichten.setBericht(StringEscapeUtils.escapeHtml4(bericht), currentTime, user);
 		RequestDispatcher rd = null;
 
-		Logger.getLogger("atd.blog").info("Bericht: " + bericht + " door " + user.getNaam() + " is geplaatst");
+		Logger.getLogger("atd.log").info("Bericht: " + bericht + " door " + user.getNaam() + " is geplaatst");
 
 		rd = req.getRequestDispatcher("/index.jsp");
 		rd.forward(req, resp);

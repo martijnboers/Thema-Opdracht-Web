@@ -10,7 +10,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 public class MyContextListener implements ServletContextListener{
-	private Logger logger = Logger.getLogger("atd.blog");
+	private Logger logger = Logger.getLogger("atd.log");
 	
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
@@ -22,7 +22,7 @@ public class MyContextListener implements ServletContextListener{
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		try {
-			FileHandler fh = new FileHandler("/home/martijn/log/bloglog.log");
+			FileHandler fh = new FileHandler("/log/atdlog.log");
 			fh.setFormatter(new LogFormatter());
 			System.out.println(11);
 			logger.addHandler(fh);
