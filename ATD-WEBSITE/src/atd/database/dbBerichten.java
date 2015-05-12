@@ -31,6 +31,8 @@ public class dbBerichten {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
+	
+	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
 	 * Maakt nieuwe Klant gebruiker aan in database
@@ -39,7 +41,7 @@ public class dbBerichten {
 	 */
 	public static StatusDB setBericht(String bericht, String tijd, User user) {
 		try {
-			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
+			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
@@ -80,7 +82,7 @@ public class dbBerichten {
 	 */
 	public static StatusDB removeBericht(int id) {
 		try {
-			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
+			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
@@ -121,7 +123,7 @@ public class dbBerichten {
 	public static ArrayList<Bericht> getAllBerichten() throws SQLException {
 		ArrayList<Bericht> alleBerichten = new ArrayList<>();
 		try {
-			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
+			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));

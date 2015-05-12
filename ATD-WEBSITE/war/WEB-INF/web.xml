@@ -63,6 +63,13 @@
     
     <filter-mapping>
         <filter-name>FilterForSecurity</filter-name>
+        <url-pattern>/home/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>FilterForSecurity</filter-name>
         <url-pattern>/index.jsp</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>

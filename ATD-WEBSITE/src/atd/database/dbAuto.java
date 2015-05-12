@@ -32,6 +32,8 @@ public class dbAuto {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
+	
+	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
 	 * Maakt nieuwe Auto aan in database
@@ -44,7 +46,7 @@ public class dbAuto {
 	 */
 	public static StatusDB setAuto(Auto autoIn) {
 		try {
-			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
+			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
@@ -89,7 +91,7 @@ public class dbAuto {
 	 */
 	public static Auto searchAuto(String kenteken) {
 		try {
-			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
+			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));

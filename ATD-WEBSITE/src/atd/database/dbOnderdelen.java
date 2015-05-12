@@ -32,6 +32,8 @@ public class dbOnderdelen {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
+	
+	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
 	 * Maakt nieuw Onderdeel aan in database
@@ -41,7 +43,7 @@ public class dbOnderdelen {
 	 */
 	public static StatusDB setOnderdeel(Onderdeel onderdeelIn) {
 		try {
-			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
+			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
@@ -86,7 +88,7 @@ public class dbOnderdelen {
 	 */
 	public static Onderdeel getOnderdeel(int id) throws SQLException {
 		try {
-			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
+			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
@@ -126,7 +128,7 @@ public class dbOnderdelen {
 	public static ArrayList<Onderdeel> getAllOnderdelen() throws SQLException {
 		ArrayList<Onderdeel> alleOnderdelen = new ArrayList<>();
 		try {
-			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
+			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
@@ -165,7 +167,7 @@ public class dbOnderdelen {
 	 */
 	public static StatusDB updateOnderdeel(Onderdeel onderdeelIn) {
 		try {
-			config = new URL("http://db.plebian.nl/3c0nf1g/database.properties").openStream();
+			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
