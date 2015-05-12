@@ -85,13 +85,13 @@ public class Register extends HttpServlet {
 		props.put("mail.smtp.ssl.enable", true);
 		Session mailSession = Session.getInstance(props);
 		try {
-			Logger.getLogger("atd.blog").info("");
+			Logger.getLogger("atd.blog").info("Stuurt mail naar: " + k.getEmail());
 			MimeMessage msg = new MimeMessage(mailSession);
 			msg.setFrom(new InternetAddress("autototaaldienst.robot@gmail.com", "Auto Totaal Dienst (NO-REPLY)"));
 			msg.setRecipients(Message.RecipientType.TO, k.getEmail());
 			msg.setSubject("Uw account is aangemaakt");
 			msg.setSentDate(Calendar.getInstance().getTime());
-			msg.setText("Beste " + k.getVolledigeNaam() + ", \n\n Uw account " + k.getEmail() + " is aangemaakt\n");
+			msg.setContent("Beste " + k.getVolledigeNaam() + ", \n\nUw account " + k.getUsername() + " is aangemaakt, U kunt inloggen op de <a href='https://atd.plebian.nl'>ATD website</a>\n", "text/html; charset=utf-8");
 			// TODO: Heeft OAUTH nodig, maarja we zijn al niet erg netjes met wachtwoorden
 			Transport.send(msg, "autototaaldienst.robot@gmail.com", "autototaaldienst.robot!!");
 		} catch (Exception e) {
