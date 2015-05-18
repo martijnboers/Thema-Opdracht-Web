@@ -18,19 +18,9 @@
 			<p>Log hier in om gebruik te maken van het ATD systeem</p>
 			<form action="/ATD-WEBSITE/Login.do" method="post">
 				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1"> <%
- 	String userName = "";
- 	if (request.getCookies() != null) {
- 		for (Cookie c : request.getCookies()) {
- 			if (c.getName().equals("username")) {
- 				userName = c.getValue();
- 				break;
- 			}
- 		}
- 	}
- %> Gebruikersnaam
+					<span class="input-group-addon" id="basic-addon1"> Gebruikersnaam
 					</span> <input name="username" type="text" class="form-control"
-						aria-describedby="basic-addon1" value="<%=userName%>">
+						aria-describedby="basic-addon1" value="${cookie.username.value }">
 				</div>
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1">Wachtwoord</span>
@@ -39,12 +29,8 @@
 				</div>
 				<input type="submit" class="btn btn-success btn-lg pull-right"
 					value="aanmelden">
-				<%
-					Object msgs = request.getAttribute("error");
-					if (msgs != null) {
-						out.println(msgs);
-					}
-				%>
+				
+				${requestScope.error}
 			
 		</div>
 		</form>

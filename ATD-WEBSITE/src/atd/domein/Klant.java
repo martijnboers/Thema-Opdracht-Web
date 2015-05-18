@@ -16,6 +16,8 @@ public class Klant implements Serializable{
     private ArrayList<Afspraak> alleAfspraken;
     private Privilege priv;
 
+    // TODO: Dit heeft nog heel veel werk nodig
+    
     public Klant(int id, String volledigeNaam, String username, String postcode, String email, Auto deAuto, Privilege priv)
     {
     	this.id = id;

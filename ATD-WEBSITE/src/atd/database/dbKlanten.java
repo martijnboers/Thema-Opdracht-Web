@@ -31,7 +31,7 @@ public class dbKlanten {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
-	
+
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
