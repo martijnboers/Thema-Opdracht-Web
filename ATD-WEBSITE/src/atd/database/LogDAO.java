@@ -22,7 +22,7 @@ import atd.domein.User;
  *
  */
 
-public class dbLog {
+public class LogDAO {
 	private static Connection con = null;
 	private static Statement st = null;
 	private static ResultSet rs = null;

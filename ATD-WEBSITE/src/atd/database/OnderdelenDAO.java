@@ -25,7 +25,7 @@ import atd.domein.Onderdeel;
  *
  */
 
-public class dbOnderdelen {
+public class OnderdelenDAO {
 	private static Connection con = null;
 	private static Statement st = null;
 	private static ResultSet rs = null;

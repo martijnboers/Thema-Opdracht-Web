@@ -7,9 +7,9 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
-import atd.database.dbKlanten;
-import atd.database.dbLog;
-import atd.database.dbUsers;
+import atd.database.KlantenDAO;
+import atd.database.LogDAO;
+import atd.database.UsersDAO;
 
 /**
  * TODO: Klanten login support
@@ -50,7 +50,7 @@ public class Login extends HttpServlet {
 		String pass = org.apache.commons.codec.digest.DigestUtils.sha256Hex(req.getParameter("password"));
 		RequestDispatcher rd = null;
 
-		if (dbUsers.authUser(username, pass) || (username.equals(adminUser)) && req.getParameter("password").equals(adminPwd)) {
+		if (UsersDAO.authUser(username, pass) || (username.equals(adminUser)) && req.getParameter("password").equals(adminPwd)) {
 			// Controlleer of het filter een redirect gezet heeft
 			if (req.getAttribute("redirect") == null || req.getAttribute("redirect").equals("")) {
 				rd = req.getRequestDispatcher("/index.jsp");
@@ -58,14 +58,14 @@ public class Login extends HttpServlet {
 				rd = req.getRequestDispatcher((String) req.getAttribute("redirect"));
 				req.removeAttribute("redirect");
 			}
-			req.getSession().setAttribute("username", dbUsers.searchUser(username));
+			req.getSession().setAttribute("username", UsersDAO.searchUser(username));
 			resp.addCookie(new Cookie("username", username));
 			java.util.Date dt = new java.util.Date();
 			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String currentTime = sdf.format(dt);
-			dbLog.setLog(req.getRemoteAddr(), currentTime, dbUsers.searchUser(username), null);
+			LogDAO.setLog(req.getRemoteAddr(), currentTime, UsersDAO.searchUser(username), null);
 			rd.forward(req, resp);
-		} else if (dbKlanten.authKlant(username, pass)){
+		} else if (KlantenDAO.authKlant(username, pass)){
 			if (req.getAttribute("redirect") == null || req.getAttribute("redirect").equals("")) {
 				rd = req.getRequestDispatcher("/index.jsp");
 			} else {

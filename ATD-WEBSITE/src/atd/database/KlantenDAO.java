@@ -24,7 +24,7 @@ import atd.domein.Klant;
  *
  */
 
-public class dbKlanten {
+public class KlantenDAO {
 	private static Connection con = null;
 	private static Statement st = null;
 	private static ResultSet rs = null;

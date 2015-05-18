@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import atd.database.dbAuto;
-import atd.database.dbKlanten;
-import atd.database.dbUsers;
+import atd.database.AutoDAO;
+import atd.database.KlantenDAO;
+import atd.database.UsersDAO;
 import atd.domein.Auto;
 import atd.domein.Klant;
 import atd.domein.Privilege;
@@ -53,7 +53,7 @@ public class Register extends HttpServlet {
 				return;
 			}
 
-			dbUsers.setUser(new User(0, realName, username, Privilege.ADMIN), wachtwoord);
+			UsersDAO.setUser(new User(0, realName, username, Privilege.ADMIN), wachtwoord);
 			req.setAttribute("error", "<div class=\"alert alert-success\" role=\"alert\"> <span class=\"sr-only\">Info:</span> nieuwe gebruiker is aangemaakt </div>");
 			rd = req.getRequestDispatcher("login/login.jsp");
 			rd.forward(req, resp);
@@ -84,9 +84,9 @@ public class Register extends HttpServlet {
 			}
 
 			Auto deAuto = new Auto(0, kenteken, merk, type);
-			dbAuto.setAuto(deAuto);
+			AutoDAO.setAuto(deAuto);
 			Klant k = new Klant(0, realName, username, postcode, email, deAuto, Privilege.KLANT);
-			dbKlanten.setKlant(k, wachtwoord);
+			KlantenDAO.setKlant(k, wachtwoord);
 			sendRegMail(k);
 			req.setAttribute("error", "<div class=\"alert alert-success\" role=\"alert\"> <span class=\"sr-only\">Info:</span> nieuwe gebruiker is aangemaakt </div>");
 			rd = req.getRequestDispatcher("login/login.jsp");

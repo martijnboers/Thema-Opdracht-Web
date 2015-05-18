@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<%@ page import="atd.database.dbBerichten"%>
+<%@ page import="atd.database.BerichtenDAO"%>
 <%@ page import="atd.domein.Bericht"%>
 
 <head>
@@ -31,7 +31,7 @@
 		<br>
 
 		<%
-			for (Bericht ber : dbBerichten.getAllBerichten()) {
+			for (Bericht ber : BerichtenDAO.getAllBerichten()) {
 				out.print("<div class=\"jumbotron\"></p><p><a style=\"float:right; display:inline-block; margin:-60px -47px;\" href=\"DeletePost.do?id=" + ber.getID() + "\">x</a>" + ber.getBericht() + "</p><p><em><small>- " + ber.getOwner().getNaam() + " @ " + ber.getDate() + "</small></em></div><br>");
 
 			}
