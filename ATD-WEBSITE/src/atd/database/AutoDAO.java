@@ -38,10 +38,9 @@ public class AutoDAO {
 	/**
 	 * Maakt nieuwe Auto aan in database
 	 * 
-	 * @param klantIn
+	 * @param autoIn
 	 *            Ingegeven Klant
-	 * @param password
-	 *            Wachtwoord word niet opgeslagen in User object
+	 *            
 	 * @return StatusDB Status
 	 */
 	public static StatusDB setAuto(Auto autoIn) {
@@ -81,12 +80,11 @@ public class AutoDAO {
 	}
 
 	/**
-	 * Zoek gebruiker in database en return Klant object
+	 * Zoek auto in database en return auto object
 	 * 
-	 * @param Klantname
-	 *            Gebruikernaam gebruiker
-	 * @param fullName
-	 *            Volledige naam gebruiker
+	 * @param kenteken
+	 *            Kenteken van de gezochte auto
+	 *            
 	 * @return
 	 */
 	public static Auto searchAuto(String kenteken) {

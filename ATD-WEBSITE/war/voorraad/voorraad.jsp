@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="atd.backend.*, atd.database.OnderdelenDAO, atd.domein.*"%>
+<%@ page
+	import="atd.backend.*, atd.database.OnderdelenDAO, atd.domein.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -61,39 +62,13 @@
 				</thead>
 				<tbody>
 					<c:forEach var="Onderdeel"
-						items="${dbOnderdelen.getAllOnderdelen()}">
+						items="${OnderdelenDAO.getAllOnderdelen()}">
 						<tr>
 							<td>${Onderdeel.naam}</td>
 							<td>${Onderdeel.voorraad }</td>
 							<td>${Onderdeel.prijs }</td>
 						</tr>
 					</c:forEach>
-
-					<tr>
-						<td>auto dak</td>
-						<td>43</td>
-						<td>$87.40</td>
-					</tr>
-					<tr>
-						<td>auto raam</td>
-						<td>23</td>
-						<td>$1200.00</td>
-					</tr>
-					<tr>
-						<td>dashboard</td>
-						<td>2</td>
-						<td>$234.30</td>
-					</tr>
-					<tr>
-						<td>stoel</td>
-						<td>87</td>
-						<td>$32.40</td>
-					</tr>
-					<tr>
-						<td>Deur</td>
-						<td>34</td>
-						<td>$85.40</td>
-					</tr>
 				</tbody>
 			</table>
 			<!--  footer  -->

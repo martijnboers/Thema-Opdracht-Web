@@ -31,11 +31,11 @@ public class BerichtenDAO {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
-	
+
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
-	 * Maakt nieuwe Klant gebruiker aan in database
+	 * Maakt nieuwe bericht aan in database
 	 * 
 	 * @return StatusDB Status
 	 */
@@ -44,7 +44,9 @@ public class BerichtenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"),
+					prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			String query = "INSERT INTO Berichten(Bericht, Tijd, User) VALUES(?, ?, ?)";
@@ -74,9 +76,13 @@ public class BerichtenDAO {
 		}
 		return StatusDB.UNKOWN;
 	}
-	
+
 	/**
-	 * Maakt nieuwe Klant gebruiker aan in database
+	 * Verwijderd bericht uit database, of bericht verwijderd mag worden moet
+	 * bepaald worden in hoger level
+	 * 
+	 * @param id
+	 *            Id van het bericht, kan opgehaald worden met bericht.getId()
 	 * 
 	 * @return StatusDB Status
 	 */
@@ -85,13 +91,16 @@ public class BerichtenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"),
+					prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			String query = "DELETE FROM Berichten WHERE id = ?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.setInt(1, id);
 			preparedStmt.execute();
+			return StatusDB.SUCCESS;
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
@@ -111,7 +120,6 @@ public class BerichtenDAO {
 				System.out.println(ex.getMessage());
 			}
 		}
-		return StatusDB.UNKOWN;
 	}
 
 	/**
@@ -126,7 +134,9 @@ public class BerichtenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"),
+					prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Berichten ORDER BY id DESC LIMIT 0, 6");
 
