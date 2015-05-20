@@ -1,6 +1,8 @@
 package atd.backend;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Properties;
 import java.util.logging.Logger;
@@ -31,6 +33,8 @@ import atd.domein.User;
  *
  */
 public class Register extends HttpServlet {
+	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/mail.properties";
+	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher rd = null;
 		System.out.println(req.getParameter("checkbox"));
@@ -94,22 +98,27 @@ public class Register extends HttpServlet {
 		}
 	}
 
-	public void sendRegMail(Klant k) {
+	public void sendRegMail(Klant k) throws IOException {
+		Properties propMail = new Properties();
+		InputStream config = null;
+		config = new URL(CONFIG_URL).openStream();
+		propMail.load(config);
+		
 		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.host", propMail.getProperty("host"));
 		props.put("mail.smtp.port", 465);
 		props.put("mail.smtp.ssl.enable", true);
 		Session mailSession = Session.getInstance(props);
 		try {
 			Logger.getLogger("atd.log").info("Stuurt mail naar: " + k.getEmail());
 			MimeMessage msg = new MimeMessage(mailSession);
-			msg.setFrom(new InternetAddress("autototaaldienst.robot@gmail.com", "Auto Totaal Dienst (NO-REPLY)"));
+			msg.setFrom(new InternetAddress(propMail.getProperty("email"), propMail.getProperty("mailName")));
 			msg.setRecipients(Message.RecipientType.TO, k.getEmail());
 			msg.setSubject("Uw account is aangemaakt");
 			msg.setSentDate(Calendar.getInstance().getTime());
 			msg.setContent("Beste " + k.getVolledigeNaam() + ", \n\nUw account " + k.getUsername() + " is aangemaakt, U kunt inloggen op de <a href='https://atd.plebian.nl'>ATD website</a>\n", "text/html; charset=utf-8");
 			// TODO: Heeft OAUTH nodig, maarja we zijn al niet erg netjes met wachtwoorden
-			Transport.send(msg, "autototaaldienst.robot@gmail.com", "autototaaldienst.robot!!");
+			Transport.send(msg, propMail.getProperty("email"), propMail.getProperty("password"));
 		} catch (Exception e) {
 			Logger.getLogger("atd.log").warning("send failed: " + e.getMessage());
 		}
