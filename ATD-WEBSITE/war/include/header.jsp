@@ -15,7 +15,7 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="#">Parkeren</a></li>
-					<li><a href="#">Reparatie</a></li>
+					<li><a href="/ATD-WEBSITE/werkplaats/werkplaats.jsp">Reparatie</a></li>
 					<li><a href="/ATD-WEBSITE/voorraad/voorraad.jsp">Voorraad</a></li>
 				</ul>
 				<%@ page import="atd.domein.User"%>
