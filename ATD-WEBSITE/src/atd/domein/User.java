@@ -6,6 +6,8 @@ public class User {
 	private String username;
 	private Privilege priv;
 	
+	// Dit moet hernoemd worden naar monteur, maar ergens zitten problemen
+	
 	public User(int id, String naam, String username, Privilege priv){
 		this.id = id;
 		this.naam = naam;
