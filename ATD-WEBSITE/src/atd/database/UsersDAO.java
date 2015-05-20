@@ -37,7 +37,7 @@ public class UsersDAO {
 
 
 	/**
-	 * Maakt nieuwe User gebruiker aan in database
+	 * Maakt nieuwe User gebruiker aan in host
 	 * 
 	 * @param usrIn
 	 *            Ingegeven user
@@ -50,7 +50,7 @@ public class UsersDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			int priv = 3;
@@ -92,7 +92,7 @@ public class UsersDAO {
 	 * Geeft User object terug met gegeven id
 	 * 
 	 * @param id
-	 *            Database user ID
+	 *            host user ID
 	 * @return User
 	 * @throws SQLException
 	 */
@@ -101,7 +101,7 @@ public class UsersDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Users WHERE id='" + id + "'");
 
@@ -141,7 +141,7 @@ public class UsersDAO {
 	}
 
 	/**
-	 * Geeft alle Users in de database terug als ArrayList
+	 * Geeft alle Users in de host terug als ArrayList
 	 * 
 	 * @return ArrayList<User>
 	 * @throws SQLException
@@ -152,7 +152,7 @@ public class UsersDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Users");
 
@@ -193,7 +193,7 @@ public class UsersDAO {
 	}
 
 	/**
-	 * Hiermee kun je eigen SQLQueries uitvoeren. Wordt voornamelijk gebruikt in Database.java
+	 * Hiermee kun je eigen SQLQueries uitvoeren. Wordt voornamelijk gebruikt in host.java
 	 * 
 	 * @param input
 	 *            Rauwe SQL query, geen ; invoeren!
@@ -204,7 +204,7 @@ public class UsersDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Users WHERE id='" + id + "'");
 			if (rs.next()) {
@@ -235,7 +235,7 @@ public class UsersDAO {
 	}
 
 	/**
-	 * Controleert gebruikerswachtwoord met database, return als goed is true
+	 * Controleert gebruikerswachtwoord met host, return als goed is true
 	 * 
 	 * @param username
 	 * @param password
@@ -246,7 +246,7 @@ public class UsersDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT password FROM Users WHERE username='" + username + "'");
 			if (rs.next()) {
@@ -278,7 +278,7 @@ public class UsersDAO {
 	}
 
 	/**
-	 * Zoek gebruiker in database en return User object
+	 * Zoek gebruiker in host en return User object
 	 * 
 	 * @param username
 	 *            Gebruikernaam gebruiker
@@ -291,7 +291,7 @@ public class UsersDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Users WHERE username='" + username + "'");
 			if (rs.next()) {

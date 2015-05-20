@@ -35,7 +35,7 @@ public class BerichtenDAO {
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
-	 * Maakt nieuwe bericht aan in database
+	 * Maakt nieuwe bericht aan in host
 	 * 
 	 * @return StatusDB Status
 	 */
@@ -45,7 +45,7 @@ public class BerichtenDAO {
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"),
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"),
 					prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
@@ -78,7 +78,7 @@ public class BerichtenDAO {
 	}
 
 	/**
-	 * Verwijderd bericht uit database, of bericht verwijderd mag worden moet
+	 * Verwijderd bericht uit host, of bericht verwijderd mag worden moet
 	 * bepaald worden in hoger level
 	 * 
 	 * @param id
@@ -92,7 +92,7 @@ public class BerichtenDAO {
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"),
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"),
 					prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
@@ -123,7 +123,7 @@ public class BerichtenDAO {
 	}
 
 	/**
-	 * Geeft alle Berichten in de database terug als ArrayList
+	 * Geeft alle Berichten in de host terug als ArrayList
 	 * 
 	 * @return ArrayList<Klant>
 	 * @throws SQLException
@@ -135,7 +135,7 @@ public class BerichtenDAO {
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"),
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"),
 					prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Berichten ORDER BY id DESC LIMIT 0, 6");

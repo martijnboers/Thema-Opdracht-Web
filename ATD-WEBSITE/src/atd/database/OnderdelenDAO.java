@@ -35,7 +35,7 @@ public class OnderdelenDAO {
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 	
 	/**
-	 * Maakt nieuw Onderdeel aan in database
+	 * Maakt nieuw Onderdeel aan in host
 	 * 
 	 * @param onderdeelIn
 	 * @return
@@ -45,7 +45,7 @@ public class OnderdelenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			String query = "INSERT INTO Onderdeel(Naam, Type, Voorraad, Prijs) VALUES(?, ?, ?, ?)";
@@ -81,7 +81,7 @@ public class OnderdelenDAO {
 	 * Geeft Klant object terug met gegeven id
 	 * 
 	 * @param id
-	 *            Database Onderdeel ID
+	 *            host Onderdeel ID
 	 * @return Onderdeel
 	 * @throws SQLException
 	 */
@@ -90,7 +90,7 @@ public class OnderdelenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Onderdeel WHERE id='" + id + "'");
 
@@ -119,7 +119,7 @@ public class OnderdelenDAO {
 	}
 
 	/**
-	 * Geeft alle Onderdelen in de database terug als ArrayList
+	 * Geeft alle Onderdelen in de host terug als ArrayList
 	 * 
 	 * @return ArrayList<Klant>
 	 * @throws SQLException
@@ -130,7 +130,7 @@ public class OnderdelenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Onderdeel");
 
@@ -159,7 +159,7 @@ public class OnderdelenDAO {
 		return null;
 	}
 	/**
-	 * Maakt nieuw Onderdeel aan in database
+	 * Maakt nieuw Onderdeel aan in host
 	 * 
 	 * @param onderdeelIn
 	 * @return
@@ -169,7 +169,7 @@ public class OnderdelenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			String query = "UPDATE Onderdeel(Naam, Type, Voorraad, Prijs) VALUES(?, ?, ?, ?)";

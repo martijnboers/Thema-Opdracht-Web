@@ -35,7 +35,7 @@ public class KlantenDAO {
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
-	 * Maakt nieuwe Klant gebruiker aan in database
+	 * Maakt nieuwe Klant gebruiker aan in host
 	 * 
 	 * @param klantIn
 	 *            Ingegeven Klant
@@ -48,7 +48,7 @@ public class KlantenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			int priv = 3;
@@ -93,7 +93,7 @@ public class KlantenDAO {
 	 * Geeft Klant object terug met gegeven id
 	 * 
 	 * @param id
-	 *            Database Klant ID
+	 *            host Klant ID
 	 * @return Klant
 	 * @throws SQLException
 	 */
@@ -102,7 +102,7 @@ public class KlantenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Klanten WHERE id='" + id + "'");
 
@@ -142,7 +142,7 @@ public class KlantenDAO {
 	}
 
 	/**
-	 * Geeft alle Klants in de database terug als ArrayList
+	 * Geeft alle Klants in de host terug als ArrayList
 	 * 
 	 * @return ArrayList<Klant>
 	 * @throws SQLException
@@ -153,7 +153,7 @@ public class KlantenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Klanten");
 
@@ -194,7 +194,7 @@ public class KlantenDAO {
 	}
 
 	/**
-	 * Hiermee kun je eigen SQLQueries uitvoeren. Wordt voornamelijk gebruikt in Database.java
+	 * Hiermee kun je eigen SQLQueries uitvoeren. Wordt voornamelijk gebruikt in host.java
 	 * 
 	 * @param input
 	 *            Rauwe SQL query, geen ; invoeren!
@@ -205,7 +205,7 @@ public class KlantenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Klanten WHERE id='" + id + "'");
 			if (rs.next()) {
@@ -235,7 +235,7 @@ public class KlantenDAO {
 	}
 
 	/**
-	 * Controleert gebruikerswachtwoord met database, return als goed is true
+	 * Controleert gebruikerswachtwoord met host, return als goed is true
 	 * 
 	 * @param Klantname
 	 * @param password
@@ -246,7 +246,7 @@ public class KlantenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT password FROM Klanten WHERE Username='" + username + "'");
 			if (rs.next()) {
@@ -278,7 +278,7 @@ public class KlantenDAO {
 	}
 
 	/**
-	 * Zoek gebruiker in database en return Klant object
+	 * Zoek gebruiker in host en return Klant object
 	 * 
 	 * @param Klantname
 	 *            Gebruikernaam gebruiker
@@ -291,7 +291,7 @@ public class KlantenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Klanten WHERE Username='" + Klantname + "'");
 			if (rs.next()) {

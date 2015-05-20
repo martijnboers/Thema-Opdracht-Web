@@ -36,7 +36,7 @@ public class AutoDAO {
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
-	 * Maakt nieuwe Auto aan in database
+	 * Maakt nieuwe Auto aan in host
 	 * 
 	 * @param autoIn
 	 *            Ingegeven Klant
@@ -48,7 +48,7 @@ public class AutoDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			String query = "INSERT INTO Auto(Kenteken, Merk, Type) VALUES(?, ?, ?)";
@@ -80,7 +80,7 @@ public class AutoDAO {
 	}
 
 	/**
-	 * Zoek auto in database en return auto object
+	 * Zoek auto in host en return auto object
 	 * 
 	 * @param kenteken
 	 *            Kenteken van de gezochte auto
@@ -92,7 +92,7 @@ public class AutoDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Auto WHERE kenteken='" + kenteken + "'");
 			if (rs.next()) {

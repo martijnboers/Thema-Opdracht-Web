@@ -33,7 +33,7 @@ public class LogDAO {
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
-	 * Maakt nieuwe Log entry aan in database
+	 * Maakt nieuwe Log entry aan in host
 	 * 
 	 * @return StatusDB Status
 	 */
@@ -42,7 +42,7 @@ public class LogDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("database") + ":3306/" + prop.getProperty("table"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			String query = "INSERT INTO Log(IP, Tijd, User, Klant) VALUES(?, ?, ?, ?)";
