@@ -135,7 +135,9 @@ public class OnderdelenDAO {
 			rs = st.executeQuery("SELECT * FROM Onderdeel");
 
 			while (rs.next()) {
-				alleOnderdelen.add(new Onderdeel(rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDouble(5)));
+				Onderdeel ond = new Onderdeel(rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDouble(5));
+				ond.setID(rs.getInt(1));
+				alleOnderdelen.add(ond);
 			}
 			return alleOnderdelen;
 

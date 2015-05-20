@@ -3,13 +3,14 @@ package atd.domein;
 import java.io.Serializable;
 
 /**
- * Onderdeel object. MAAK HIER GEEN SETTERS, LAAT HET VIA DATABASE PACKAGE LOPEN! updateOnderdeel(Onderdeel, amount)!!
+ * Onderdeel object. MAAK HIER GEEN SETTERS, LAAT HET VIA DATABASE PACKAGE
+ * LOPEN! updateOnderdeel(Onderdeel, amount)!!
  * 
  * @author Martijn
  *
  */
 public class Onderdeel {
-
+	private int id;
 	private String naam;
 	private String type;
 	private int voorraad;
@@ -38,4 +39,11 @@ public class Onderdeel {
 		return prijs;
 	}
 
+	public void setID(int id) {
+		this.id = id;
+	}
+
+	public int getID() {
+		return id;
+	}
 }
