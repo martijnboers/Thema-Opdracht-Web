@@ -92,7 +92,7 @@ public class Register extends HttpServlet {
 			Klant k = new Klant(0, realName, username, postcode, email, deAuto, Privilege.KLANT);
 			KlantenDAO.setKlant(k, wachtwoord);
 			sendRegMail(k);
-			req.setAttribute("error", "<div class=\"alert alert-success\" role=\"alert\"> <span class=\"sr-only\">Info:</span> nieuwe gebruiker is aangemaakt </div>");
+			req.setAttribute("error", "<div class=\"alert alert-success\" role=\"alert\"> <span class=\"sr-only\">Info:</span> Gebruiker " + k.getUsername() + " is aangemaakt </div>");
 			rd = req.getRequestDispatcher("login/login.jsp");
 			rd.forward(req, resp);
 		}

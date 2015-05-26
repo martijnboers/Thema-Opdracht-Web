@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import atd.backend.LogFormatter;
 import atd.database.BerichtenDAO;
+import atd.database.BerichtenService;
 import atd.domein.User;
 
 /**
@@ -24,7 +25,8 @@ import atd.domein.User;
  *
  */
 public class BlogPost extends HttpServlet {
-
+	private BerichtenService BerichtenService = new BerichtenService();
+	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			Class.forName("org.apache.commons.lang3");
@@ -38,7 +40,7 @@ public class BlogPost extends HttpServlet {
 		String currentTime = sdf.format(dt);
 
 		User user = (User) req.getSession().getAttribute("username");
-		BerichtenDAO.setBericht(StringEscapeUtils.escapeHtml4(bericht), currentTime, user);
+		BerichtenService.setBericht(StringEscapeUtils.escapeHtml4(bericht), currentTime, user);
 		RequestDispatcher rd = null;
 
 		Logger.getLogger("atd.log").info("Bericht: " + bericht + " door " + user.getNaam() + " is geplaatst");

@@ -39,7 +39,7 @@ public class BerichtenDAO {
 	 * 
 	 * @return StatusDB Status
 	 */
-	public static StatusDB setBericht(String bericht, String tijd, User user) {
+	public StatusDB setBericht(String bericht, String tijd, User user) {
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
@@ -86,7 +86,7 @@ public class BerichtenDAO {
 	 * 
 	 * @return StatusDB Status
 	 */
-	public static StatusDB removeBericht(int id) {
+	public StatusDB removeBericht(int id) {
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
@@ -99,8 +99,12 @@ public class BerichtenDAO {
 			String query = "DELETE FROM Berichten WHERE id = ?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.setInt(1, id);
-			preparedStmt.execute();
-			return StatusDB.SUCCESS;
+			int affectedRows = preparedStmt.executeUpdate();
+			if (affectedRows > 0) {
+				return StatusDB.SUCCESS;
+			} else {
+				return StatusDB.UNKOWN;
+			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
@@ -128,7 +132,7 @@ public class BerichtenDAO {
 	 * @return ArrayList<Klant>
 	 * @throws SQLException
 	 */
-	public static ArrayList<Bericht> getAllBerichten() throws SQLException {
+	public ArrayList<Bericht> getAllBerichten() throws SQLException {
 		ArrayList<Bericht> alleBerichten = new ArrayList<>();
 		try {
 			config = new URL(CONFIG_URL).openStream();

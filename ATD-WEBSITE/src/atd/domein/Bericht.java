@@ -35,7 +35,7 @@ public class Bericht {
 		return date;
 	}
 	
-	public int getID(){
+	public int getId(){
 		return id;
 	}
 }

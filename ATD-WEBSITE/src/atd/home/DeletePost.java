@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import atd.backend.LogFormatter;
 import atd.database.BerichtenDAO;
+import atd.database.BerichtenService;
 import atd.domein.User;
 
 /**
@@ -24,10 +25,11 @@ import atd.domein.User;
  *
  */
 public class DeletePost extends HttpServlet {
+	private BerichtenService berichtenService = new BerichtenService();
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int id = Integer.valueOf(req.getParameter("id"));
-		BerichtenDAO.removeBericht(id);
+		berichtenService.removeBericht(id);
 		RequestDispatcher rd = null;
 		rd = req.getRequestDispatcher("/index.jsp");
 		Logger.getLogger("atd.log").info("Bericht: " + id + "  is verwijderd");
