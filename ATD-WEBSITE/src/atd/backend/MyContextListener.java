@@ -14,7 +14,7 @@ public class MyContextListener implements ServletContextListener{
 	
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
-		for (Handler handler : Logger.getLogger("atd.blog").getHandlers()) {
+		for (Handler handler : Logger.getLogger("atd.log").getHandlers()) {
 			handler.close();
 		}		
 	}
@@ -22,7 +22,7 @@ public class MyContextListener implements ServletContextListener{
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		try {
-			FileHandler fh = new FileHandler("atdlog.log");
+			FileHandler fh = new FileHandler("atd.log");
 			fh.setFormatter(new LogFormatter());
 			System.out.println(11);
 			logger.addHandler(fh);

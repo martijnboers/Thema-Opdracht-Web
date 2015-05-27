@@ -79,7 +79,7 @@ public class Login extends HttpServlet {
 			String currentTime = sdf.format(dt);
 			
 			// TODO: Geeft NPE
-			//dbLog.setLog(req.getRemoteAddr(), currentTime, null, dbKlanten.searchKlant(username));
+			LogDAO.setLog(req.getRemoteAddr(), currentTime, null, KlantenDAO.searchKlant(username));
 			rd.forward(req, resp);
 		} else {
 			rd = req.getRequestDispatcher("/login/login.jsp");
