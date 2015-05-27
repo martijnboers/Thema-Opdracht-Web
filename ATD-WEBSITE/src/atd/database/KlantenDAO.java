@@ -31,7 +31,7 @@ public class KlantenDAO {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
-
+	
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
@@ -296,7 +296,7 @@ public class KlantenDAO {
 			rs = st.executeQuery("SELECT * FROM Klanten WHERE Username='" + Klantname + "'");
 			if (rs.next()) {
 				Privilege priv = Privilege.KLANT;
-				switch (rs.getInt(7)) {
+				switch (rs.getInt(8)) {
 				case 1:
 					priv = Privilege.ADMIN;
 					break;
@@ -306,7 +306,8 @@ public class KlantenDAO {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				return new Klant(rs.getInt(0), rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv);
+				// TODO: Auto werkt nog niet goed
+				return new Klant(rs.getInt(1), rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv);
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {

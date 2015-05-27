@@ -41,9 +41,9 @@ public class AfspraakDAO {
 			String query = "INSERT INTO Afspraak(Klant, Monteur, Auto, Datum, Omschrijving) VALUES(?, ?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.setInt(1, afspraak.getKlant().getId());
-			preparedStmt.setInt(2, afspraak.getKlant().getId());
-			preparedStmt.setInt(1, afspraak.getKlant().getId());
-			preparedStmt.setInt(1, afspraak.getKlant().getId());
+			preparedStmt.setInt(2, afspraak.getMonteur().getId());
+			preparedStmt.setInt(1, afspraak.getAuto().getId());
+			preparedStmt.setDate(1, afspraak.getDatum());
 			preparedStmt.setInt(1, afspraak.getKlant().getId());			
 			preparedStmt.execute();
 

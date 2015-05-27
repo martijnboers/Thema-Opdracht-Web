@@ -72,13 +72,12 @@ public class Login extends HttpServlet {
 				rd = req.getRequestDispatcher((String) req.getAttribute("redirect"));
 				req.removeAttribute("redirect");
 			}
-			//req.getSession().setAttribute("username", dbKlanten.searchKlant(username));
+			req.getSession().setAttribute("username", KlantenDAO.searchKlant(username));
 			resp.addCookie(new Cookie("username", username));
 			java.util.Date dt = new java.util.Date();
 			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String currentTime = sdf.format(dt);
 			
-			// TODO: Geeft NPE
 			LogDAO.setLog(req.getRemoteAddr(), currentTime, null, KlantenDAO.searchKlant(username));
 			rd.forward(req, resp);
 		} else {
