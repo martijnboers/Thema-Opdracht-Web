@@ -15,8 +15,7 @@ import atd.services.VoorraadService;
 
 public class Voorraad extends HttpServlet {
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// blog service ophalen
 		VoorraadService service = ServiceProvider.getVoorraadService();
 		// kijken welke button gebruikt is
