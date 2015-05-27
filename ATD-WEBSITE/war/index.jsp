@@ -7,7 +7,7 @@
 <%@ page import="atd.domein.Bericht"%>
 <%
 	BerichtenService berichtenService = new BerichtenService();
-	//request.setAttribute("berichtenService", berichtenService);
+	request.setAttribute("berichtenService", berichtenService);
 %>
 
 <head>
