@@ -21,62 +21,76 @@
 		<h2>Voorraad</h2>
 		<p>Click op een onderdeel om te bestellen en aanpassing te kunnen
 			maken</p>
-		<div class="input-group">
-			<span class="input-group-addon" id="basic-addon1">Aantal</span> <input
-				type="text" class="form-control" placeholder="2342"
-				aria-describedby="basic-addon1" id="aantal"> <span
-				class="input-group-btn">
-				<button class="btn btn-success" type="button">updaten</button>
-			</span>
-		</div>
-		<div class="input-group">
-			<span class="input-group-addon" id="basic-addon1">Naam</span> <input
-				type="text" class="form-control" placeholder="Auto motor"
-				aria-describedby="basic-addon1" id="naam" readonly>
-		</div>
-		<div class="input-group">
-			<span class="input-group-addon" id="basic-addon1">Prijs</span> <input
-				type="text" class="form-control" placeholder="$234.43"
-				aria-describedby="basic-addon1" id="prijs" readonly>
-		</div>
-		<div class="row">
-			<div class="col-lg-6"></div>
-			<div class="col-lg-6">
-				<div class="input-group">
-					<input type="text" class="form-control"
-						placeholder="geef aantal op"> <span
-						class="input-group-btn">
-						<button class="btn btn-success" type="button">bestellen</button>
-
-					</span>
-				</div>
+		<form action="/ATD-WEBSITE/Voorraad.do" method="POST">
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">Aantal</span> <input
+					type="text" class="form-control" placeholder="2342"
+					aria-describedby="basic-addon1" id="aantal"> <span
+					class="input-group-btn">
+					<button name="run" class="btn btn-success" type="submit"
+						value="updaten">updaten</button>
+				</span>
 			</div>
-			<table class="table table-default" id="voorraad-table">
 
-				<thead>
+
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">Naam</span> <input
+					type="text" class="form-control" placeholder="Auto motor"
+					aria-describedby="basic-addon1" id="naam" readonly>
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">Prijs</span> <input
+					type="text" class="form-control" placeholder="$234.43"
+					aria-describedby="basic-addon1" id="prijs" readonly>
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">ID</span> <input
+					type="text" class="form-control" placeholder="9938"
+					aria-describedby="basic-addon1" id="ID" name="ID" readonly>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-6"></div>
+				<div class="col-lg-6">
+					<div class="input-group">
+						<input type="text" class="form-control"
+							placeholder="geef aantal op"> <span
+							class="input-group-btn">
+							<button name="run" class="btn btn-success" type="submit"
+								value="bestellen">bestellen</button>
+
+						</span>
+					</div>
+				</div>
+		</form>
+		<table class="table table-default" id="voorraad-table">
+
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Naam</th>
+					<th>Aantal</th>
+					<th>Prijs</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="Onderdeel"
+					items="${OnderdelenDAO.getAllOnderdelen()}">
 					<tr>
-						<th>Naam</th>
-						<th>Aantal</th>
-						<th>Prijs</th>
+						<td>${Onderdeel.ID}</td>
+						<td>${Onderdeel.naam}</td>
+						<td>${Onderdeel.voorraad }</td>
+						<td>${Onderdeel.prijs }</td>
 					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="Onderdeel"
-						items="${OnderdelenDAO.getAllOnderdelen()}">
-						<tr>
-							<td>${Onderdeel.naam}</td>
-							<td>${Onderdeel.voorraad }</td>
-							<td>${Onderdeel.prijs }</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			<!--  footer  -->
-			<jsp:include page="/include/footer.jsp" />
-			<!-- alle javascript files -->
-			<script src="${pageContext.request.contextPath}/js/jquery-1.11.2.js"></script>
-			<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-			<script src="${pageContext.request.contextPath}/js/main.js"></script>
+				</c:forEach>
+			</tbody>
+		</table>
+		<!--  footer  -->
+		<jsp:include page="/include/footer.jsp" />
+		<!-- alle javascript files -->
+		<script src="${pageContext.request.contextPath}/js/jquery-1.11.2.js"></script>
+		<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+		<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 
 </html>

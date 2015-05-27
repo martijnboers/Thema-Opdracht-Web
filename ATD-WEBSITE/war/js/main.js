@@ -40,9 +40,11 @@ $('#checkbox').change(function() {
 				var f1 = document.getElementById('naam');
 				var f2 = document.getElementById('aantal');
 				var f3 = document.getElementById('prijs');
-				f1.value = cells[0].innerHTML;
-				f2.value = cells[1].innerHTML;
-				f3.value = cells[2].innerHTML;
+				var f4 = document.getElementById('ID');
+				f1.value = cells[1].innerHTML;
+				f2.value = cells[2].innerHTML;
+				f3.value = cells[3].innerHTML;
+				f4.value = cells[0].innerHTML;
 			};
 		}
 	}
