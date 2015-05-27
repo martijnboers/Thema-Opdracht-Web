@@ -29,7 +29,7 @@ public class BlogPost extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			Class.forName("org.apache.commons.lang3");
+			Class.forName("org.apache.commons.lang3.StringEscapeUtils");
 		} catch (ClassNotFoundException e) {
 			Logger.getLogger("atd.log").warning("Kan niet lib importeren");
 			e.printStackTrace();

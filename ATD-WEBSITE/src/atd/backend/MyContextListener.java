@@ -22,7 +22,7 @@ public class MyContextListener implements ServletContextListener{
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		try {
-			FileHandler fh = new FileHandler("/log/atdlog.log");
+			FileHandler fh = new FileHandler("atdlog.log");
 			fh.setFormatter(new LogFormatter());
 			System.out.println(11);
 			logger.addHandler(fh);
