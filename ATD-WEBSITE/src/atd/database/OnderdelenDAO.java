@@ -54,7 +54,7 @@ public class OnderdelenDAO {
 	 * @param onderdeelIn
 	 * @return
 	 */
-	public static StatusDB setOnderdeel(Onderdeel onderdeelIn) {
+	public StatusDB setOnderdeel(Onderdeel onderdeelIn) {
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);

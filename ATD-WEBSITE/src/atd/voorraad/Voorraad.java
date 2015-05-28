@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import atd.domein.Onderdeel;
 import atd.services.ServiceProvider;
 import atd.services.VoorraadService;
 
@@ -35,19 +36,37 @@ public class Voorraad extends HttpServlet {
 			throws ServletException, IOException {
 		VoorraadService service = ServiceProvider.getVoorraadService();
 		String run = req.getParameter("run");
-
-		int onderdeelId = Integer.parseInt(req.getParameter("ID"));
-		int nieuwAantal = Integer.parseInt(req.getParameter("aantal"));
 		boolean update = false;
-		System.out.println(onderdeelId + " " + nieuwAantal);
 
+		// get Parameterss
+//		int onderdeelId = Integer.parseInt(req.getParameter("ID"));
+//		int nieuwAantal = Integer.parseInt(req.getParameter("aantal"));
+		int onderdeelId =434;
+		int nieuwAantal = 3;
+
+		String aantal = req.getParameter("nieuwOnderdeelAantal");
+		String naam = req.getParameter("nieuwOnderdeelNaam");
+		String type = req.getParameter("nieuwOnderdeelType");
+		String prijs = req.getParameter("nieuwOnderdeelPrijs");
+
+		System.out.println(aantal + " " + naam + " " + type + " " + prijs);
 		if (run == null) {
 		} else if (run.equals("updaten")) {
 			if (service.updateOnderdeel(onderdeelId, nieuwAantal) == true) {
 				update = true;
 			}
 		} else if (run.equals("bestellen")) {
-			
+
+			if (service.updateOnderdeel(onderdeelId, nieuwAantal) == true) {
+				update = true;
+			}
+		} else if (run.equals("nieuwOnderdeel")) {
+			System.out.println("onderdeel toevoegen");
+
+			if (service.addOnderdeel(naam, type, Integer.parseInt(aantal), Double.parseDouble(prijs)) == true) {
+				update = true;
+			}
+
 		}
 		if (update) {
 			rd = req.getRequestDispatcher("/voorraad/voorraad.jsp");

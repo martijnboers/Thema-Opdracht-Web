@@ -17,6 +17,7 @@ package atd.services;
 import java.sql.SQLException;
 
 import atd.database.OnderdelenDAO;
+import atd.domein.Onderdeel;
 import atd.domein.StatusDB;
 
 public class VoorraadService {
@@ -30,6 +31,18 @@ public class VoorraadService {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		return false;
+
+	}
+
+	public boolean addOnderdeel(String naam, String type, int aantal,
+			double prijs) {
+
+		Onderdeel onderdeel = new Onderdeel(naam, type, aantal, prijs);
+		if (onderdelenDAO.setOnderdeel(onderdeel) == StatusDB.SUCCESS) {
+			System.out.println("onderdeel is er");
+			return true;
 		}
 		return false;
 
