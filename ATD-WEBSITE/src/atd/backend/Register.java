@@ -64,7 +64,6 @@ public class Register extends HttpServlet {
 				e.printStackTrace();
 			}
 			String wachtwoord = org.apache.commons.codec.digest.DigestUtils.sha256Hex(req.getParameter("password"));
-			System.out.println(UsersDAO.searchUser(username));
 			if (UsersDAO.searchUser(username) != null) {
 				req.setAttribute("errorReg",
 						"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Username is bezet</div>");
@@ -103,7 +102,7 @@ public class Register extends HttpServlet {
 			String kenteken = req.getParameter("kenteken");
 			String merk = req.getParameter("merk");
 			String type = req.getParameter("type");
-			
+
 			if (KlantenDAO.searchKlant(username) != null) {
 				req.setAttribute("errorReg",
 						"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Username bestaat al</div>");
@@ -111,7 +110,7 @@ public class Register extends HttpServlet {
 				rd.forward(req, resp);
 				return;
 			}
-			
+
 			if (username.equals("") || realName.equals("") || wachtwoord.equals("") || postcode.equals("") || email.equals("")
 					|| kenteken.equals("") || merk.equals("") || type.equals("")) {
 				req.setAttribute("errorReg",
