@@ -19,8 +19,8 @@ import atd.domein.Onderdeel;
 
 /**
  * @author Martijn
- *  
- * TODO: Heel veel code kan hieruit weg
+ * 
+ *         TODO: Heel veel code kan hieruit weg
  *
  */
 
@@ -31,9 +31,9 @@ public class OnderdelenDAO {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
-	
+
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
-	
+
 	/**
 	 * Maakt nieuw Onderdeel aan in host
 	 * 
@@ -45,7 +45,10 @@ public class OnderdelenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			String query = "INSERT INTO Onderdeel(Naam, Type, Voorraad, Prijs) VALUES(?, ?, ?, ?)";
@@ -85,17 +88,22 @@ public class OnderdelenDAO {
 	 * @return Onderdeel
 	 * @throws SQLException
 	 */
-	public static Onderdeel getOnderdeel(int id) throws SQLException {
+	public Onderdeel getOnderdeel(int id) throws SQLException {
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Onderdeel WHERE id='" + id + "'");
+			rs = st.executeQuery("SELECT * FROM Onderdeel WHERE id='" + id
+					+ "'");
 
 			if (rs.next()) {
-				return new Onderdeel(rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDouble(5));
+				return new Onderdeel(rs.getString(2), rs.getString(3),
+						rs.getInt(4), rs.getDouble(5));
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
@@ -130,12 +138,16 @@ public class OnderdelenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Onderdeel");
 
 			while (rs.next()) {
-				Onderdeel ond = new Onderdeel(rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDouble(5));
+				Onderdeel ond = new Onderdeel(rs.getString(2), rs.getString(3),
+						rs.getInt(4), rs.getDouble(5));
 				ond.setID(rs.getInt(1));
 				alleOnderdelen.add(ond);
 			}
@@ -160,26 +172,30 @@ public class OnderdelenDAO {
 		}
 		return null;
 	}
+
 	/**
 	 * Maakt nieuw Onderdeel aan in host
 	 * 
 	 * @param onderdeelIn
+	 * @param aantal
 	 * @return
 	 */
-	public static StatusDB updateOnderdeel(Onderdeel onderdeelIn) {
+	public StatusDB updateOnderdeel(Onderdeel onderdeelIn, int aantal) {
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
-			String query = "UPDATE Onderdeel(Naam, Type, Voorraad, Prijs) VALUES(?, ?, ?, ?)";
+			String query = "UPDATE Onderdeel SET Voorraad='" + aantal
+					+ "' WHERE `Prijs` = " + onderdeelIn.getPrijs()
+					+ " and `Type` = '" + onderdeelIn.getType()
+					+ "' and `Naam` = '" + onderdeelIn.getNaam() + "'";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
-			preparedStmt.setString(1, onderdeelIn.getNaam());
-			preparedStmt.setString(2, onderdeelIn.getType());
-			preparedStmt.setInt(3, onderdeelIn.getVoorraad());
-			preparedStmt.setDouble(4, onderdeelIn.getPrijs());
 			preparedStmt.execute();
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {

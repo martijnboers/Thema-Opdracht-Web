@@ -25,7 +25,7 @@
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">Aantal</span> <input
 					type="text" class="form-control" placeholder="2342"
-					aria-describedby="basic-addon1" id="aantal"> <span
+					aria-describedby="basic-addon1" id="aantal" name="aantal"> <span
 					class="input-group-btn">
 					<button name="run" class="btn btn-success" type="submit"
 						value="updaten">updaten</button>
