@@ -46,7 +46,7 @@
 						href="DeletePost.do?id=${Bericht.id }">x</a> ${Bericht.bericht}
 				</p>
 				<p>
-					<em><small>- ${Bericht.owner.naam} " @ "
+					<em><small>- ${Bericht.owner.naam} @ 
 							${Bericht.date} </small></em>
 				</p>
 			</div>
