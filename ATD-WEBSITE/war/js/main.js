@@ -1,8 +1,9 @@
-// javascript voor de voorraad beheer!
-// dit vuld de velden met de waarde uit de tabel
-// scheeld een hoop werk
 
-console.log('main js');
+$("td").click(function() {
+	$(this).closest("tr").siblings().removeClass("highlight-table");
+	$(this).parents("tr").toggleClass("highlight-table", this.clicked);
+
+});
 
 $('#checkbox').change(function() {
 	if (this.checked) {
@@ -51,14 +52,19 @@ $('#checkbox').change(function() {
 
 })();
 
-// extra
-// als je op een table row klikt highligh hij groen
-$("td").click(function() {
-	$(this).closest("tr").siblings().removeClass("highlight-table");
-	$(this).parents("tr").toggleClass("highlight-table", this.clicked);
-});
+$(document).ready(
+		function() {
+			$('#voorraad-table tr').each(
+					function() {
+						$(this).find('#prijs').each(
+								function() {
+									var a = $(this).text();
 
-// datepicker
-$(function() {
-	$('#datetimepicker1').datetimepicker();
-});
+									$(this).replaceWith(
+											"<td>"
+													+ accounting.formatMoney(a,
+															"€", 2, ".", ",")
+													+ "</td>");
+								})
+					})
+		});

@@ -38,35 +38,52 @@ public class Voorraad extends HttpServlet {
 		String run = req.getParameter("run");
 		boolean update = false;
 
-		// get Parameterss
-		int onderdeelId = Integer.parseInt(req.getParameter("ID"));
-		int nieuwAantal = Integer.parseInt(req.getParameter("aantal"));
-		int bestelAantal = Integer.parseInt(req.getParameter("bestelAantal"));
+		String onderdeelId = req.getParameter("ID");
+		String nieuwAantal = req.getParameter("aantal");
+		String bestelAantal = req.getParameter("bestelAantal");
 
 		String aantal = req.getParameter("nieuwOnderdeelAantal");
 		String naam = req.getParameter("nieuwOnderdeelNaam");
 		String type = req.getParameter("nieuwOnderdeelType");
 		String prijs = req.getParameter("nieuwOnderdeelPrijs");
-	
 
 		System.out.println(aantal + " " + naam + " " + type + " " + prijs);
-		
+
 		if (run == null) {
 		} else if (run.equals("updaten")) {
 			if (service.updateOnderdeel(onderdeelId, nieuwAantal) == true) {
 				update = true;
+			} else {
+				// error
+				req.setAttribute(
+						"error",
+						"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Vul al de velden correct in </div>");
 			}
 		} else if (run.equals("bestellen")) {
 			System.out.println("onderdeel bestellen");
 			if (service.bestelOnderdeel(onderdeelId, bestelAantal) == true) {
 				update = true;
+			} else {
+				// error
+				req.setAttribute(
+						"error",
+						"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Vul al de velden correct in </div>");
+
 			}
+			/**
+			 * Nieuw onderdeel toevoegen, voeg alleen strings toe, alles word
+			 * netjes omgezet in de services
+			 * */
 		} else if (run.equals("nieuwOnderdeel")) {
 			System.out.println("onderdeel toevoegen");
 
-			if (service.addOnderdeel(naam, type, Integer.parseInt(aantal),
-					Double.parseDouble(prijs)) == true) {
+			if (service.addOnderdeel(naam, type, aantal, prijs) == true) {
 				update = true;
+			} else {
+				// error message
+				req.setAttribute(
+						"errorToevoegen",
+						"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Vul al de velden correct in </div>");
 			}
 
 		}

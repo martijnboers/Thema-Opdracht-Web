@@ -23,43 +23,60 @@ import atd.domein.StatusDB;
 public class VoorraadService {
 	OnderdelenDAO onderdelenDAO = new OnderdelenDAO();
 
-	public boolean updateOnderdeel(int id, int aantal) {
-		try {
-			if (onderdelenDAO.updateOnderdeel(onderdelenDAO.getOnderdeel(id),
-					aantal) == StatusDB.SUCCESS) {
-				return true;
+	public boolean updateOnderdeel(String id, String aantal) {
+		if (id.isEmpty() || id == null && aantal.isEmpty() || aantal == null) {
+			return false;
+		} else {
+			try {
+				if (onderdelenDAO.updateOnderdeel(
+						onderdelenDAO.getOnderdeel(Integer.parseInt(id)),
+						Integer.parseInt(aantal)) == StatusDB.SUCCESS) {
+					return true;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+			return false;
 		}
-		return false;
-
 	}
 
-	public boolean bestelOnderdeel(int id, int aantal) {
-		try {
-			int nieuwAantal = onderdelenDAO.getOnderdeel(id).getVoorraad()
-					+ aantal;
-			if (onderdelenDAO.updateOnderdeel(onderdelenDAO.getOnderdeel(id),
-					nieuwAantal) == StatusDB.SUCCESS) {
-				return true;
+	public boolean bestelOnderdeel(String id, String aantal) {
+		if (id.isEmpty() || id == null && aantal.isEmpty() || aantal == null) {
+			return false;
+		} else {
+			try {
+				int nieuwAantal = onderdelenDAO.getOnderdeel(
+						Integer.parseInt(id)).getVoorraad()
+						+ Integer.parseInt(aantal);
+				if (onderdelenDAO.updateOnderdeel(
+						onderdelenDAO.getOnderdeel(Integer.parseInt(id)),
+						nieuwAantal) == StatusDB.SUCCESS) {
+					return true;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+			return false;
 		}
-		return false;
-
 	}
 
-	public boolean addOnderdeel(String naam, String type, int aantal,
-			double prijs) {
+	public boolean addOnderdeel(String naam, String type, String aantal,
+			String prijs) {
+		if (naam.isEmpty() || naam == null && type.isEmpty() || type == null
+				&& aantal.isEmpty() || aantal == null && prijs.isEmpty()
+				|| prijs == null) {
+			return false;
+		} else {
 
-		Onderdeel onderdeel = new Onderdeel(naam, type, aantal, prijs);
-		if (onderdelenDAO.setOnderdeel(onderdeel) == StatusDB.SUCCESS) {
-			System.out.println("onderdeel is er");
-			return true;
+			double doublePrijs = Double.parseDouble(prijs);
+			int intAantal = Integer.parseInt(aantal);
+			Onderdeel onderdeel = new Onderdeel(naam, type, intAantal,
+					doublePrijs);
+			if (onderdelenDAO.setOnderdeel(onderdeel) == StatusDB.SUCCESS) {
+				System.out.println("onderdeel is er");
+				return true;
+			}
+			return false;
 		}
-		return false;
-
 	}
 }

@@ -24,6 +24,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -148,6 +149,7 @@ public class OnderdelenDAO {
 	 */
 	public static ArrayList<Onderdeel> getAllOnderdelen() throws SQLException {
 		ArrayList<Onderdeel> alleOnderdelen = new ArrayList<>();
+	
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
@@ -160,6 +162,8 @@ public class OnderdelenDAO {
 			rs = st.executeQuery("SELECT * FROM Onderdeel");
 
 			while (rs.next()) {
+			
+
 				Onderdeel ond = new Onderdeel(rs.getString(2), rs.getString(3),
 						rs.getInt(4), rs.getDouble(5));
 				ond.setID(rs.getInt(1));

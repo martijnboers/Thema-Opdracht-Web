@@ -40,8 +40,11 @@
 				placeholder="hoeveelheid in voorraad"
 				aria-describedby="basic-addon1" name="nieuwOnderdeelAantal">
 		</div>
+		${requestScope.errorToevoegen}
 		<button type="submit" name="run" value="nieuwOnderdeel"
 			class="btn btn-success pull-right ">Nieuw onderdeel</button>
+
+
 		<h2>Onderdeel aanpassen</h2>
 		<p>Click op een onderdeel om te bestellen en aanpassing te kunnen
 			maken</p>
@@ -73,7 +76,7 @@
 				type="text" class="form-control" placeholder="Product ID"
 				aria-describedby="basic-addon1" id="ID" name="ID" readonly>
 		</div>
-
+		${requestScope.error}
 		<div class="row">
 			<div class="col-lg-6"></div>
 			<div class="col-lg-6">
@@ -86,8 +89,10 @@
 
 					</span>
 				</div>
+
 			</div>
 	</form>
+
 	<table class="table table-default" id="voorraad-table">
 
 		<thead>
@@ -101,11 +106,11 @@
 		<tbody>
 			<c:forEach var="Onderdeel"
 				items="${OnderdelenDAO.getAllOnderdelen()}">
-				<tr>
+				<tr onclick="toggleClass(this,'highlight-table');">
 					<td>${Onderdeel.ID}</td>
 					<td>${Onderdeel.naam}</td>
 					<td>${Onderdeel.voorraad }</td>
-					<td>${Onderdeel.prijs }</td>
+					<td id="prijs">${Onderdeel.prijs}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -115,6 +120,7 @@
 	<!-- alle javascript files -->
 	<script src="${pageContext.request.contextPath}/js/jquery-1.11.2.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+	<script src="${pageContext.request.contextPath}/js/accounting.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 

@@ -15,6 +15,8 @@
 package atd.domein;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 /**
  * Onderdeel object. MAAK HIER GEEN SETTERS, LAAT HET VIA DATABASE PACKAGE
@@ -29,6 +31,8 @@ public class Onderdeel {
 	private String type;
 	private int voorraad;
 	private double prijs;
+	DecimalFormat decimal = new DecimalFormat("#.00");
+	NumberFormat formatter = new DecimalFormat("#0.00");
 
 	public Onderdeel(String naam, String type, int voorraad, double prijs) {
 		this.naam = naam;
