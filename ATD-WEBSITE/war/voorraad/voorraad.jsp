@@ -40,7 +40,7 @@
 				placeholder="hoeveelheid in voorraad"
 				aria-describedby="basic-addon1" name="nieuwOnderdeelAantal">
 		</div>
-		${requestScope.errorToevoegen}
+
 		<button type="submit" name="run" value="nieuwOnderdeel"
 			class="btn btn-success pull-right ">Nieuw onderdeel</button>
 

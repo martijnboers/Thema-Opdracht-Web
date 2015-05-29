@@ -32,6 +32,10 @@ import atd.services.VoorraadService;
 public class Voorraad extends HttpServlet {
 	RequestDispatcher rd = null;
 
+	/**
+	 * Alle Strings worden opgehaald en pas omgezet in de service naar het
+	 * gewenste format
+	 * */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		VoorraadService service = ServiceProvider.getVoorraadService();
@@ -47,52 +51,46 @@ public class Voorraad extends HttpServlet {
 		String type = req.getParameter("nieuwOnderdeelType");
 		String prijs = req.getParameter("nieuwOnderdeelPrijs");
 
-		System.out.println(aantal + " " + naam + " " + type + " " + prijs);
-
 		if (run == null) {
+			// niks
+
+			/**
+			 * Onderdeel updaten, dit overrulled het bestaande aantal in de DB
+			 * */
 		} else if (run.equals("updaten")) {
 			if (service.updateOnderdeel(onderdeelId, nieuwAantal) == true) {
 				update = true;
-			} else {
-				// error
-				req.setAttribute(
-						"error",
-						"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Vul al de velden correct in </div>");
-			}
-		} else if (run.equals("bestellen")) {
-			System.out.println("onderdeel bestellen");
-			if (service.bestelOnderdeel(onderdeelId, bestelAantal) == true) {
-				update = true;
-			} else {
-				// error
-				req.setAttribute(
-						"error",
-						"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Vul al de velden correct in </div>");
-
 			}
 			/**
-			 * Nieuw onderdeel toevoegen, voeg alleen strings toe, alles word
-			 * netjes omgezet in de services
+			 * Nieuw onderdeel bestellen telt het bestaande aantal op bij het
+			 * bestel aantal
+			 * */
+		} else if (run.equals("bestellen")) {
+			if (service.bestelOnderdeel(onderdeelId, bestelAantal) == true) {
+				update = true;
+			}
+			/**
+			 * Nieuw onderdeel toevoegen
 			 * */
 		} else if (run.equals("nieuwOnderdeel")) {
-			System.out.println("onderdeel toevoegen");
-
 			if (service.addOnderdeel(naam, type, aantal, prijs) == true) {
 				update = true;
-			} else {
-				// error message
-				req.setAttribute(
-						"errorToevoegen",
-						"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Vul al de velden correct in </div>");
 			}
 
 		}
+
 		if (update) {
+
+			rd = req.getRequestDispatcher("/voorraad/voorraad.jsp");
+			rd.forward(req, resp);
+		} else if (update == false) {
+			req.setAttribute(
+					"error",
+					"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Vul al de velden correct in </div>");
 			rd = req.getRequestDispatcher("/voorraad/voorraad.jsp");
 			rd.forward(req, resp);
 		} else {
-			rd = req.getRequestDispatcher("/voorraad/voorraad.jsp");
-			rd.forward(req, resp);
+
 		}
 	}
 }

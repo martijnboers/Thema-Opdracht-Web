@@ -28,9 +28,10 @@ public class VoorraadService {
 			return false;
 		} else {
 			try {
+				int intAantal = Integer.parseInt(aantal);
+				int intId = Integer.parseInt(id);
 				if (onderdelenDAO.updateOnderdeel(
-						onderdelenDAO.getOnderdeel(Integer.parseInt(id)),
-						Integer.parseInt(aantal)) == StatusDB.SUCCESS) {
+						onderdelenDAO.getOnderdeel(intId), intAantal) == StatusDB.SUCCESS) {
 					return true;
 				}
 			} catch (SQLException e) {
@@ -73,7 +74,6 @@ public class VoorraadService {
 			Onderdeel onderdeel = new Onderdeel(naam, type, intAantal,
 					doublePrijs);
 			if (onderdelenDAO.setOnderdeel(onderdeel) == StatusDB.SUCCESS) {
-				System.out.println("onderdeel is er");
 				return true;
 			}
 			return false;
