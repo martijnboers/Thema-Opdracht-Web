@@ -39,31 +39,33 @@ public class Voorraad extends HttpServlet {
 		boolean update = false;
 
 		// get Parameterss
-//		int onderdeelId = Integer.parseInt(req.getParameter("ID"));
-//		int nieuwAantal = Integer.parseInt(req.getParameter("aantal"));
-		int onderdeelId =434;
-		int nieuwAantal = 3;
+		int onderdeelId = Integer.parseInt(req.getParameter("ID"));
+		int nieuwAantal = Integer.parseInt(req.getParameter("aantal"));
+		int bestelAantal = Integer.parseInt(req.getParameter("bestelAantal"));
 
 		String aantal = req.getParameter("nieuwOnderdeelAantal");
 		String naam = req.getParameter("nieuwOnderdeelNaam");
 		String type = req.getParameter("nieuwOnderdeelType");
 		String prijs = req.getParameter("nieuwOnderdeelPrijs");
+	
 
 		System.out.println(aantal + " " + naam + " " + type + " " + prijs);
+		
 		if (run == null) {
 		} else if (run.equals("updaten")) {
 			if (service.updateOnderdeel(onderdeelId, nieuwAantal) == true) {
 				update = true;
 			}
 		} else if (run.equals("bestellen")) {
-
-			if (service.updateOnderdeel(onderdeelId, nieuwAantal) == true) {
+			System.out.println("onderdeel bestellen");
+			if (service.bestelOnderdeel(onderdeelId, bestelAantal) == true) {
 				update = true;
 			}
 		} else if (run.equals("nieuwOnderdeel")) {
 			System.out.println("onderdeel toevoegen");
 
-			if (service.addOnderdeel(naam, type, Integer.parseInt(aantal), Double.parseDouble(prijs)) == true) {
+			if (service.addOnderdeel(naam, type, Integer.parseInt(aantal),
+					Double.parseDouble(prijs)) == true) {
 				update = true;
 			}
 

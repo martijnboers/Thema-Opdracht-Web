@@ -7,8 +7,7 @@
 <title>Home</title>
 <jsp:include page="/include/style.jsp" />
 </head>
-<body>
-	<div class="container">
+<body>nieuwAantal
 		<jsp:include page="/include/header.jsp" />
 		<h1>Blogpost</h1>
 		<jsp:include page="/include/footer.jsp" />

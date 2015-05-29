@@ -8,10 +8,10 @@
 <jsp:include page="/include/style.jsp" />
 </head>
 <body>
-	<div class="container">
-		<jsp:include page="/include/header.jsp" />
-		<h1>Werkplaats</h1>
-		<jsp:include page="/include/footer.jsp" />
+
+	<jsp:include page="/include/header.jsp" />
+	<h1>Werkplaats</h1>
+	<jsp:include page="/include/footer.jsp" />
 	</div>
 	<script src="${pageContext.request.contextPath}/js/jquery-1.11.2.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>

@@ -10,7 +10,6 @@
 </head>
 <body>
 	<!--   main container -->
-	<div class="container">
 		<jsp:include page="/include/header.jsp" />
 		<!-- login scherm -->
 		<div class="master-login clearfix">
@@ -27,10 +26,11 @@
 					<input type="password" name="password" class="form-control"
 						aria-describedby="basic-addon1">
 				</div>
+				${requestScope.error}
 				<input type="submit" class="btn btn-success btn-lg pull-right"
 					value="aanmelden">
 				
-				${requestScope.error}
+				
 			
 		</div>
 		</form>

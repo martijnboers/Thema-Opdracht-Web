@@ -8,7 +8,6 @@
 <jsp:include page="/include/style.jsp" />
 </head>
 <body>
-	<div class="container">
 		<jsp:include page="/include/header.jsp" />
 		<h1>Parkeren</h1>
 		<jsp:include page="/include/footer.jsp" />

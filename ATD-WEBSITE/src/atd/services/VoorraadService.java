@@ -36,6 +36,21 @@ public class VoorraadService {
 
 	}
 
+	public boolean bestelOnderdeel(int id, int aantal) {
+		try {
+			int nieuwAantal = onderdelenDAO.getOnderdeel(id).getVoorraad()
+					+ aantal;
+			if (onderdelenDAO.updateOnderdeel(onderdelenDAO.getOnderdeel(id),
+					nieuwAantal) == StatusDB.SUCCESS) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+
 	public boolean addOnderdeel(String naam, String type, int aantal,
 			double prijs) {
 

@@ -16,43 +16,41 @@
 <jsp:include page="/include/style.jsp" />
 </head>
 <body>
-	<div class="container">
-		<jsp:include page="/include/header.jsp" />
-		<h2>Maak nieuw bericht</h2>
+
+	<jsp:include page="/include/header.jsp" />
+	<h2>Maak nieuw bericht</h2>
+	<br>
+	<form action="/ATD-WEBSITE/BlogPost.do" method="POST">
+
+		<div class="input-group">
+			<span class="input-group-addon" style="width: 150px"
+				id="basic-addon1"> Bericht </span> <input type="text"
+				class="form-control" name="bericht" placeholder="Input text"
+				aria-describedby="basic-addon1">
+		</div>
+		<input type="submit" value="Bericht toevoegen"
+			class="btn btn-success btn-lg pull-right">
+	</form>
+	<br>
+	<br>
+	<h2>Nieuwe berichten:</h2>
+	<br>
+
+	<!-- Met EL -->
+	<c:forEach var="Bericht" items="${berichtenService.alleBerichten}">
+		<div class="jumbotron">
+			</p>
+			<p>
+				<a style="float: right; display: inline-block; margin: -60px -47px;"
+					href="DeletePost.do?id=${Bericht.id }">x</a> ${Bericht.bericht}
+			</p>
+			<p>
+				<em><small>- ${Bericht.owner.naam} @ ${Bericht.date} </small></em>
+			</p>
+		</div>
 		<br>
-		<form action="/ATD-WEBSITE/BlogPost.do" method="POST">
+	</c:forEach>
 
-			<div class="input-group">
-				<span class="input-group-addon" style="width: 150px"
-					id="basic-addon1"> Bericht </span> <input type="text"
-					class="form-control" name="bericht" placeholder="Input text"
-					aria-describedby="basic-addon1">
-			</div>
-			<input type="submit" value="Bericht toevoegen"
-				class="btn btn-success btn-lg pull-right">
-		</form>
-		<br> <br>
-		<h2>Nieuwe berichten:</h2>
-		<br>
-
-		<!-- Met EL -->
-		<c:forEach var="Bericht"
-			items="${berichtenService.alleBerichten}">
-			<div class="jumbotron">
-				</p>
-				<p>
-					<a
-						style="float: right; display: inline-block; margin: -60px -47px;"
-						href="DeletePost.do?id=${Bericht.id }">x</a> ${Bericht.bericht}
-				</p>
-				<p>
-					<em><small>- ${Bericht.owner.naam} @ 
-							${Bericht.date} </small></em>
-				</p>
-			</div>
-			<br>
-		</c:forEach>
-
-		<jsp:include page="/include/footer.jsp" />
+	<jsp:include page="/include/footer.jsp" />
 </body>
 </html>

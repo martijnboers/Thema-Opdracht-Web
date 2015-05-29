@@ -4,6 +4,13 @@
 body {
 	padding-top: 20px;
 	padding-bottom: 20px;
+	background-color: rgb(236, 240, 241);
+}
+
+.container {
+	background-color: white;
+	padding: 20px;
+	border-radius: 5px;
 }
 
 h1, h2, h3 {
@@ -27,9 +34,14 @@ p {
 	line-height: 45px;
 }
 
+table {
+
+
+}
+
 /* footer */
 .footer {
-	padding-top: 19px;
+	margin-top: 19px;
 	color: #777;
 	background-color: brand-dark;
 	border-top: 1px solid #e5e5e5;
