@@ -25,18 +25,22 @@ public class VoorraadService {
 
 	public boolean updateOnderdeel(String id, String aantal) {
 		if (id.isEmpty() || id == null && aantal.isEmpty() || aantal == null) {
+			System.out.println("validatie is fout met" + id + " " + aantal);
 			return false;
 		} else {
 			try {
 				int intAantal = Integer.parseInt(aantal);
 				int intId = Integer.parseInt(id);
+
 				if (onderdelenDAO.updateOnderdeel(
-						onderdelenDAO.getOnderdeel(intId), intAantal) == StatusDB.SUCCESS) {
+						onderdelenDAO.getOnderdeel(intId), intAantal)) {
+					System.out.println("Gelukt!");
 					return true;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			System.out.println("helaas");
 			return false;
 		}
 	}
@@ -51,7 +55,7 @@ public class VoorraadService {
 						+ Integer.parseInt(aantal);
 				if (onderdelenDAO.updateOnderdeel(
 						onderdelenDAO.getOnderdeel(Integer.parseInt(id)),
-						nieuwAantal) == StatusDB.SUCCESS) {
+						nieuwAantal)) {
 					return true;
 				}
 			} catch (SQLException e) {
@@ -73,7 +77,7 @@ public class VoorraadService {
 			int intAantal = Integer.parseInt(aantal);
 			Onderdeel onderdeel = new Onderdeel(naam, type, intAantal,
 					doublePrijs);
-			if (onderdelenDAO.setOnderdeel(onderdeel) == StatusDB.SUCCESS) {
+			if (onderdelenDAO.setOnderdeel(onderdeel)) {
 				return true;
 			}
 			return false;

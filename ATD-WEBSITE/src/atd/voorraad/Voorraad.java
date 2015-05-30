@@ -58,7 +58,11 @@ public class Voorraad extends HttpServlet {
 			 * Onderdeel updaten, dit overrulled het bestaande aantal in de DB
 			 * */
 		} else if (run.equals("updaten")) {
+			System.out.println(service
+					.updateOnderdeel(onderdeelId, nieuwAantal));
 			if (service.updateOnderdeel(onderdeelId, nieuwAantal) == true) {
+				System.out.println(service.updateOnderdeel(onderdeelId,
+						nieuwAantal));
 				update = true;
 			}
 			/**
@@ -78,19 +82,20 @@ public class Voorraad extends HttpServlet {
 			}
 
 		}
-
+		/**
+		 * als het veranderen van een onderdeel of updaten gelukt is is 'update'
+		 * true en zal de pagina herladen met nieuwe producten, als er niks is
+		 * ingevuld en het fout is gegaan komt er een error message
+		 * */
 		if (update) {
-
 			rd = req.getRequestDispatcher("/voorraad/voorraad.jsp");
 			rd.forward(req, resp);
-		} else if (update == false) {
+		} else {
 			req.setAttribute(
 					"error",
 					"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Vul al de velden correct in </div>");
 			rd = req.getRequestDispatcher("/voorraad/voorraad.jsp");
 			rd.forward(req, resp);
-		} else {
-
 		}
 	}
 }

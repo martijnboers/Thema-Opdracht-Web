@@ -33,7 +33,7 @@ import atd.domein.StatusDB;
 import atd.domein.Onderdeel;
 
 /**
- * @author Martijn
+ * @author Martijn/Klaas
  * 
  *         TODO: Heel veel code kan hieruit weg
  *
@@ -55,7 +55,8 @@ public class OnderdelenDAO {
 	 * @param onderdeelIn
 	 * @return
 	 */
-	public StatusDB setOnderdeel(Onderdeel onderdeelIn) {
+	public boolean setOnderdeel(Onderdeel onderdeelIn) {
+		boolean result = false;
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
@@ -66,17 +67,24 @@ public class OnderdelenDAO {
 					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
-			String query = "INSERT INTO Onderdeel(Naam, Type, Voorraad, Prijs) VALUES(?, ?, ?, ?)";
+			String query = "INSERT INTO `Onderdeel`( `Naam`, `Type`, `Voorraad`, `Prijs`) VALUES ('"
+					+ onderdeelIn.getNaam()
+					+ "','"
+					+ onderdeelIn.getType()
+					+ "',"
+					+ onderdeelIn.getVoorraad()
+					+ ","
+					+ onderdeelIn.getPrijs() + ")";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
-			preparedStmt.setString(1, onderdeelIn.getNaam());
-			preparedStmt.setString(2, onderdeelIn.getType());
-			preparedStmt.setInt(3, onderdeelIn.getVoorraad());
-			preparedStmt.setDouble(4, onderdeelIn.getPrijs());
 			preparedStmt.execute();
+
+			if (st.executeUpdate(query) == 1) {
+				result = true;
+			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
-			return StatusDB.INCORRECT;
+			return false;
 		} finally {
 			try {
 				if (rs != null) {
@@ -92,7 +100,7 @@ public class OnderdelenDAO {
 				System.out.println(ex.getMessage());
 			}
 		}
-		return StatusDB.UNKOWN;
+		return result;
 	}
 
 	/**
@@ -149,7 +157,7 @@ public class OnderdelenDAO {
 	 */
 	public static ArrayList<Onderdeel> getAllOnderdelen() throws SQLException {
 		ArrayList<Onderdeel> alleOnderdelen = new ArrayList<>();
-	
+
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
@@ -162,7 +170,6 @@ public class OnderdelenDAO {
 			rs = st.executeQuery("SELECT * FROM Onderdeel");
 
 			while (rs.next()) {
-			
 
 				Onderdeel ond = new Onderdeel(rs.getString(2), rs.getString(3),
 						rs.getInt(4), rs.getDouble(5));
@@ -192,13 +199,15 @@ public class OnderdelenDAO {
 	}
 
 	/**
-	 * Maakt nieuw Onderdeel aan in host
+	 * Maakt nieuw Onderdeel aan in host en returned een boolean true als het
+	 * gelukt is
 	 * 
 	 * @param onderdeelIn
 	 * @param aantal
-	 * @return
+	 * @return boolean
 	 */
-	public StatusDB updateOnderdeel(Onderdeel onderdeelIn, int aantal) {
+	public boolean updateOnderdeel(Onderdeel onderdeelIn, int aantal) {
+		boolean result = false;
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
@@ -216,9 +225,14 @@ public class OnderdelenDAO {
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.execute();
 
+			// kijken of het gelukt is
+			if (st.executeUpdate(query) == 1) {
+				result = true;
+			}
+
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
-			return StatusDB.INCORRECT;
+
 		} finally {
 			try {
 				if (rs != null) {
@@ -234,6 +248,6 @@ public class OnderdelenDAO {
 				System.out.println(ex.getMessage());
 			}
 		}
-		return StatusDB.UNKOWN;
+		return result;
 	}
 }
