@@ -4,13 +4,40 @@
 body {
 	padding-top: 20px;
 	padding-bottom: 20px;
-	background-color: rgb(236, 240, 241);
+	/* Location of the image */
+	background-image: url("${pageContext.request.contextPath}/images/background.jpg");
+	/* Background image is centered vertically and horizontally at all times */
+	background-position: center center;
+	/* Background image doesn't tile */
+	background-repeat: no-repeat;
+	/* Background image is fixed in the viewport so that it doesn't move when 
+     the content's height is greater than the image's height */
+	background-attachment: fixed;
+	/* This is what makes the background image rescale based
+     on the container's size */
+	background-size: cover;
+	/* Set a background color that will be displayed
+     while the background image is loading */
+	/*background-color: rgb(236, 240, 241); */
+	background-color: grey;
 }
 
 .container {
 	background-color: white;
 	padding: 20px;
 	border-radius: 5px;
+}
+
+.logo {
+	height: 25px;
+	display: block;
+	margin-top: -3px;
+	opacity: 0.7;
+	vertical-align: middle
+}
+
+.logo:hover {
+	opacity: 1.0;
 }
 
 h1, h2, h3 {
@@ -35,8 +62,7 @@ p {
 }
 
 table {
-
-
+	
 }
 
 /* footer */
