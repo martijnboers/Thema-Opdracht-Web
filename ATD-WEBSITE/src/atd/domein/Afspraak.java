@@ -14,20 +14,28 @@
  *******************************************************************************/
 package atd.domein;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.util.Date;
 
 public class Afspraak {
+	private int id;
 	private Klant klant;
 	private User monteur;
 	private Auto auto;
 	private Date datum;
 	private String omschrijving;
 
-	public Afspraak(Klant klant, User monteur, Auto auto, Date datum, String omschrijving) {
+	public Afspraak(int id, Klant klant, User monteur, Auto auto, String datum, String omschrijving) {
+		this.id = id;
 		this.klant = klant;
 		this.monteur = monteur;
 		this.auto = auto;
-		this.datum = datum;
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			this.datum = sdf.parse(datum);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		this.omschrijving = omschrijving;
 	}
 
@@ -43,8 +51,9 @@ public class Afspraak {
 		return auto;
 	}
 
-	public Date getDatum() {
-		return datum;
+	public String getDatum() {
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return sdf.format(datum);
 	}
 
 	public String getOmschrijving() {

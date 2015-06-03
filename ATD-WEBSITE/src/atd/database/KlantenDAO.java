@@ -132,7 +132,7 @@ public class KlantenDAO {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				return new Klant(rs.getInt(0), rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv);
+				return new Klant(rs.getInt(1), rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv);
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
@@ -183,7 +183,7 @@ public class KlantenDAO {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				allKlanten.add(new Klant(rs.getInt(0), rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv));
+				allKlanten.add(new Klant(rs.getInt(1), rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv));
 			}
 			return allKlanten;
 
