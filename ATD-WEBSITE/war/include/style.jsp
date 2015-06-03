@@ -5,4 +5,4 @@
 	href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/custom.css" />
-
+<jsp:include page="/include/background.jsp" />
