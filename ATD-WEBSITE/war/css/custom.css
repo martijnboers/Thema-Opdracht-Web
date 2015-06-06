@@ -5,7 +5,8 @@ body {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	/* Location of the image */
-	background-image: url("${pageContext.request.contextPath}/images/background.jpg");
+	background-image:
+		url("${pageContext.request.contextPath}/images/background.jpg");
 	/* Background image is centered vertically and horizontally at all times */
 	background-position: center center;
 	/* Background image doesn't tile */
@@ -22,10 +23,34 @@ body {
 	background-color: grey;
 }
 
+.alert {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
 .container {
 	background-color: white;
 	padding: 20px;
-	border-radius: 5px;
+}
+
+.navbar {
+	border-radius: 0px;
+}
+
+.btn {
+	border-radius: 0px;
+}
+
+input {
+	border-radius: 0px;
+}
+
+.form-control {
+	border-radius: 0px;
+}
+
+.input-group-addon {
+	border-radius: 0px;
 }
 
 .logo {
@@ -65,9 +90,25 @@ table {
 	
 }
 
+.date-container {
+	width: 100%;
+}
+
+.date-box {
+	width: 30%;
+	float: left;
+	margin-right: 20px;
+}
+
+.date-container:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
 /* footer */
 .footer {
-	margin-top: 19px;
+	margin-top: 39px;
 	color: #777;
 	background-color: brand-dark;
 	border-top: 1px solid #e5e5e5;

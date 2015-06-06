@@ -23,7 +23,6 @@ public class Auto {
 	private String type;
 
 	public Auto(int id, String kenteken, String merk, String type) {
-		this.id = id;
 		this.kenteken = kenteken;
 		this.setMerk(merk);
 		this.setType(type);

@@ -24,11 +24,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Properties;
 
 import atd.domein.Afspraak;
-import atd.domein.Bericht;
 import atd.domein.StatusDB;
 
 /**
@@ -43,35 +41,24 @@ public class AfspraakDAO {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
-
+	
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
-
-	public static void main(String[] args) throws SQLException {
-		//setAfspraak(new Afspraak(0, KlantenDAO.getKlant(3), UsersDAO.getUser(9), AutoDAO.searchAuto("12-32-32"), "2015-06-03 12:23:29", "Maak he 3"));
-
-		ArrayList<Afspraak> alleAfspraken = getAlleAfspraken();
-		for (Afspraak x : alleAfspraken) {
-			System.out.println(x.getDatum());
-		}
-	}
 
 	public static StatusDB setAfspraak(Afspraak afspraak) {
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"),
-					prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			String query = "INSERT INTO Afspraak(Klant, Monteur, Auto, Datum, Omschrijving) VALUES(?, ?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.setInt(1, afspraak.getKlant().getId());
 			preparedStmt.setInt(2, afspraak.getMonteur().getId());
-			preparedStmt.setInt(3, afspraak.getAuto().getId());
-			preparedStmt.setString(4, afspraak.getDatum());
-			preparedStmt.setString(5, afspraak.getOmschrijving());
+			preparedStmt.setInt(1, afspraak.getAuto().getId());
+			preparedStmt.setDate(1, afspraak.getDatum());
+			preparedStmt.setInt(1, afspraak.getKlant().getId());			
 			preparedStmt.execute();
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
@@ -93,49 +80,5 @@ public class AfspraakDAO {
 			}
 		}
 		return StatusDB.UNKOWN;
-	}
-
-	/**
-	 * Geeft alle Berichten in de host terug als ArrayList
-	 * 
-	 * @return ArrayList<Klant>
-	 * @throws SQLException
-	 */
-	public static ArrayList<Afspraak> getAlleAfspraken() throws SQLException {
-		ArrayList<Afspraak> alleAfspraken = new ArrayList<>();
-		try {
-			config = new URL(CONFIG_URL).openStream();
-			prop.load(config);
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"),
-					prop.getProperty("dbpassword"));
-			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Afspraak");
-
-			while (rs.next()) {
-				alleAfspraken.add(new Afspraak(rs.getInt(1), KlantenDAO.getKlant(rs.getInt(2)), UsersDAO.getUser(rs.getInt(3)), AutoDAO
-						.getAuto(4), rs.getString(5), rs.getString(6)));
-			}
-			return alleAfspraken;
-
-		} catch (SQLException | IOException | ClassNotFoundException ex) {
-			System.out.println(ex.getMessage());
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (st != null) {
-					st.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException ex) {
-				System.out.println(ex.getMessage());
-			}
-		}
-		return null;
 	}
 }

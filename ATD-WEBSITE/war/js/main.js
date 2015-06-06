@@ -1,3 +1,30 @@
+var picker = new Pikaday({
+	field : document.getElementById('datepicker_aankomst'),
+	firstDay : 1,
+	minDate : new Date('2000-01-01'),
+	maxDate : new Date('2020-12-31'),
+	yearRange : [ 2000, 2020 ],
+	onSelect : function() {
+		var date = document.createTextNode(this.getMoment().format(
+				'Do MMMM YYYY')
+				+ ' ');
+		document.getElementById('selected').appendChild(date);
+	}
+});
+
+var picker = new Pikaday({
+	field : document.getElementById('datepicker_vertrek'),
+	firstDay : 1,
+	minDate : new Date('2000-01-01'),
+	maxDate : new Date('2020-12-31'),
+	yearRange : [ 2000, 2020 ],
+	onSelect : function() {
+		var date = document.createTextNode(this.getMoment().format(
+				'Do MMMM YYYY')
+				+ ' ');
+		document.getElementById('selected').appendChild(date);
+	}
+});
 
 $("td").click(function() {
 	$(this).closest("tr").siblings().removeClass("highlight-table");

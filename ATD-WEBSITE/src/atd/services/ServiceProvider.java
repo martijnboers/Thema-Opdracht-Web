@@ -18,6 +18,7 @@ public class ServiceProvider {
 	private static VoorraadService voorraadService = new VoorraadService();
 	private static AuthenticatieService authenticatieService = new AuthenticatieService();
 	private static WerkplaatsService werkplaatsService = new WerkplaatsService();
+	private static ParkerenService parkeerService = new ParkerenService();
 
 	public static VoorraadService getVoorraadService() {
 		return voorraadService;
@@ -29,5 +30,9 @@ public class ServiceProvider {
 
 	public static WerkplaatsService getWerkplaatsService() {
 		return werkplaatsService;
+	}
+
+	public static ParkerenService getParkerenService() {
+		return parkeerService;
 	}
 }

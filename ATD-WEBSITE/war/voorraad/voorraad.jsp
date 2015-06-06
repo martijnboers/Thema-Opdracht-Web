@@ -115,6 +115,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 	<!--  footer  -->
 	<jsp:include page="/include/footer.jsp" />
 	<!-- alle javascript files -->

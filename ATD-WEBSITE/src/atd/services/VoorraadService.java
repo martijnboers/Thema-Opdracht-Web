@@ -46,7 +46,7 @@ public class VoorraadService {
 	}
 
 	public boolean bestelOnderdeel(String id, String aantal) {
-		if (id.isEmpty() || id == null && aantal.isEmpty() || aantal == null) {
+		if (id.isEmpty() || id == null && aantal == null || aantal.isEmpty()) {
 			return false;
 		} else {
 			try {
@@ -72,7 +72,7 @@ public class VoorraadService {
 				|| prijs == null) {
 			return false;
 		} else {
-
+			System.out.println("nieuw onderdeel");
 			double doublePrijs = Double.parseDouble(prijs);
 			int intAantal = Integer.parseInt(aantal);
 			Onderdeel onderdeel = new Onderdeel(naam, type, intAantal,

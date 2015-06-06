@@ -16,7 +16,7 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="#">Parkeren</a></li>
+					<li><a href="/ATD-WEBSITE/parkeren/parkeren.jsp">Parkeren</a></li>
 					<li><a href="/ATD-WEBSITE/werkplaats/werkplaats.jsp">Reparatie</a></li>
 					<li><a href="/ATD-WEBSITE/voorraad/voorraad.jsp">Voorraad</a></li>
 				</ul>
@@ -31,7 +31,7 @@
 						if (request.getSession().getAttribute("username") instanceof User) {
 							User user = (User) request.getSession().getAttribute(
 									"username");
-							out.print("<ul class=\"nav navbar-nav navbar-right\"> <li><a href=\"/ATD-WEBSITE/Logout.do\">"
+							out.print("<ul class=\"nav navbar-nav navbar-right\"> <li><a href=\"/ATD-WEBSITE/Logout.do\"> logout "
 									+ user.getNaam() + "</a></li> </ul>");
 						}
 						if (request.getSession().getAttribute("username") instanceof Klant) {

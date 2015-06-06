@@ -50,6 +50,17 @@
         <servlet-name>Register</servlet-name>
         <url-pattern>/Register.do</url-pattern>
     </servlet-mapping>
+    
+        <servlet>
+        <servlet-name>Parkeren</servlet-name>
+        <servlet-class>atd.parkeren.Parkeren
+	</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Parkeren</servlet-name>
+        <url-pattern>/Parkeren.do</url-pattern>
+    </servlet-mapping>
+    
     <filter>
         <filter-name>FilterForSecurity</filter-name>
         <filter-class>atd.backend.SecurityFilter</filter-class>

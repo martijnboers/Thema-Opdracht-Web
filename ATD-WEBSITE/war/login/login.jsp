@@ -7,6 +7,7 @@
 <title>Login pagina</title>
 <!--  alle stylesheets  -->
 <jsp:include page="/include/style.jsp" />
+
 </head>
 <body>
 	<!--   main container -->

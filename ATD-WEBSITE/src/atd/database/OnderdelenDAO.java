@@ -75,8 +75,6 @@ public class OnderdelenDAO {
 					+ onderdeelIn.getVoorraad()
 					+ ","
 					+ onderdeelIn.getPrijs() + ")";
-			PreparedStatement preparedStmt = con.prepareStatement(query);
-			preparedStmt.execute();
 
 			if (st.executeUpdate(query) == 1) {
 				result = true;
