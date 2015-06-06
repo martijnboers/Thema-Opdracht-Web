@@ -15,14 +15,10 @@
 package atd.parkeren;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,10 +27,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import atd.domein.Onderdeel;
+import atd.domein.Klant;
+import atd.domein.Reservering;
 import atd.services.ParkerenService;
 import atd.services.ServiceProvider;
-import atd.services.VoorraadService;
 
 public class Parkeren extends HttpServlet {
 	RequestDispatcher rd = null;
@@ -47,7 +43,7 @@ public class Parkeren extends HttpServlet {
 
 		String datum_aankomst = req.getParameter("datum_aankomst");
 		String datum_vertrek = req.getParameter("datum_vertrek");
-
+		Klant klant = (Klant) req.getSession().getAttribute("username");
 		if (run.equals("reserveren")) {
 			if (datum_aankomst == null || datum_aankomst.isEmpty()
 					&& datum_vertrek == null || datum_vertrek.isEmpty()) {
@@ -55,11 +51,15 @@ public class Parkeren extends HttpServlet {
 			} else {
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 				try {
-					// Date objecten maken
+
 					Date aankomst = df.parse(datum_aankomst);
 					Date vertrek = df.parse(datum_vertrek);
-					service.reserveerParkeerplaats(aankomst, vertrek);
-					update = true;
+					Reservering reservering = new Reservering(klant, aankomst,
+							vertrek);
+					if (service.reserveerParkeerplaats(reservering)) {
+						update = true;
+					}
+
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
