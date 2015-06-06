@@ -23,6 +23,15 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `Resevering`
+--
+CREATE TABLE IF NOT EXISTS `Reservering` (
+  `id` int(11) NOT NULL,
+  `aankomst` date NOT NULL,
+  `vertrek` date NOT NULL,
+  `klant_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+--
 -- Tabelstructuur voor tabel `Auto`
 --
 
