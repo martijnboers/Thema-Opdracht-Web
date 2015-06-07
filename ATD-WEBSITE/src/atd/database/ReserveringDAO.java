@@ -24,6 +24,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 
 import atd.domein.Klant;
@@ -68,7 +70,6 @@ public class ReserveringDAO {
 			preparedStmt.setInt(3, reservering.getKlant().getId());
 
 			if ((preparedStmt.executeUpdate()) > 0) {
-				System.out.println("gelukt!");
 				return true;
 			}
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
@@ -105,21 +106,14 @@ public class ReserveringDAO {
 							+ prop.getProperty("database"),
 					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Reservering");
+			rs = st.executeQuery("SELECT  `aankomst`, `vertrek`, `klant_id` FROM `Reservering` WHERE 1");
 
 			while (rs.next()) {
-				Klant klant = KlantenDAO.getKlant(rs.getInt(4));
 
-				java.util.Date aankomst = new java.util.Date(rs.getDate(2)
-						.getTime());
-
-				java.util.Date vertrek = new java.util.Date(rs.getDate(3)
-						.getTime());
-
-				Reservering reservering = new Reservering(klant, aankomst,
-						vertrek);
-
-				alleReserveringen.add(reservering);
+				alleReserveringen.add(new Reservering(KlantenDAO.getKlant(rs
+						.getInt(3)),
+						new java.util.Date(rs.getDate(1).getTime()),
+						new java.util.Date(rs.getDate(2).getTime())));
 			}
 			return alleReserveringen;
 
@@ -141,5 +135,56 @@ public class ReserveringDAO {
 			}
 		}
 		return null;
+	}
+
+	public int geparkeerdeDagen(Klant klant) throws SQLException {
+
+		int dagen = 0;
+		try {
+			config = new URL(CONFIG_URL).openStream();
+			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT `id`, `aankomst`, `vertrek`, `klant_id` FROM `Reservering` WHERE `klant_id` = "
+					+ klant.getId() + "");
+
+			while (rs.next()) {
+				Calendar aankomst_cal = Calendar.getInstance();
+				Calendar vertrek_cal = Calendar.getInstance();
+
+				Date aankomst = new java.util.Date(rs.getDate(2).getTime());
+				Date vertrek = new java.util.Date(rs.getDate(3).getTime());
+
+				vertrek_cal.setTime(vertrek);
+				aankomst_cal.setTime(aankomst);
+
+				dagen += vertrek_cal.get(Calendar.DAY_OF_YEAR)
+						- aankomst_cal.get(Calendar.DAY_OF_YEAR);
+
+			}
+			return dagen;
+
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		return dagen;
 	}
 }

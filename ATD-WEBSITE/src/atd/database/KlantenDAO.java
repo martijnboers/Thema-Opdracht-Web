@@ -33,7 +33,8 @@ import atd.domein.StatusDB;
 /**
  * @author Martijn
  * 
- *         TODO: Heel veel code kan hieruit weg TODO: Auth moet veilig zijn (MD5 + SALT)
+ *         TODO: Heel veel code kan hieruit weg TODO: Auth moet veilig zijn (MD5
+ *         + SALT)
  *
  */
 
@@ -44,7 +45,7 @@ public class KlantenDAO {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
-	
+
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
@@ -61,7 +62,10 @@ public class KlantenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			int priv = 3;
@@ -115,7 +119,10 @@ public class KlantenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Klanten WHERE id='" + id + "'");
 
@@ -131,7 +138,9 @@ public class KlantenDAO {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				return new Klant(rs.getInt(0), rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv);
+				return new Klant(rs.getInt(1), rs.getString(4),
+						rs.getString(3), rs.getString(4), rs.getString(5),
+						null, priv);
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
@@ -166,7 +175,10 @@ public class KlantenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Klanten");
 
@@ -182,7 +194,9 @@ public class KlantenDAO {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				allKlanten.add(new Klant(rs.getInt(0), rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv));
+				allKlanten.add(new Klant(rs.getInt(0), rs.getString(4), rs
+						.getString(3), rs.getString(4), rs.getString(5), null,
+						priv));
 			}
 			return allKlanten;
 
@@ -207,7 +221,8 @@ public class KlantenDAO {
 	}
 
 	/**
-	 * Hiermee kun je eigen SQLQueries uitvoeren. Wordt voornamelijk gebruikt in host.java
+	 * Hiermee kun je eigen SQLQueries uitvoeren. Wordt voornamelijk gebruikt in
+	 * host.java
 	 * 
 	 * @param input
 	 *            Rauwe SQL query, geen ; invoeren!
@@ -218,7 +233,10 @@ public class KlantenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Klanten WHERE id='" + id + "'");
 			if (rs.next()) {
@@ -259,9 +277,13 @@ public class KlantenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT password FROM Klanten WHERE Username='" + username + "'");
+			rs = st.executeQuery("SELECT password FROM Klanten WHERE Username='"
+					+ username + "'");
 			if (rs.next()) {
 				if (rs.getString(1).equals(password)) {
 					return true;
@@ -304,9 +326,13 @@ public class KlantenDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Klanten WHERE Username='" + Klantname + "'");
+			rs = st.executeQuery("SELECT * FROM Klanten WHERE Username='"
+					+ Klantname + "'");
 			if (rs.next()) {
 				Privilege priv = Privilege.KLANT;
 				switch (rs.getInt(8)) {
@@ -320,7 +346,9 @@ public class KlantenDAO {
 					priv = Privilege.KLANT;
 				}
 				// TODO: Auto werkt nog niet goed
-				return new Klant(rs.getInt(1), rs.getString(4), rs.getString(3), rs.getString(4), rs.getString(5), null, priv);
+				return new Klant(rs.getInt(1), rs.getString(4),
+						rs.getString(3), rs.getString(4), rs.getString(5),
+						null, priv);
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
