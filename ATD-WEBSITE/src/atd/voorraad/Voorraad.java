@@ -55,11 +55,7 @@ public class Voorraad extends HttpServlet {
 			 * Onderdeel updaten, dit overrulled het bestaande aantal in de DB
 			 * */
 		} else if (run.equals("updaten")) {
-			System.out.println(service
-					.updateOnderdeel(onderdeelId, nieuwAantal));
 			if (service.updateOnderdeel(onderdeelId, nieuwAantal) == true) {
-				System.out.println(service.updateOnderdeel(onderdeelId,
-						nieuwAantal));
 				update = true;
 			}
 			/**

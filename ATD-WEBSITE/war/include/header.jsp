@@ -31,14 +31,15 @@
 						if (request.getSession().getAttribute("username") instanceof User) {
 							User user = (User) request.getSession().getAttribute(
 									"username");
-							out.print("<ul class=\"nav navbar-nav navbar-right\"> <li><a href=\"/ATD-WEBSITE/Logout.do\"> logout "
-									+ user.getNaam() + "</a></li> </ul>");
+							out.print("<ul class=\"nav navbar-nav navbar-right\"> <li><a href=\"/ATD-WEBSITE/Logout.do\">  "
+									+ user.getNaam() + " uitloggen</a></li> </ul>");
 						}
 						if (request.getSession().getAttribute("username") instanceof Klant) {
 							Klant klant = (Klant) request.getSession().getAttribute(
 									"username");
 							out.print("<ul class=\"nav navbar-nav navbar-right\"> <li><a href=\"/ATD-WEBSITE/Logout.do\">"
-									+ klant.getVolledigeNaam() + "</a></li> </ul>");
+									+ klant.getVolledigeNaam()
+									+ " uitloggen</a></li> </ul>");
 						}
 					}
 				%>

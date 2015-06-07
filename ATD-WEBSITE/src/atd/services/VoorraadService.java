@@ -24,7 +24,6 @@ public class VoorraadService {
 
 	public boolean updateOnderdeel(String id, String aantal) {
 		if (id.isEmpty() || id == null && aantal.isEmpty() || aantal == null) {
-			System.out.println("validatie is fout met" + id + " " + aantal);
 			return false;
 		} else {
 			try {
@@ -33,13 +32,11 @@ public class VoorraadService {
 
 				if (onderdelenDAO.updateOnderdeel(
 						onderdelenDAO.getOnderdeel(intId), intAantal)) {
-					System.out.println("Gelukt!");
 					return true;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			System.out.println("helaas");
 			return false;
 		}
 	}
