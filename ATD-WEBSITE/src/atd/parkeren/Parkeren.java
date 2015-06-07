@@ -67,12 +67,15 @@ public class Parkeren extends HttpServlet {
 		}
 
 		if (update) {
+			req.setAttribute(
+					"msg",
+					"<div class=\"alert alert-success\" role=\"alert\"> <span class=\"sr-only\">Succes:</span> De reservering is gelukt! op uw dashboard kunt u de factuur terug vinden</div>");
 			rd = req.getRequestDispatcher("/parkeren/parkeren.jsp");
 			rd.forward(req, resp);
 		} else {
 			req.setAttribute(
-					"error",
-					"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Deze datum is niet beschikbaar</div>");
+					"msg",
+					"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Fout:</span> Deze datum is helaas niet beschikbaar</div>");
 			rd = req.getRequestDispatcher("/parkeren/parkeren.jsp");
 			rd.forward(req, resp);
 		}

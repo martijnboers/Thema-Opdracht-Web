@@ -24,14 +24,14 @@ import java.util.logging.Logger;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-public class MyContextListener implements ServletContextListener{
+public class MyContextListener implements ServletContextListener {
 	private Logger logger = Logger.getLogger("atd.log");
-	
+
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
 		for (Handler handler : Logger.getLogger("atd.log").getHandlers()) {
 			handler.close();
-		}		
+		}
 	}
 
 	@Override
@@ -39,7 +39,6 @@ public class MyContextListener implements ServletContextListener{
 		try {
 			FileHandler fh = new FileHandler("atd.log");
 			fh.setFormatter(new LogFormatter());
-			System.out.println(11);
 			logger.addHandler(fh);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
@@ -47,6 +46,6 @@ public class MyContextListener implements ServletContextListener{
 
 		logger.setLevel(Level.ALL);
 		logger.info("Logger initialized");
-		
+
 	}
 }

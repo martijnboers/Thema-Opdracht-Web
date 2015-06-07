@@ -1,4 +1,6 @@
 <style>
+/*omdat je natuurlijk niks met een jsp kan includen we dit style effectt  
+in de header zomdat we gebruik kunnen maken van een css image */
 body {
 	padding-top: 20px;
 	padding-bottom: 20px;

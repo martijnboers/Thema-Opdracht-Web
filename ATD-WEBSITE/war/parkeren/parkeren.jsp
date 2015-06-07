@@ -38,7 +38,7 @@
 		</div>
 
 	</form>
-	${requestScope.error}
+	${requestScope.msg}
 	<jsp:include page="/include/footer.jsp" />
 
 	<script src="${pageContext.request.contextPath}/js/jquery-1.11.2.js"></script>

@@ -25,11 +25,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Logout extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 		req.getSession().removeAttribute("username");
 		RequestDispatcher rd = null;
 		rd = req.getRequestDispatcher("login/login.jsp");
-		req.setAttribute("error", "<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Gebruiker is uitgelogd </div>");
+		req.setAttribute(
+				"error",
+				"<div class=\"alert alert-success\" role=\"alert\"> <span class=\"sr-only\">Success:</span> Gebruiker is uitgelogd </div>");
 		rd.forward(req, resp);
 	}
 }

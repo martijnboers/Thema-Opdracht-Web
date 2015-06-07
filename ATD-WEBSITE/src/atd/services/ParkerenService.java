@@ -33,7 +33,6 @@ public class ParkerenService {
 				if (dateOverlap(reservering.getAankomst(),
 						reservering.getVertrek(), res.getAankomst(),
 						res.getVertrek())) {
-					System.out.println(res.getBetaald());
 					overlap++;
 				}
 			}
