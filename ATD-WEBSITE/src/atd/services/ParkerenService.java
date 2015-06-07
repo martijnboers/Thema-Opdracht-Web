@@ -26,7 +26,6 @@ public class ParkerenService {
 			// ophalen allen reserveringen
 			ArrayList<Reservering> alleReserveringen = reserveringDAO
 					.getAlleReservering();
-
 			// alle resveringen vergelijken met de nieuwe resveringen en als er
 			// meer dan 10 zijn is de datum niet beschikbaar..
 			// niet geweldig maar het werkt voor nu
@@ -34,7 +33,7 @@ public class ParkerenService {
 				if (dateOverlap(reservering.getAankomst(),
 						reservering.getVertrek(), res.getAankomst(),
 						res.getVertrek())) {
-					System.out.println(res.getKlant().getId());
+					System.out.println(res.getBetaald());
 					overlap++;
 				}
 			}
@@ -75,7 +74,13 @@ public class ParkerenService {
 		return aantalParkeerplaatsen;
 	}
 
-	public void parkeerGeldBetalen() {
-
+	// parkeer kosten betalen (gelijk alles)
+	public boolean perkeerKostenBetalen(Klant klant) {
+		try {
+			return reserveringDAO.parkerenBetalen(klant);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

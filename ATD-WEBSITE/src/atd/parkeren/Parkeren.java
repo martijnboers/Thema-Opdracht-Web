@@ -55,7 +55,7 @@ public class Parkeren extends HttpServlet {
 					Date aankomst = df.parse(datum_aankomst);
 					Date vertrek = df.parse(datum_vertrek);
 					Reservering reservering = new Reservering(klant, aankomst,
-							vertrek);
+							vertrek, false);
 					if (service.reserveerParkeerplaats(reservering)) {
 						update = true;
 					}
