@@ -14,7 +14,6 @@
  *******************************************************************************/
 package atd.database;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -24,12 +23,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import atd.domein.Privilege;
-import atd.domein.StatusDB;
 import atd.domein.Onderdeel;
 
 /**

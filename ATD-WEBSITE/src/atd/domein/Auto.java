@@ -14,8 +14,6 @@
  *******************************************************************************/
 package atd.domein;
 
-import java.io.Serializable;
-
 public class Auto {
 	private int id;
 	private String kenteken;

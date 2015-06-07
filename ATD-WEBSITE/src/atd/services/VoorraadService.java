@@ -18,7 +18,6 @@ import java.sql.SQLException;
 
 import atd.database.OnderdelenDAO;
 import atd.domein.Onderdeel;
-import atd.domein.StatusDB;
 
 public class VoorraadService {
 	OnderdelenDAO onderdelenDAO = new OnderdelenDAO();

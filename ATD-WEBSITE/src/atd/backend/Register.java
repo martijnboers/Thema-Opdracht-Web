@@ -22,7 +22,9 @@ import java.util.Calendar;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-import javax.mail.*;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.RequestDispatcher;
@@ -50,6 +52,7 @@ import atd.domein.User;
 public class Register extends HttpServlet {
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/mail.properties";
 
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher rd = null;
 		System.out.println(req.getParameter("checkbox"));

@@ -15,13 +15,9 @@
 package atd.home;
 
 import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Handler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import atd.backend.LogFormatter;
-import atd.database.BerichtenDAO;
 import atd.database.BerichtenService;
 import atd.domein.User;
 
@@ -41,6 +35,7 @@ import atd.domein.User;
 public class BlogPost extends HttpServlet {
 	private BerichtenService BerichtenService = new BerichtenService();
 	
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			Class.forName("org.apache.commons.lang3.StringEscapeUtils");

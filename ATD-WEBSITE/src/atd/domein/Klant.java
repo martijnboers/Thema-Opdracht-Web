@@ -15,7 +15,6 @@
 package atd.domein;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Klant implements Serializable {
 	private int id;
@@ -28,7 +27,8 @@ public class Klant implements Serializable {
 
 	// TODO: Dit heeft nog heel veel werk nodig
 
-	public Klant(int id, String volledigeNaam, String username, String postcode, String email, Auto deAuto, Privilege priv) {
+	public Klant(int id, String volledigeNaam, String username,
+			String postcode, String email, Auto deAuto, Privilege priv) {
 		this.id = id;
 		this.postcode = postcode;
 		this.volledigeNaam = volledigeNaam;
@@ -42,6 +42,7 @@ public class Klant implements Serializable {
 		return priv;
 	}
 
+	@Override
 	public String toString() {
 		return "";
 	}

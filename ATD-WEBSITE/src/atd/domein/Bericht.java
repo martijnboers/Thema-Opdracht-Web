@@ -14,7 +14,6 @@
  *******************************************************************************/
 package atd.domein;
 
-import atd.domein.User;
 
 public class Bericht {
 	private int id;

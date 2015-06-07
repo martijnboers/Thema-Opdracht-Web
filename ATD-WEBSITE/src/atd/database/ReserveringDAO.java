@@ -23,15 +23,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Properties;
 
-import atd.domein.Afspraak;
+import atd.domein.Klant;
 import atd.domein.Reservering;
-import atd.domein.StatusDB;
 
 /**
  * @author Martijn
@@ -64,13 +60,11 @@ public class ReserveringDAO {
 			java.sql.Date sql_vertrek = new java.sql.Date(reservering
 					.getVertrek().getTime());
 
-			System.out.println(sql_vertrek.getTime());
-			System.out.println(sql_aankomst.getTime());
 			String query = "INSERT INTO `Reservering`(`aankomst`, `vertrek`, `klant_id`) VALUES(?, ?, ?)";
 
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.setDate(1, sql_aankomst);
-			preparedStmt.setDate(2, sql_aankomst);
+			preparedStmt.setDate(2, sql_vertrek);
 			preparedStmt.setInt(3, reservering.getKlant().getId());
 
 			if ((preparedStmt.executeUpdate()) > 0) {
@@ -98,6 +92,54 @@ public class ReserveringDAO {
 		return false;
 
 	}
-	
-	
+
+	public ArrayList<Reservering> getAlleReservering() throws SQLException {
+		ArrayList<Reservering> alleReserveringen = new ArrayList<>();
+
+		try {
+			config = new URL(CONFIG_URL).openStream();
+			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT * FROM Reservering");
+
+			while (rs.next()) {
+				Klant klant = KlantenDAO.getKlant(rs.getInt(4));
+
+				java.util.Date aankomst = new java.util.Date(rs.getDate(2)
+						.getTime());
+
+				java.util.Date vertrek = new java.util.Date(rs.getDate(3)
+						.getTime());
+
+				Reservering reservering = new Reservering(klant, aankomst,
+						vertrek);
+
+				alleReserveringen.add(reservering);
+			}
+			return alleReserveringen;
+
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		return null;
+	}
 }

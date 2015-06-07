@@ -14,7 +14,6 @@
  *******************************************************************************/
 package atd.domein;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 

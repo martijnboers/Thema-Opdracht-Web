@@ -20,7 +20,10 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import atd.database.KlantenDAO;
 import atd.database.LogDAO;
@@ -43,6 +46,7 @@ public class Login extends HttpServlet {
 	 * Pakt uit web.xml een admin profiel die altijd beschikbaar is
 	 * 
 	 */
+	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		adminUser = config.getInitParameter("adminUser");
@@ -53,7 +57,9 @@ public class Login extends HttpServlet {
 	 * Vangt het POST request van de login.jsp en controlleerd deze met de
 	 * database
 	 */
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 		String username = req.getParameter("username").toLowerCase();
 
 		try {
@@ -62,42 +68,58 @@ public class Login extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String pass = org.apache.commons.codec.digest.DigestUtils.sha256Hex(req.getParameter("password"));
+		String pass = org.apache.commons.codec.digest.DigestUtils.sha256Hex(req
+				.getParameter("password"));
 		RequestDispatcher rd = null;
 
-		if (UsersDAO.authUser(username, pass) || (username.equals(adminUser)) && req.getParameter("password").equals(adminPwd)) {
+		if (UsersDAO.authUser(username, pass) || (username.equals(adminUser))
+				&& req.getParameter("password").equals(adminPwd)) {
 			// Controlleer of het filter een redirect gezet heeft
-			if (req.getAttribute("redirect") == null || req.getAttribute("redirect").equals("")) {
+			if (req.getAttribute("redirect") == null
+					|| req.getAttribute("redirect").equals("")) {
 				rd = req.getRequestDispatcher("/index.jsp");
 			} else {
-				rd = req.getRequestDispatcher((String) req.getAttribute("redirect"));
+				rd = req.getRequestDispatcher((String) req
+						.getAttribute("redirect"));
 				req.removeAttribute("redirect");
 			}
-			req.getSession().setAttribute("username", UsersDAO.searchUser(username));
+
+			req.getSession().setAttribute("username",
+					UsersDAO.searchUser(username));
 			resp.addCookie(new Cookie("username", username));
 			java.util.Date dt = new java.util.Date();
-			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:ss");
 			String currentTime = sdf.format(dt);
-			LogDAO.setLog(req.getRemoteAddr(), currentTime, UsersDAO.searchUser(username), null);
+			LogDAO.setLog(req.getRemoteAddr(), currentTime,
+					UsersDAO.searchUser(username), null);
 			rd.forward(req, resp);
-		} else if (KlantenDAO.authKlant(username, pass)){
-			if (req.getAttribute("redirect") == null || req.getAttribute("redirect").equals("")) {
+		} else if (KlantenDAO.authKlant(username, pass)) {
+			if (req.getAttribute("redirect") == null
+					|| req.getAttribute("redirect").equals("")) {
 				rd = req.getRequestDispatcher("/index.jsp");
 			} else {
-				rd = req.getRequestDispatcher((String) req.getAttribute("redirect"));
+				rd = req.getRequestDispatcher((String) req
+						.getAttribute("redirect"));
 				req.removeAttribute("redirect");
 			}
-			req.getSession().setAttribute("username", KlantenDAO.searchKlant(username));
+			req.getSession().setAttribute("username",
+					KlantenDAO.searchKlant(username));
 			resp.addCookie(new Cookie("username", username));
+
 			java.util.Date dt = new java.util.Date();
-			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:ss");
 			String currentTime = sdf.format(dt);
-			
-			LogDAO.setLog(req.getRemoteAddr(), currentTime, null, KlantenDAO.searchKlant(username));
+
+			LogDAO.setLog(req.getRemoteAddr(), currentTime, null,
+					KlantenDAO.searchKlant(username));
 			rd.forward(req, resp);
 		} else {
 			rd = req.getRequestDispatcher("/login/login.jsp");
-			req.setAttribute("error", "<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> ongeldige inlog gegevens </div>");
+			req.setAttribute(
+					"error",
+					"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> ongeldige inlog gegevens </div>");
 			rd.forward(req, resp);
 		}
 	}

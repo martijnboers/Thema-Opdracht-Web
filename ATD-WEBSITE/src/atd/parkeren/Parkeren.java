@@ -25,7 +25,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import atd.domein.Klant;
 import atd.domein.Reservering;
@@ -35,6 +34,7 @@ import atd.services.ServiceProvider;
 public class Parkeren extends HttpServlet {
 	RequestDispatcher rd = null;
 
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		ParkerenService service = ServiceProvider.getParkerenService();
