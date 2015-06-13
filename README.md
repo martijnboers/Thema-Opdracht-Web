@@ -1,7 +1,7 @@
 # Project "Auto Totaal Dienst"
 *JSP/Java Code Auto Totaal Dienst*
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/MartijnDevNull/Thema-Opdracht-Web?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/MartijnDevNull/Thema-Opdracht-Web?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge) [![Build Status](https://travis-ci.org/MartijnDevNull/Thema-Opdracht-Web.svg?branch=master)](https://travis-ci.org/MartijnDevNull/Thema-Opdracht-Web)
 
 ![alt tag](https://i.imgur.com/O7eExDz.png)
 
