@@ -1,4 +1,6 @@
 # Project "Auto Totaal Dienst"
+
+[![Join the chat at https://gitter.im/MartijnDevNull/Thema-Opdracht-Web](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/MartijnDevNull/Thema-Opdracht-Web?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 *JSP/Java Code Auto Totaal Dienst*
 
 ![alt tag](https://i.imgur.com/O7eExDz.png)
