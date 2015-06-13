@@ -3,7 +3,8 @@
               Any modifications will be overwritten.
               To include a user specific buildfile here, simply create one in the same
               directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="ATD-WEBSITE">
+              as the first entry and export the buildfile again. -->
+    <project basedir="." default="build" name="ATD-WEBSITE">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="../../../../../opt/eclipse/"/>
     <property name="debuglevel" value="source,lines,vars"/>
@@ -67,4 +68,8 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
+    
+    <target name="test" >
+		<echo message="TODO: Hier moeten de ant test gezet worden"/>
+	</target>
 </project>
