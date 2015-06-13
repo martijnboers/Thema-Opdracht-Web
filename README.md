@@ -1,6 +1,8 @@
 # Project "Auto Totaal Dienst"
 *JSP/Java Code Auto Totaal Dienst*
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/MartijnDevNull/Thema-Opdracht-Web?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
+
 ![alt tag](https://i.imgur.com/O7eExDz.png)
 
 # Geting the code
