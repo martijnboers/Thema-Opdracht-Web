@@ -98,4 +98,8 @@ public class GebruikteOnderdelenDAO {
 		return result;
 	}
 
+	public ArrayList<Onderdeel> getOnderdelen(Afspraak afspraak) {
+		return null;
+	}
+
 }

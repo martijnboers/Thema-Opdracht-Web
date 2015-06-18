@@ -102,6 +102,16 @@
         <url-pattern>/Voorraad.do</url-pattern>
     </servlet-mapping>
     
+     <servlet>
+        <servlet-name>Afspraak</servlet-name>
+        <servlet-class>atd.werkplaats.Afspraak
+	</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Afspraak</servlet-name>
+        <url-pattern>/Afspraak.do</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>DeletePost</servlet-name>
         <servlet-class>atd.home.DeletePost

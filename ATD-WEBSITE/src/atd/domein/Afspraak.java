@@ -60,6 +60,10 @@ public class Afspraak {
 		return status;
 	}
 
+	public void setStatus(AfspraakStatus st) {
+		status = st;
+	}
+
 	public boolean setOnderdeel(Onderdeel onderdeel) {
 		onderdelen.add(onderdeel);
 		if (onderdelen.contains(onderdeel)) {
