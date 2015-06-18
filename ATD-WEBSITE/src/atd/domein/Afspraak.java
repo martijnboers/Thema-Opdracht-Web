@@ -15,6 +15,7 @@
 package atd.domein;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Afspraak {
 	private Klant klant;
@@ -22,8 +23,10 @@ public class Afspraak {
 	private Auto auto;
 	private Date datum;
 	private String omschrijving;
+	private ArrayList<Onderdeel> onderdelen = new ArrayList<>();
 
-	public Afspraak(Klant klant, User monteur, Auto auto, Date datum, String omschrijving) {
+	public Afspraak(Klant klant, User monteur, Auto auto, Date datum,
+			String omschrijving) {
 		this.klant = klant;
 		this.monteur = monteur;
 		this.auto = auto;
@@ -49,5 +52,17 @@ public class Afspraak {
 
 	public String getOmschrijving() {
 		return omschrijving;
+	}
+
+	public boolean setOnderdeel(Onderdeel onderdeel) {
+		onderdelen.add(onderdeel);
+		if (onderdelen.contains(onderdeel)) {
+			return true;
+		} else
+			return false;
+	}
+
+	public ArrayList<Onderdeel> getAlleOnderdelen() {
+		return onderdelen;
 	}
 }
