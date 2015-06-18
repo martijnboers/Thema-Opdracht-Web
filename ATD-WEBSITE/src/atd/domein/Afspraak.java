@@ -23,15 +23,17 @@ public class Afspraak {
 	private Auto auto;
 	private Date datum;
 	private String omschrijving;
+	private AfspraakStatus status;
 	private ArrayList<Onderdeel> onderdelen = new ArrayList<>();
 
 	public Afspraak(Klant klant, User monteur, Auto auto, Date datum,
-			String omschrijving) {
+			String omschrijving, AfspraakStatus st) {
 		this.klant = klant;
 		this.monteur = monteur;
 		this.auto = auto;
 		this.datum = datum;
 		this.omschrijving = omschrijving;
+		this.status = st;
 	}
 
 	public Klant getKlant() {
@@ -52,6 +54,10 @@ public class Afspraak {
 
 	public String getOmschrijving() {
 		return omschrijving;
+	}
+
+	public AfspraakStatus getStatus() {
+		return status;
 	}
 
 	public boolean setOnderdeel(Onderdeel onderdeel) {

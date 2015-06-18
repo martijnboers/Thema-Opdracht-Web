@@ -27,15 +27,17 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import atd.domein.Afspraak;
-import atd.domein.StatusDB;
-import atd.domein.User;
+import atd.domein.Klant;
+import atd.domein.Onderdeel;
 
 /**
- * @author Martijn
+ * @author Martijn/Klaas
+ * 
+ *         TODO: Heel veel code kan hieruit weg
  *
  */
 
-public class AfspraakDAO {
+public class GebruikteOnderdelenDAO {
 	private static Connection con = null;
 	private static Statement st = null;
 	private static ResultSet rs = null;
@@ -45,29 +47,39 @@ public class AfspraakDAO {
 
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
-	public static StatusDB setAfspraak(Afspraak afspraak) {
+	/**
+	 * Maakt nieuw Onderdeel aan in host
+	 * 
+	 * @param onderdeelIn
+	 * @return
+	 */
+	public boolean setOnderdeel(Onderdeel onderdeel, Klant klant, int aantal) {
+		boolean result = false;
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(
+			con = DriverManager.getConnection(
 					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
 							+ prop.getProperty("database"),
 					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
-			String query = "INSERT INTO Afspraak(Klant, Monteur, Auto, Datum, Omschrijving) VALUES(?, ?, ?, ?, ?)";
-			PreparedStatement preparedStmt = con.prepareStatement(query);
-			preparedStmt.setInt(1, afspraak.getKlant().getId());
-			preparedStmt.setInt(2, afspraak.getMonteur().getId());
-			preparedStmt.setInt(1, afspraak.getAuto().getId());
-			preparedStmt.setDate(1, afspraak.getDatum());
-			preparedStmt.setInt(1, afspraak.getKlant().getId());
-			preparedStmt.execute();
+			String query = "INSERT INTO `GebruikteOnderdeel`( `Klant_ID`, `Onderdeel_ID`, `aantal`) VALUES ('"
+					+ klant.getId()
+					+ "','"
+					+ onderdeel.getID()
+					+ "',"
+					+ aantal
+					+ ")";
+
+			if (st.executeUpdate(query) == 1) {
+				result = true;
+			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
-			return StatusDB.INCORRECT;
+			return false;
 		} finally {
 			try {
 				if (rs != null) {
@@ -83,14 +95,7 @@ public class AfspraakDAO {
 				System.out.println(ex.getMessage());
 			}
 		}
-		return StatusDB.UNKOWN;
+		return result;
 	}
 
-	public ArrayList<Afspraak> getAlleAfspraken() {
-		return null;
-	}
-
-	public ArrayList<Afspraak> getAfsprakenMonteur(User user) {
-		return null;
-	}
 }
