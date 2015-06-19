@@ -42,7 +42,7 @@ public class AutoDAO {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
-	
+
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
@@ -50,7 +50,7 @@ public class AutoDAO {
 	 * 
 	 * @param autoIn
 	 *            Ingegeven Klant
-	 *            
+	 * 
 	 * @return StatusDB Status
 	 */
 	public static StatusDB setAuto(Auto autoIn) {
@@ -58,7 +58,10 @@ public class AutoDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			String query = "INSERT INTO Auto(Kenteken, Merk, Type) VALUES(?, ?, ?)";
@@ -94,7 +97,7 @@ public class AutoDAO {
 	 * 
 	 * @param kenteken
 	 *            Kenteken van de gezochte auto
-	 *            
+	 * 
 	 * @return
 	 */
 	public static Auto searchAuto(String kenteken) {
@@ -102,11 +105,54 @@ public class AutoDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbKlant"), prop.getProperty("dbpassword"));
+			con = DriverManager
+					.getConnection("jdbc:mysql://" + prop.getProperty("host")
+							+ ":3306/" + prop.getProperty("database"),
+							prop.getProperty("dbKlant"),
+							prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Auto WHERE kenteken='" + kenteken + "'");
+			rs = st.executeQuery("SELECT * FROM Auto WHERE kenteken='"
+					+ kenteken + "'");
 			if (rs.next()) {
-				return new Auto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+				return new Auto(rs.getInt(1), rs.getString(2), rs.getString(3),
+						rs.getString(4));
+			}
+
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		return null;
+	}
+
+	public Auto getAutoByID(int id) {
+		try {
+			config = new URL(CONFIG_URL).openStream();
+			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager
+					.getConnection("jdbc:mysql://" + prop.getProperty("host")
+							+ ":3306/" + prop.getProperty("database"),
+							prop.getProperty("dbKlant"),
+							prop.getProperty("dbpassword"));
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT * FROM Auto WHERE id='" + id + "'");
+			if (rs.next()) {
+				return new Auto(rs.getInt(1), rs.getString(2), rs.getString(3),
+						rs.getString(4));
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {

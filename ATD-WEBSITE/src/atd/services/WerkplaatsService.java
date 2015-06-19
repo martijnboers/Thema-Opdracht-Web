@@ -14,10 +14,78 @@
  *******************************************************************************/
 package atd.services;
 
-import atd.database.AutoDAO;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import atd.database.AfspraakDAO;
+import atd.database.GebruikteOnderdelenDAO;
 import atd.database.OnderdelenDAO;
+import atd.domein.Afspraak;
+import atd.domein.AfspraakStatus;
+import atd.domein.Onderdeel;
+import atd.domein.User;
 
 public class WerkplaatsService {
-	AutoDAO autoDAO = new AutoDAO();
-	OnderdelenDAO onderdelenDAO = new OnderdelenDAO();
+	private GebruikteOnderdelenDAO gebruikteOnderdelenDAO = new GebruikteOnderdelenDAO();
+	private AfspraakDAO afspraakDAO = new AfspraakDAO();
+	private OnderdelenDAO onderdeelDAO = new OnderdelenDAO();
+	private ArrayList<Afspraak> afspraken = new ArrayList<>();
+
+	public ArrayList<Afspraak> getAlleAfspraken() {
+		return afspraakDAO.getAlleAfspraken();
+	}
+
+	public ArrayList<Afspraak> getAfsprakenMonteur(User user) {
+		return afspraakDAO.getAfsprakenMonteur(user);
+	}
+
+	public ArrayList<Afspraak> getAfgerondeAfspraken() {
+		ArrayList<Afspraak> afgerondeAfsparken = getAlleAfspraken();
+		for (Iterator<Afspraak> it = afgerondeAfsparken.iterator(); it
+				.hasNext();) {
+			Afspraak afspraak = it.next();
+			if (afspraak.getStatus().equals(AfspraakStatus.AFGEROND)) {
+				it.remove();
+			}
+		}
+		return afspraken;
+	}
+
+	public ArrayList<Afspraak> getNieuwAfspraken() {
+		ArrayList<Afspraak> afgerondeAfsparken = getAlleAfspraken();
+		for (Iterator<Afspraak> it = afgerondeAfsparken.iterator(); it
+				.hasNext();) {
+			Afspraak afspraak = it.next();
+			if (afspraak.getStatus().equals(AfspraakStatus.NIEUW)) {
+				it.remove();
+			}
+		}
+		return afspraken;
+	}
+
+	public void onderdeelToevoegen(int onderdeelID, Afspraak afspraak,
+			int aantal) {
+		Onderdeel onderdeel;
+		try {
+			onderdeel = onderdeelDAO.getOnderdeel(onderdeelID);
+			gebruikteOnderdelenDAO.setOnderdeel(onderdeel, afspraak, aantal);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public ArrayList<Onderdeel> getOnderdelenAfspraak(Afspraak afspraak) {
+		return gebruikteOnderdelenDAO.getOnderdelen(afspraak);
+
+	}
+
+	public void afspraakInBehandeling(Afspraak afspraak) {
+
+	}
+
+	public void afspraakAfgerond(Afspraak afspraak) {
+
+	}
 }

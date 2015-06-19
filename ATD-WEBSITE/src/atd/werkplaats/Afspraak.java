@@ -22,9 +22,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import atd.services.AfspraakService;
+import atd.domein.User;
 import atd.services.ServiceProvider;
-import atd.services.VoorraadService;
+import atd.services.WerkplaatsService;
 
 public class Afspraak extends HttpServlet {
 	RequestDispatcher rd = null;
@@ -36,28 +36,36 @@ public class Afspraak extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		AfspraakService service = ServiceProvider.getAfspraakService();
+		WerkplaatsService service = ServiceProvider.getWerkplaatsService();
 
 		boolean update = false;
+		User user = (User) req.getSession().getAttribute("username");
+		String aantal = req.getParameter("nieuwAantal");
+		String onderdeel = req.getParameter("nieuwOnderdeel");
+		String menu = req.getParameter("menu");
 
-		String onderdeelId = req.getParameter("ID");
-		String nieuwAantal = req.getParameter("aantal");
-		String bestelAantal = req.getParameter("bestelAantal");
-
-		String aantal = req.getParameter("nieuwOnderdeelAantal");
-		String naam = req.getParameter("nieuwOnderdeelNaam");
-		String type = req.getParameter("nieuwOnderdeelType");
-		String prijs = req.getParameter("nieuwOnderdeelPrijs");
 		String run = req.getParameter("run");
 		System.out.println(run);
+
 		if (run == null) {
 			// niks
+		} else if (run.equals("inbehandeling")) {
+			req.setAttribute("inbehandelingAfspraak",
+					service.getAfsprakenMonteur(user));
+			update = true;
+		} else if (run.equals("nieuw")) {
+			req.setAttribute("nieuweAfspraak", service.getNieuwAfspraken());
+			update = true;
+		} else if (run.equals("afgerond")) {
+			req.setAttribute("afgerondeAfspraak",
+					service.getAfgerondeAfspraken());
+			update = true;
 		} else if (run.equals("aanmelden")) {
-			// User object uit de sessie setten op de afspraak
+
 		} else if (run.equals("bestellen")) {
-			// onderdelen bestellen (in de option tag staat het ID)
+
 		} else if (run.equals("afronden")) {
-			// status van afspraak "afgerond maken"
+
 			System.out.println("afronden");
 		}
 

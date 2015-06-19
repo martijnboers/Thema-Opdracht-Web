@@ -33,7 +33,8 @@ import atd.domein.User;
 /**
  * @author Martijn
  * 
- *         TODO: Heel veel code kan hieruit weg TODO: Auth moet veilig zijn (MD5 + SALT)
+ *         TODO: Heel veel code kan hieruit weg TODO: Auth moet veilig zijn (MD5
+ *         + SALT)
  *
  */
 
@@ -44,9 +45,8 @@ public class UsersDAO {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
-	
-	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
+	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
 	 * Maakt nieuwe User gebruiker aan in host
@@ -62,7 +62,10 @@ public class UsersDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			int priv = 3;
@@ -108,12 +111,15 @@ public class UsersDAO {
 	 * @return User
 	 * @throws SQLException
 	 */
-	public static User getUser(int id) throws SQLException {
+	public User getUser(int id) throws SQLException {
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Users WHERE id='" + id + "'");
 
@@ -129,7 +135,8 @@ public class UsersDAO {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				return new User(rs.getInt(1), rs.getString(2), rs.getString(3), priv);
+				return new User(rs.getInt(1), rs.getString(2), rs.getString(3),
+						priv);
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
@@ -164,7 +171,10 @@ public class UsersDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Users");
 
@@ -180,7 +190,8 @@ public class UsersDAO {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				allUsers.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), priv));
+				allUsers.add(new User(rs.getInt(1), rs.getString(2), rs
+						.getString(3), priv));
 			}
 			return allUsers;
 
@@ -205,7 +216,8 @@ public class UsersDAO {
 	}
 
 	/**
-	 * Hiermee kun je eigen SQLQueries uitvoeren. Wordt voornamelijk gebruikt in host.java
+	 * Hiermee kun je eigen SQLQueries uitvoeren. Wordt voornamelijk gebruikt in
+	 * host.java
 	 * 
 	 * @param input
 	 *            Rauwe SQL query, geen ; invoeren!
@@ -216,7 +228,10 @@ public class UsersDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Users WHERE id='" + id + "'");
 			if (rs.next()) {
@@ -258,9 +273,13 @@ public class UsersDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT password FROM Users WHERE username='" + username + "'");
+			rs = st.executeQuery("SELECT password FROM Users WHERE username='"
+					+ username + "'");
 			if (rs.next()) {
 				if (rs.getString(1).equals(password)) {
 					return true;
@@ -303,9 +322,13 @@ public class UsersDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Users WHERE username='" + username + "'");
+			rs = st.executeQuery("SELECT * FROM Users WHERE username='"
+					+ username + "'");
 			if (rs.next()) {
 				Privilege priv = Privilege.KLANT;
 				switch (rs.getInt(4)) {
@@ -318,7 +341,8 @@ public class UsersDAO {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				return new User(rs.getInt(1), rs.getString(2), rs.getString(3), priv);
+				return new User(rs.getInt(1), rs.getString(2), rs.getString(3),
+						priv);
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {

@@ -43,7 +43,7 @@ public class ReserveringDAO {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
-
+	private KlantenDAO klantenDAO = new KlantenDAO();
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	// reservering toevoegen
@@ -112,7 +112,7 @@ public class ReserveringDAO {
 
 			while (rs.next()) {
 
-				alleReserveringen.add(new Reservering(KlantenDAO.getKlant(rs
+				alleReserveringen.add(new Reservering(klantenDAO.getKlant(rs
 						.getInt(3)),
 						new java.util.Date(rs.getDate(1).getTime()),
 						new java.util.Date(rs.getDate(2).getTime()), rs

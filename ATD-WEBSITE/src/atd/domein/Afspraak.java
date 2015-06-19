@@ -14,8 +14,9 @@
  *******************************************************************************/
 package atd.domein;
 
-import java.sql.Date;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Afspraak {
 	private Klant klant;
@@ -24,16 +25,19 @@ public class Afspraak {
 	private Date datum;
 	private String omschrijving;
 	private AfspraakStatus status;
+	private int afspraakID;
 	private ArrayList<Onderdeel> onderdelen = new ArrayList<>();
 
-	public Afspraak(Klant klant, User monteur, Auto auto, Date datum,
+	public Afspraak(int id, Klant klant, User monteur, Auto auto, Date datum,
 			String omschrijving, AfspraakStatus st) {
+		this.afspraakID = id;
 		this.klant = klant;
 		this.monteur = monteur;
 		this.auto = auto;
 		this.datum = datum;
 		this.omschrijving = omschrijving;
 		this.status = st;
+
 	}
 
 	public Klant getKlant() {
@@ -62,6 +66,10 @@ public class Afspraak {
 
 	public void setStatus(AfspraakStatus st) {
 		status = st;
+	}
+
+	public int getID() {
+		return afspraakID;
 	}
 
 	public boolean setOnderdeel(Onderdeel onderdeel) {

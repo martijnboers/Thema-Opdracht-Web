@@ -44,7 +44,7 @@ public class BerichtenDAO {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
-
+	private UsersDAO usersDAO = new UsersDAO();
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
@@ -58,8 +58,9 @@ public class BerichtenDAO {
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"),
-					prop.getProperty("dbpassword"));
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			String query = "INSERT INTO Berichten(Bericht, Tijd, User) VALUES(?, ?, ?)";
@@ -105,8 +106,9 @@ public class BerichtenDAO {
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"),
-					prop.getProperty("dbpassword"));
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
 			String query = "DELETE FROM Berichten WHERE id = ?";
@@ -152,13 +154,15 @@ public class BerichtenDAO {
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://" + prop.getProperty("host") + ":3306/" + prop.getProperty("database"), prop.getProperty("dbuser"),
-					prop.getProperty("dbpassword"));
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Berichten ORDER BY id DESC LIMIT 0, 6");
 
 			while (rs.next()) {
-				alleBerichten.add(new Bericht(rs.getInt(1), rs.getString(2), rs.getString(3), UsersDAO.getUser(rs.getInt(4))));
+				alleBerichten.add(new Bericht(rs.getInt(1), rs.getString(2), rs
+						.getString(3), usersDAO.getUser(rs.getInt(4))));
 			}
 			return alleBerichten;
 

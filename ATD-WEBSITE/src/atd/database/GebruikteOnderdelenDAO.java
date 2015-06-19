@@ -19,7 +19,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import atd.domein.Afspraak;
-import atd.domein.Klant;
 import atd.domein.Onderdeel;
 
 /**
@@ -53,7 +51,8 @@ public class GebruikteOnderdelenDAO {
 	 * @param onderdeelIn
 	 * @return
 	 */
-	public boolean setOnderdeel(Onderdeel onderdeel, Klant klant, int aantal) {
+	public boolean setOnderdeel(Onderdeel onderdeel, Afspraak afspraak,
+			int aantal) {
 		boolean result = false;
 		try {
 			config = new URL(CONFIG_URL).openStream();
@@ -66,12 +65,11 @@ public class GebruikteOnderdelenDAO {
 			st = con.createStatement();
 
 			String query = "INSERT INTO `GebruikteOnderdeel`( `Klant_ID`, `Onderdeel_ID`, `aantal`) VALUES ('"
-					+ klant.getId()
+					+ afspraak.getID()
 					+ "','"
 					+ onderdeel.getID()
 					+ "',"
-					+ aantal
-					+ ")";
+					+ aantal + ")";
 
 			if (st.executeUpdate(query) == 1) {
 				result = true;
