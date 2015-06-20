@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
+-- version 4.4.3
 -- http://www.phpmyadmin.net
 --
--- Machine: localhost
--- Genereertijd: 20 mei 2015 om 10:56
--- Serverversie: 5.5.43-0ubuntu0.14.04.1
--- PHP-versie: 5.5.9-1ubuntu4.9
+-- Host: localhost
+-- Gegenereerd op: 20 jun 2015 om 18:02
+-- Serverversie: 5.6.24
+-- PHP-versie: 5.6.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,34 +17,49 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Databank: `autototaaldienst`
+-- Database: `ATD`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `Resevering`
+-- Tabelstructuur voor tabel `Afspraken`
 --
-CREATE TABLE IF NOT EXISTS `Reservering` (
+
+CREATE TABLE IF NOT EXISTS `Afspraken` (
   `id` int(11) NOT NULL,
-  `aankomst` date NOT NULL,
-  `vertrek` date NOT NULL,
-  `klant_id` int(11) NOT NULL
+  `Klant_ID` int(11) NOT NULL,
+  `Monteur_ID` int(11) NOT NULL,
+  `Auto_ID` int(11) NOT NULL,
+  `Datum` date NOT NULL,
+  `Omschrijving` text NOT NULL,
+  `Status` varchar(50) NOT NULL DEFAULT 'NIEUW'
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `Afspraken`
+--
+
+INSERT INTO `Afspraken` (`id`, `Klant_ID`, `Monteur_ID`, `Auto_ID`, `Datum`, `Omschrijving`, `Status`) VALUES
+(1, 1, 1, 1, '2015-06-20', 'Deze auto moet gemaakt worden want hij is stuk duhhh..', 'INBEHANDELING'),
+(2, 1, 20, 1, '2015-06-26', 'kgskrgnsrkngskrngksrngskrng', 'NIEUW'),
+(3, 2, 20, 2, '2015-06-18', 'Dit is nog een omschrijving bla bla bla', 'NIEUW');
+
+-- --------------------------------------------------------
+
 --
 -- Tabelstructuur voor tabel `Auto`
 --
 
 CREATE TABLE IF NOT EXISTS `Auto` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `Kenteken` text NOT NULL,
   `Merk` text NOT NULL,
-  `Type` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+  `Type` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden uitgevoerd voor tabel `Auto`
+-- Gegevens worden geëxporteerd voor tabel `Auto`
 --
 
 INSERT INTO `Auto` (`id`, `Kenteken`, `Merk`, `Type`) VALUES
@@ -59,7 +74,9 @@ INSERT INTO `Auto` (`id`, `Kenteken`, `Merk`, `Type`) VALUES
 (9, 'asd', 'asd', 'asd'),
 (10, 'asd', 'sd', 'asd'),
 (11, 'a', 'a', 'a'),
-(12, 'asd', 'a', 'asd');
+(12, 'asd', 'a', 'asd'),
+(13, '3453452345', 'audi', 'cabrio'),
+(14, '1342-234-3', 'audi', 'cabrio');
 
 -- --------------------------------------------------------
 
@@ -68,15 +85,14 @@ INSERT INTO `Auto` (`id`, `Kenteken`, `Merk`, `Type`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Berichten` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `Bericht` text NOT NULL,
   `Tijd` text NOT NULL,
-  `User` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
+  `User` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden uitgevoerd voor tabel `Berichten`
+-- Gegevens worden geëxporteerd voor tabel `Berichten`
 --
 
 INSERT INTO `Berichten` (`id`, `Bericht`, `Tijd`, `User`) VALUES
@@ -90,7 +106,54 @@ INSERT INTO `Berichten` (`id`, `Bericht`, `Tijd`, `User`) VALUES
 (60, 'testbericht', '2015-05-11 14:44:40', 10),
 (63, 'bericht', '2015-05-11 14:51:30', 10),
 (65, 'asdfs', '2015-05-11 15:02:03', 10),
-(66, '&lt;script&gt;alert(1)&lt;/script&gt;', '2015-05-12 13:04:50', 10);
+(66, '&lt;script&gt;alert(1)&lt;/script&gt;', '2015-05-12 13:04:50', 10),
+(68, 'test', '2015-05-27 09:45:38', 20),
+(69, 'test', '2015-05-27 09:47:23', 20),
+(70, 'tesr', '2015-05-27 09:48:07', 20),
+(71, 'test34234', '2015-05-27 09:49:06', 20),
+(72, 'klafadfsdfsdf', '2015-05-27 09:52:25', 20),
+(73, 'sdfsadfadsfa', '2015-05-27 09:57:02', 20),
+(74, 'etstestest', '2015-05-27 09:58:05', 20),
+(75, 'fasdfasdfas', '2015-05-27 09:59:02', 20),
+(76, 'test', '2015-05-27 10:00:24', 20),
+(77, 'testset', '2015-05-27 10:02:34', 20),
+(78, 'adfasdfasdfasdf', '2015-05-27 10:04:15', 20),
+(79, 'adfasdfasdf', '2015-05-27 10:04:18', 20),
+(80, 'adfasdfasdf', '2015-05-27 10:04:20', 20),
+(81, 'asdfasdfasdf', '2015-05-27 10:05:44', 20),
+(82, 'sadfsdafasdf', '2015-05-27 10:08:56', 20),
+(83, 'asfdfsa', '2015-05-27 10:11:29', 20),
+(84, 'dfasdfadsf', '2015-05-27 10:11:42', 20),
+(85, 'tstetserser', '2015-05-27 10:12:27', 20),
+(86, 'testestset', '2015-05-27 10:13:04', 20),
+(87, 'asdfasdfasdf', '2015-05-27 10:13:44', 20),
+(88, 'testsetset', '2015-05-27 10:14:51', 20),
+(89, 'fasdfasdf', '2015-05-27 10:20:35', 20),
+(90, 'testserser', '2015-05-27 10:23:20', 20),
+(91, 'etsetserse', '2015-05-27 10:40:08', 20),
+(93, 'test2', '2015-05-27 10:42:29', 20),
+(94, 'testestset', '2015-06-03 11:32:39', 20),
+(95, 'testestset', '2015-06-03 11:34:01', 20),
+(96, 'test', '2015-06-18 13:22:04', 20);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `GebruiktOnderdeel`
+--
+
+CREATE TABLE IF NOT EXISTS `GebruiktOnderdeel` (
+  `Afspraak_ID` int(11) NOT NULL,
+  `Onderdeel_ID` int(11) NOT NULL,
+  `aantal` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `GebruiktOnderdeel`
+--
+
+INSERT INTO `GebruiktOnderdeel` (`Afspraak_ID`, `Onderdeel_ID`, `aantal`) VALUES
+(2, 46, 50);
 
 -- --------------------------------------------------------
 
@@ -99,19 +162,18 @@ INSERT INTO `Berichten` (`id`, `Bericht`, `Tijd`, `User`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Klanten` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `Password` text NOT NULL,
   `Username` text NOT NULL,
   `Volledigenaam` text NOT NULL,
   `Postcode` text NOT NULL,
   `Email` text NOT NULL,
   `Auto` int(11) NOT NULL,
-  `Priv` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+  `Priv` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden uitgevoerd voor tabel `Klanten`
+-- Gegevens worden geëxporteerd voor tabel `Klanten`
 --
 
 INSERT INTO `Klanten` (`id`, `Password`, `Username`, `Volledigenaam`, `Postcode`, `Email`, `Auto`, `Priv`) VALUES
@@ -125,7 +187,10 @@ INSERT INTO `Klanten` (`id`, `Password`, `Username`, `Volledigenaam`, `Postcode`
 (11, '043a718774c572bd8a25adbeb1bfcd5c0256ae11cecf9f9c3f925d0e52beaf89', 's', 'ss', 's', 'm.balsmeer@gmail.com', 0, 3),
 (12, '8254c329a92850f6d539dd376f4816ee2764517da5e0235514af433164480d7a', 'lk', 'lk', 'lk', 'm.balsmeer@gmail.com', 0, 3),
 (13, '043a718774c572bd8a25adbeb1bfcd5c0256ae11cecf9f9c3f925d0e52beaf89', 'sucker', 's', 's', 'martijn.s.boers@gmail.com', 0, 3),
-(14, '688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6', 'asd', 'sd', 'das', 'm.balsmeer@gmail.com', 0, 3);
+(14, '688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6', 'asd', 'sd', 'das', 'm.balsmeer@gmail.com', 0, 3),
+(15, 'a2b23cc05a376e1b0ff01e749c4866049303a367be3c9d8e8fa18f8fa69541de', 'klant12', 'jan', '1544TW', 'sgsfg@gmail.com', 0, 3),
+(16, 'ae5deb822e0d71992900471a7199d0d95b8e7c9d05c40a8245a281fd2c1d6684', 'testuser', 'testuser', '152TW', 'klaas.foppen@gmail.com', 0, 3),
+(18, 'klantklaas', 'klantklaas', 'klaas', '1541TW', 'klaas.foppen@gmail.com', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -134,15 +199,14 @@ INSERT INTO `Klanten` (`id`, `Password`, `Username`, `Volledigenaam`, `Postcode`
 --
 
 CREATE TABLE IF NOT EXISTS `Log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `IP` text NOT NULL,
   `Tijd` text NOT NULL,
-  `User` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=66 ;
+  `User` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden uitgevoerd voor tabel `Log`
+-- Gegevens worden geëxporteerd voor tabel `Log`
 --
 
 INSERT INTO `Log` (`id`, `IP`, `Tijd`, `User`) VALUES
@@ -219,22 +283,22 @@ INSERT INTO `Log` (`id`, `IP`, `Tijd`, `User`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Onderdeel` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `Naam` text NOT NULL,
   `Type` text NOT NULL,
   `Voorraad` int(11) NOT NULL,
-  `Prijs` double NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `Prijs` double NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden uitgevoerd voor tabel `Onderdeel`
+-- Gegevens worden geëxporteerd voor tabel `Onderdeel`
 --
 
 INSERT INTO `Onderdeel` (`id`, `Naam`, `Type`, `Voorraad`, `Prijs`) VALUES
-(1, 'Schakelbak', 'auto', 423423, 1234),
-(2, 'Koppeling', 'intern', 12, 600.5),
-(3, 'Voor ruit', '', 100, 43.22);
+(46, 'Motor', 'auto', 1, 500),
+(47, 'Raam', 'auto', 20, 4),
+(48, 'test onderdeel', 'test', 50, 700),
+(49, 'test ', 'test', 10, 900);
 
 -- --------------------------------------------------------
 
@@ -243,17 +307,16 @@ INSERT INTO `Onderdeel` (`id`, `Naam`, `Type`, `Voorraad`, `Prijs`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Privileges` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `naam` text NOT NULL,
   `ADMIN` tinyint(1) NOT NULL,
   `VOORRAAD` tinyint(1) NOT NULL,
   `WERKPLAATS` tinyint(1) NOT NULL,
-  `PARKEERGARAGE` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `PARKEERGARAGE` tinyint(1) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden uitgevoerd voor tabel `Privileges`
+-- Gegevens worden geëxporteerd voor tabel `Privileges`
 --
 
 INSERT INTO `Privileges` (`id`, `naam`, `ADMIN`, `VOORRAAD`, `WERKPLAATS`, `PARKEERGARAGE`) VALUES
@@ -264,20 +327,59 @@ INSERT INTO `Privileges` (`id`, `naam`, `ADMIN`, `VOORRAAD`, `WERKPLAATS`, `PARK
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `Reservering`
+--
+
+CREATE TABLE IF NOT EXISTS `Reservering` (
+  `id` int(11) NOT NULL,
+  `aankomst` date NOT NULL,
+  `vertrek` date NOT NULL,
+  `klant_id` int(11) NOT NULL,
+  `betaald` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `Reservering`
+--
+
+INSERT INTO `Reservering` (`id`, `aankomst`, `vertrek`, `klant_id`, `betaald`) VALUES
+(49, '2015-06-23', '2015-06-23', 16, NULL),
+(50, '2015-06-26', '2015-06-28', 16, NULL),
+(51, '2015-06-30', '2015-07-24', 16, NULL),
+(52, '2015-06-23', '2015-06-25', 16, NULL),
+(60, '2015-06-18', '2015-06-27', 5, 1),
+(61, '2015-06-23', '2015-06-30', 16, 1),
+(62, '2015-06-18', '2015-06-30', 16, 1),
+(63, '2015-06-30', '2015-07-02', 16, 1),
+(64, '2015-06-27', '2015-06-30', 16, 0),
+(65, '2015-06-16', '2015-06-30', 16, 0),
+(66, '2015-06-19', '2015-06-30', 16, 0),
+(67, '2015-06-25', '2015-06-30', 16, 0),
+(68, '2015-06-19', '2015-06-24', 16, 0),
+(69, '2015-06-23', '2015-06-30', 16, 0),
+(70, '2015-06-23', '2015-06-30', 16, 0),
+(71, '2015-06-30', '2015-07-30', 16, 0),
+(72, '2015-06-28', '2015-06-30', 16, 0),
+(73, '2015-06-28', '2015-06-30', 16, 0),
+(74, '2015-06-28', '2015-06-30', 16, 0),
+(75, '2015-06-28', '2015-06-30', 16, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `Users`
 --
 
 CREATE TABLE IF NOT EXISTS `Users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `username` text NOT NULL,
   `naam` text NOT NULL,
   `priv` int(11) NOT NULL,
-  `password` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
+  `password` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden uitgevoerd voor tabel `Users`
+-- Gegevens worden geëxporteerd voor tabel `Users`
 --
 
 INSERT INTO `Users` (`id`, `username`, `naam`, `priv`, `password`) VALUES
@@ -299,8 +401,116 @@ INSERT INTO `Users` (`id`, `username`, `naam`, `priv`, `password`) VALUES
 (24, 'jan', 'jan', 1, '6a0ac0fd972c325d6ca5512b67a5e0ad996c4a3e9b59971d125164e6d4db1a1c'),
 (25, 'jan', 'jan', 1, '6a0ac0fd972c325d6ca5512b67a5e0ad996c4a3e9b59971d125164e6d4db1a1c'),
 (26, 'kees', 'kees', 1, '159eea4303125de0a60fbce8d362778cfe915166d42de1339d9bc79523d9e9a8'),
-(33, 'asd', '', 1, 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
+(33, 'asd', '', 1, 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'),
+(34, 'connor', 'connor', 1, 'cc0b8a95a883bc0b5f64a536de42349e0ce0673918a3c446255ddc8354887140');
 
+--
+-- Indexen voor geëxporteerde tabellen
+--
+
+--
+-- Indexen voor tabel `Afspraken`
+--
+ALTER TABLE `Afspraken`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `Auto`
+--
+ALTER TABLE `Auto`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `Berichten`
+--
+ALTER TABLE `Berichten`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `Klanten`
+--
+ALTER TABLE `Klanten`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `Log`
+--
+ALTER TABLE `Log`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `Onderdeel`
+--
+ALTER TABLE `Onderdeel`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `Privileges`
+--
+ALTER TABLE `Privileges`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `Reservering`
+--
+ALTER TABLE `Reservering`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `Users`
+--
+ALTER TABLE `Users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT voor geëxporteerde tabellen
+--
+
+--
+-- AUTO_INCREMENT voor een tabel `Afspraken`
+--
+ALTER TABLE `Afspraken`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT voor een tabel `Auto`
+--
+ALTER TABLE `Auto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT voor een tabel `Berichten`
+--
+ALTER TABLE `Berichten`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=97;
+--
+-- AUTO_INCREMENT voor een tabel `Klanten`
+--
+ALTER TABLE `Klanten`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT voor een tabel `Log`
+--
+ALTER TABLE `Log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=66;
+--
+-- AUTO_INCREMENT voor een tabel `Onderdeel`
+--
+ALTER TABLE `Onderdeel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
+--
+-- AUTO_INCREMENT voor een tabel `Privileges`
+--
+ALTER TABLE `Privileges`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT voor een tabel `Reservering`
+--
+ALTER TABLE `Reservering`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=76;
+--
+-- AUTO_INCREMENT voor een tabel `Users`
+--
+ALTER TABLE `Users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
