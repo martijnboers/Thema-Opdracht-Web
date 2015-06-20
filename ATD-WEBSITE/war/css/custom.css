@@ -14,6 +14,25 @@
 	margin-bottom: 10px;
 }
 
+.clearfix {
+	overflow: auto;
+}
+
+.afspraak:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.afspraak:before,
+.afspraak:after {
+  content:"";
+  display:table;
+}
+.container:after {
+  clear:both;
+}
+
 .container {
 	background-color: white;
 	padding: 20px;

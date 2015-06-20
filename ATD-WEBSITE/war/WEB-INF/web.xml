@@ -103,13 +103,13 @@
     </servlet-mapping>
     
      <servlet>
-        <servlet-name>Afspraak</servlet-name>
-        <servlet-class>atd.werkplaats.Afspraak
+        <servlet-name>Werkplaats</servlet-name>
+        <servlet-class>atd.werkplaats.Werkplaats
 	</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Afspraak</servlet-name>
-        <url-pattern>/Afspraak.do</url-pattern>
+        <servlet-name>Werkplaats</servlet-name>
+        <url-pattern>/Werkplaats.do</url-pattern>
     </servlet-mapping>
     
     <servlet>

@@ -14,7 +14,6 @@
  *******************************************************************************/
 package atd.domein;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -62,6 +61,10 @@ public class Afspraak {
 
 	public AfspraakStatus getStatus() {
 		return status;
+	}
+
+	public String getStatusString() {
+		return status.name();
 	}
 
 	public void setStatus(AfspraakStatus st) {

@@ -96,7 +96,53 @@ public class GebruikteOnderdelenDAO {
 		return result;
 	}
 
-	public ArrayList<Onderdeel> getOnderdelen(Afspraak afspraak) {
+	/**
+	 * Geeft alle Onderdelen in de host terug als ArrayList
+	 * 
+	 * @return ArrayList<Klant>
+	 * @throws SQLException
+	 */
+	public ArrayList<Onderdeel> getOnderdelen(Afspraak afspraak)
+			throws SQLException {
+		ArrayList<Onderdeel> alleOnderdelen = new ArrayList<>();
+
+		try {
+			config = new URL(CONFIG_URL).openStream();
+			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT * FROM ");
+
+			while (rs.next()) {
+
+				Onderdeel ond = new Onderdeel(rs.getString(2), rs.getString(3),
+						rs.getInt(4), rs.getDouble(5));
+				ond.setID(rs.getInt(1));
+				alleOnderdelen.add(ond);
+			}
+			return alleOnderdelen;
+
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
 		return null;
 	}
 

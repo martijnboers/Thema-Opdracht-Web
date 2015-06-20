@@ -139,7 +139,7 @@ public class KlantenDAO {
 					priv = Privilege.KLANT;
 				}
 				return new Klant(rs.getInt(1), rs.getString(4),
-						rs.getString(3), rs.getString(4), rs.getString(5),
+						rs.getString(3), rs.getString(4), rs.getString(6),
 						null, priv);
 			}
 

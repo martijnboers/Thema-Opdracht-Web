@@ -26,7 +26,7 @@ import atd.domein.User;
 import atd.services.ServiceProvider;
 import atd.services.WerkplaatsService;
 
-public class Afspraak extends HttpServlet {
+public class Werkplaats extends HttpServlet {
 	RequestDispatcher rd = null;
 
 	/**

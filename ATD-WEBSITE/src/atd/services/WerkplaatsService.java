@@ -77,7 +77,13 @@ public class WerkplaatsService {
 	}
 
 	public ArrayList<Onderdeel> getOnderdelenAfspraak(Afspraak afspraak) {
-		return gebruikteOnderdelenDAO.getOnderdelen(afspraak);
+		try {
+			return gebruikteOnderdelenDAO.getOnderdelen(afspraak);
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return null;
 
 	}
 

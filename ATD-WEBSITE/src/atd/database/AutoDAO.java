@@ -58,7 +58,7 @@ public class AutoDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(
+			con = DriverManager.getConnection(
 					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
 							+ prop.getProperty("database"),
 					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
@@ -105,11 +105,10 @@ public class AutoDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager
-					.getConnection("jdbc:mysql://" + prop.getProperty("host")
-							+ ":3306/" + prop.getProperty("database"),
-							prop.getProperty("dbKlant"),
-							prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM Auto WHERE kenteken='"
 					+ kenteken + "'");
@@ -143,14 +142,14 @@ public class AutoDAO {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager
-					.getConnection("jdbc:mysql://" + prop.getProperty("host")
-							+ ":3306/" + prop.getProperty("database"),
-							prop.getProperty("dbKlant"),
-							prop.getProperty("dbpassword"));
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Auto WHERE id='" + id + "'");
+			rs = st.executeQuery("SELECT * FROM Auto WHERE id= " + id + "");
 			if (rs.next()) {
+
 				return new Auto(rs.getInt(1), rs.getString(2), rs.getString(3),
 						rs.getString(4));
 			}

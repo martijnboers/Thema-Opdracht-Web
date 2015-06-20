@@ -151,7 +151,7 @@ public class OnderdelenDAO {
 	 */
 	public static ArrayList<Onderdeel> getAllOnderdelen() throws SQLException {
 		ArrayList<Onderdeel> alleOnderdelen = new ArrayList<>();
-
+		
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);

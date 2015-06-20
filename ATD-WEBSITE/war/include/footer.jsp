@@ -1,10 +1,12 @@
 <!-- niks aan de paden veranderen -->
 
 <div class="footer">
-	<p>2015 WTFPL - Do What the Fuck You Want to Public License.</p>
-			<img src="${pageContext.request.contextPath}/images/bovag.jpg">
-</div>
 
+	<img class="pull-right"
+		src="${pageContext.request.contextPath}/images/bovag.jpg">
+
+</div>
+	<div class="clearfix"></div>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script
