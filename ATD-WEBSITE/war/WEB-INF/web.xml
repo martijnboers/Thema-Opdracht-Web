@@ -58,7 +58,7 @@
     
     <filter>
         <filter-name>FilterForSecurity</filter-name>
-        <filter-class>atd.backend.SecurityFilter</filter-class>
+        <filter-class>atd.securityfilters.SecurityFilterBasic</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>FilterForSecurity</filter-name>

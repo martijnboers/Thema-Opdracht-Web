@@ -13,7 +13,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-package atd.backend;
+package atd.securityfilters;
 
 import java.io.IOException;
 
@@ -26,7 +26,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SecurityFilter implements Filter {
+public class SecurityFilterBasic implements Filter {
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
 		/* Filter is being placed into service, do nothing. */
