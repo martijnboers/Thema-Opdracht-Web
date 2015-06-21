@@ -52,7 +52,7 @@ public class AfspraakDAO {
 	private UsersDAO userDAO = new UsersDAO();
 	private AutoDAO autoDAO = new AutoDAO();
 
-	public static StatusDB setAfspraak(Afspraak afspraak) {
+	public StatusDB setAfspraak(Afspraak afspraak) {
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
@@ -117,8 +117,9 @@ public class AfspraakDAO {
 				String omschrijving = rs.getString(6);
 				AfspraakStatus status = AfspraakStatus.valueOf(rs.getString(7));
 
-				Afspraak afspraak = new Afspraak(id, klant, user, auto, datum,
+				Afspraak afspraak = new Afspraak(klant, user, auto, datum,
 						omschrijving, status);
+				afspraak.setId(rs.getInt(1));
 				alleAfspraken.add(afspraak);
 			}
 			return alleAfspraken;
@@ -160,7 +161,7 @@ public class AfspraakDAO {
 					+ monteur.getId() + "");
 
 			while (rs.next()) {
-				int id = rs.getInt(1);
+
 				Klant klant = klantenDAO.getKlant(rs.getInt(2));
 				User user = userDAO.getUser(rs.getInt(3));
 				Auto auto = autoDAO.getAutoByID(rs.getInt(4));
@@ -168,9 +169,9 @@ public class AfspraakDAO {
 				String omschrijving = rs.getString(6);
 				AfspraakStatus status = AfspraakStatus.valueOf(rs.getString(7));
 
-				Afspraak afspraak = new Afspraak(id, klant, user, auto, datum,
+				Afspraak afspraak = new Afspraak(klant, user, auto, datum,
 						omschrijving, status);
-
+				afspraak.setId(rs.getInt(1));
 				alleAfspraken.add(afspraak);
 			}
 			return alleAfspraken;

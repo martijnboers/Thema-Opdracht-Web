@@ -27,9 +27,9 @@ public class Afspraak {
 	private int afspraakID;
 	private ArrayList<Onderdeel> onderdelen = new ArrayList<>();
 
-	public Afspraak(int id, Klant klant, User monteur, Auto auto, Date datum,
+	public Afspraak(Klant klant, User monteur, Auto auto, Date datum,
 			String omschrijving, AfspraakStatus st) {
-		this.afspraakID = id;
+
 		this.klant = klant;
 		this.monteur = monteur;
 		this.auto = auto;
@@ -69,6 +69,10 @@ public class Afspraak {
 
 	public void setStatus(AfspraakStatus st) {
 		status = st;
+	}
+
+	public void setId(int id) {
+		afspraakID = id;
 	}
 
 	public int getID() {

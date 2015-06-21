@@ -140,7 +140,7 @@ public class KlantenDAO {
 				}
 				return new Klant(rs.getInt(1), rs.getString(4),
 						rs.getString(3), rs.getString(4), rs.getString(6),
-						null, priv);
+						AutoDAO.getAutoByID(rs.getInt(7)), priv);
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
@@ -194,9 +194,10 @@ public class KlantenDAO {
 				case 3:
 					priv = Privilege.KLANT;
 				}
+
 				allKlanten.add(new Klant(rs.getInt(0), rs.getString(4), rs
-						.getString(3), rs.getString(4), rs.getString(5), null,
-						priv));
+						.getString(3), rs.getString(4), rs.getString(5),
+						AutoDAO.getAutoByID(rs.getInt(7)), priv));
 			}
 			return allKlanten;
 
@@ -345,10 +346,11 @@ public class KlantenDAO {
 				case 3:
 					priv = Privilege.KLANT;
 				}
-				// TODO: Auto werkt nog niet goed
+
 				return new Klant(rs.getInt(1), rs.getString(4),
 						rs.getString(3), rs.getString(4), rs.getString(5),
-						null, priv);
+						AutoDAO.getAutoByID(rs.getInt(7)), priv);
+
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {

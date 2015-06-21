@@ -46,7 +46,7 @@ public class Werkplaats extends HttpServlet {
 
 		String run = req.getParameter("run");
 		System.out.println(run);
-		//System.out.println(user.getNaam());
+		// System.out.println(user.getNaam());
 
 		if (run == null) {
 			// niks

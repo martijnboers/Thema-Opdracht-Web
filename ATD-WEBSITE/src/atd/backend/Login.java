@@ -105,6 +105,8 @@ public class Login extends HttpServlet {
 			}
 			req.getSession().setAttribute("username",
 					KlantenDAO.searchKlant(username));
+			System.out.println("klant setten");
+			
 			resp.addCookie(new Cookie("username", username));
 
 			java.util.Date dt = new java.util.Date();

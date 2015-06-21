@@ -15,6 +15,10 @@
 package atd.werkplaats;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,9 +26,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import atd.domein.User;
+import atd.domein.Klant;
+import atd.services.AfspraakService;
 import atd.services.ServiceProvider;
-import atd.services.WerkplaatsService;
 
 public class Afspraak extends HttpServlet {
 	RequestDispatcher rd = null;
@@ -36,48 +40,40 @@ public class Afspraak extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		WerkplaatsService service = ServiceProvider.getWerkplaatsService();
+		AfspraakService service = ServiceProvider.getAfspraakService();
 
 		boolean update = false;
-		User user = (User) req.getSession().getAttribute("username");
-		String aantal = req.getParameter("nieuwAantal");
-		String onderdeel = req.getParameter("nieuwOnderdeel");
-		String menu = req.getParameter("menu");
-
+		Klant klant = (Klant) req.getSession().getAttribute("username");
+		String omschrijving = req.getParameter("omschrijving");
+		String datum = req.getParameter("datum");
 		String run = req.getParameter("run");
-		System.out.println(run);
-		//System.out.println(user.getNaam());
+		System.out.println(omschrijving + " " + datum);
 
 		if (run == null) {
 			// niks
-		} else if (run.equals("inbehandeling")) {
-			req.setAttribute("inbehandelingAfspraak",
-					service.getAfsprakenMonteur(user));
-			update = true;
-		} else if (run.equals("nieuw")) {
-			req.setAttribute("nieuweAfspraak", service.getNieuwAfspraken());
-			update = true;
-		} else if (run.equals("afgerond")) {
-			req.setAttribute("afgerondeAfspraak",
-					service.getAfgerondeAfspraken());
-			update = true;
-		} else if (run.equals("aanmelden")) {
+		} else if (run.equals("bevestig")) {
+			System.out.println("Nieuwe afspraak toevoegen");
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			Date date;
+			try {
+				date = df.parse(datum);
+				service.nieuweAfspraak(klant, klant.getDeAuto().getId(), date,
+						omschrijving);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 
-		} else if (run.equals("bestellen")) {
-
-		} else if (run.equals("afronden")) {
-
-			System.out.println("afronden");
+			update = true;
 		}
 
 		if (update) {
-			rd = req.getRequestDispatcher("/werkplaats/werkplaats.jsp");
+			rd = req.getRequestDispatcher("/afspraak/afspraak.jsp");
 			rd.forward(req, resp);
 		} else {
 			req.setAttribute(
 					"error",
-					"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Vul al de velden correct in </div>");
-			rd = req.getRequestDispatcher("/werkplaats/werkplaats.jsp");
+					"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Vul alles in! je mag alleen een nieuwe auto toevoegen als je niet een bestaande selecteerd</div>");
+			rd = req.getRequestDispatcher("/afspraak/afspraak.jsp");
 			rd.forward(req, resp);
 		}
 	}

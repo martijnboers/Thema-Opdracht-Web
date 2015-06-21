@@ -24,13 +24,15 @@
 	clear: both;
 }
 
-.afspraak:before,
-.afspraak:after {
-  content:"";
-  display:table;
+.afspraakmaken:before, .afspraakmaken:after, .afspraak:before, .afspraak:after
+	{
+	content: "";
+	display: table;
+	clear: both;
 }
+
 .container:after {
-  clear:both;
+	clear: both;
 }
 
 .container {

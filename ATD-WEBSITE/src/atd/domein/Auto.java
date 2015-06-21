@@ -14,7 +14,9 @@
  *******************************************************************************/
 package atd.domein;
 
-public class Auto {
+import java.io.Serializable;
+
+public class Auto implements Serializable {
 	private int id;
 	private String kenteken;
 	private String merk;
