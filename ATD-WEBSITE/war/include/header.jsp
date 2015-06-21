@@ -33,9 +33,9 @@
 						}
 						if (request.getSession().getAttribute("username") instanceof Klant) {
 							out.print("<ul class='nav navbar-nav'>" + "<li><a href='/ATD-WEBSITE/parkeren/parkeren.jsp'>Parkeren</a></li>"
-									+ "<li><a href='/ATD-WEBSITE/werkplaats/werkplaats.jsp'>Reparatie</a></li>" + "</ul>");
+									+ "<li><a href='/ATD-WEBSITE/afspraak/afspraak.jsp'>Afspraak plannen</a></li>" + "</ul>");
 							Klant klant = (Klant) request.getSession().getAttribute("username");
-							out.print("<ul class=\"nav navbar-nav navbar-right\"> <li><a href=\"/ATD-WEBSITE/Logout.do\">" + klant.getVolledigeNaam()
+							out.print("<ul class=\"nav navbar-nav navbar-right\"> <li><a href=\"/ATD-WEBSITE/Logout.do\">" + klant.getNaam()
 									+ " uitloggen</a></li> </ul>");
 						}
 					}

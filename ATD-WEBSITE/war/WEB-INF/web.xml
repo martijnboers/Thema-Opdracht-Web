@@ -57,29 +57,62 @@
     </servlet-mapping>
     
     <filter>
-        <filter-name>FilterForSecurity</filter-name>
+        <filter-name>FilterForSecurityBasic</filter-name>
         <filter-class>atd.securityfilters.SecurityFilterBasic</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>FilterForSecurity</filter-name>
+        <filter-name>FilterForSecurityBasic</filter-name>
         <url-pattern>/voorraad/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     
     <filter-mapping>
-        <filter-name>FilterForSecurity</filter-name>
+        <filter-name>FilterForSecurityBasic</filter-name>
         <url-pattern>/home/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     
     <filter-mapping>
-        <filter-name>FilterForSecurity</filter-name>
+        <filter-name>FilterForSecurityBasic</filter-name>
         <url-pattern>/index.jsp</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>FilterForSecurityBasic</filter-name>
+        <url-pattern>/afspraak/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    
+        <filter-mapping>
+        <filter-name>FilterForSecurityBasic</filter-name>
+        <url-pattern>/afspraak/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    
+     <filter>
+        <filter-name>FilterForSecurityWerknemer</filter-name>
+        <filter-class>atd.securityfilters.SecurityFilterWerknemer</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FilterForSecurityWerknemer</filter-name>
+        <url-pattern>/voorraad/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>FilterForSecurityWerknemer</filter-name>
+        <url-pattern>/werkplaats/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    
     
     <servlet>
         <servlet-name>BlogPost</servlet-name>

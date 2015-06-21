@@ -26,6 +26,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import atd.domein.Klant;
+
 public class SecurityFilterKlant implements Filter {
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
@@ -37,9 +39,9 @@ public class SecurityFilterKlant implements Filter {
 		HttpServletRequest r2 = (HttpServletRequest) req;
 		HttpServletResponse httpResponse = (HttpServletResponse) resp;
 		
-		if (r2.getSession().getAttribute("username") == null) {
+		if (r2.getSession().getAttribute("username") == null || !(r2.getSession().getAttribute("username") instanceof Klant)) {
 			r2.setAttribute("redirect", r2.getRequestURI());
-			r2.getRequestDispatcher("/login/login.jsp").forward(req, resp);
+			r2.getRequestDispatcher("/login/forbidden.jsp").forward(req, resp);
 			return;
 		} else {
 			chain.doFilter(req, resp);
