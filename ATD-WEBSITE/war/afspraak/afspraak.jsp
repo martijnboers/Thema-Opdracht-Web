@@ -43,11 +43,10 @@
 				<textarea name="omschrijving" class="form-control" rows="5"
 					id="comment"></textarea>
 			</div>
-
-			<input type="submit" name="run" value="bevestig"
+			${requestScope.msg} <input type="submit" name="run" value="bevestig"
 				class="btn btn-success btn-lg pull-right">
 		</form>
-		${requestScope.errorReg}
+
 
 	</div>
 

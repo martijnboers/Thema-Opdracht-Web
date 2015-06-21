@@ -51,26 +51,34 @@ public class Afspraak extends HttpServlet {
 		if (run == null) {
 
 		} else if (run.equals("bevestig")) {
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-			Date date;
-			try {
-				date = df.parse(datum);
-				service.nieuweAfspraak(klant, klant.getDeAuto().getId(), date,
-						omschrijving);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			if (datum == null || datum.isEmpty() && omschrijving == null
+					|| omschrijving.isEmpty()) {
+				update = false;
+			} else {
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+				Date date;
+				try {
+					date = df.parse(datum);
+					service.nieuweAfspraak(klant, klant.getDeAuto().getId(),
+							date, omschrijving);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 
-			update = true;
+				update = true;
+			}
 		}
 
 		if (update) {
+			req.setAttribute(
+					"msg",
+					"<div class=\"alert alert-success\" role=\"alert\"> <span class=\"sr-only\">Gelukt:</span>We hebben uw afspraak ontvangen!</div>");
 			rd = req.getRequestDispatcher("/afspraak/afspraak.jsp");
 			rd.forward(req, resp);
 		} else {
 			req.setAttribute(
-					"error",
-					"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Vul alles in! je mag alleen een nieuwe auto toevoegen als je niet een bestaande selecteerd</div>");
+					"msg",
+					"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Fout:</span> Zorg dat u de datum en een omschrijving opgeeft!</div>");
 			rd = req.getRequestDispatcher("/afspraak/afspraak.jsp");
 			rd.forward(req, resp);
 		}
