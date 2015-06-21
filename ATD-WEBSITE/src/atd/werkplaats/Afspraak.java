@@ -47,8 +47,8 @@ public class Afspraak extends HttpServlet {
 		String omschrijving = req.getParameter("omschrijving");
 		String datum = req.getParameter("datum");
 		String run = req.getParameter("run");
-		System.out.println(omschrijving + " " + datum);
 
+		System.out.println("klant" + klant);
 		if (run == null) {
 			// niks
 		} else if (run.equals("bevestig")) {
