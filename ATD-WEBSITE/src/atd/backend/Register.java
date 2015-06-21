@@ -153,7 +153,7 @@ public class Register extends HttpServlet {
 			msg.setRecipients(Message.RecipientType.TO, k.getEmail());
 			msg.setSubject("Uw account is aangemaakt");
 			msg.setSentDate(Calendar.getInstance().getTime());
-			msg.setContent("Beste " + k.getVolledigeNaam() + ", \n\nUw account " + k.getUsername()
+			msg.setContent("Beste " + k.getNaam() + ", \n\nUw account " + k.getUsername()
 					+ " is aangemaakt, U kunt inloggen op de <a href='https://atd.plebian.nl'>ATD website</a>\n",
 					"text/html; charset=utf-8");
 			// TODO: Heeft OAUTH nodig, maarja we zijn al niet erg netjes met

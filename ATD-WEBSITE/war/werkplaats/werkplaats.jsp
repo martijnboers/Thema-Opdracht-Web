@@ -148,58 +148,11 @@
 				</c:forEach>
 			</c:when>
 			<c:when test="${nieuweAfspraak != null}">
-				<c:forEach var="Afspraak" items="${nieuweAfspraak}">
-					<div class="afspraak">
-						<div class="row">
-							<div class="col-md-6">
-								<p>
-									status <span class="label label-warning">${Afspraak.statusString}
-									</span>
-								</p>
-								<h4>Afspraak nr. ${Afspraak.ID}</h4>
-								<p>${Afspraak.omschrijving}</p>
-							</div>
-							<div class="col-md-6">
-								<h4>Auto info</h4>
-								<ul>
-									<li>${Afspraak.auto.merk}</li>
-									<li>${Afspraak.auto.kenteken}</li>
-									<li>${Afspraak.auto.type}</li>
-								</ul>
-							</div>
-						</div>
-						<button class="btn btn-warning pull-right" name="aanmelden"
-							value="${Afspraak.ID}" type="submit">Aanmelden</button>
-
-					</div>
-				</c:forEach>
-			</c:when>
+      nieuwe afspraken
+    </c:when>
 			<c:when test="${afgerondeAfspraak != null}">
-				<c:forEach var="Afspraak" items="${afgerondeAfspraak}">
-					<div class="afspraak">
-						<div class="row">
-							<div class="col-md-6">
-								<p>
-									status <span class="label label-default">${Afspraak.statusString}
-									</span>
-								</p>
-								<h4>Afspraak nr. ${Afspraak.ID}</h4>
-								<p>${Afspraak.omschrijving}</p>
-							</div>
-							<div class="col-md-6">
-								<h4>Auto info</h4>
-								<ul>
-									<li>${Afspraak.auto.merk}</li>
-									<li>${Afspraak.auto.kenteken}</li>
-									<li>${Afspraak.auto.type}</li>
-								</ul>
-							</div>
-						</div>
-
-
-					</div>
-				</c:forEach>
-			</c:when>
+       afgeronde	
+    </c:when>
 			<c:otherwise>
 				<p>Kies in het menu een afspraak die je wil bekijken</p>
 			</c:otherwise>

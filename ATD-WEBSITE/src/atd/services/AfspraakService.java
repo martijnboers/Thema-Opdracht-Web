@@ -34,7 +34,6 @@ public class AfspraakService {
 
 	public void nieuweAfspraak(Klant klant, int autoId, Date datum,
 			String omschrijving) {
-
 		Auto auto = AutoDAO.getAutoByID(autoId);
 		Afspraak afspraak = new Afspraak(klant, null, auto, datum,
 				omschrijving, AfspraakStatus.NIEUW);

@@ -14,46 +14,17 @@
  *******************************************************************************/
 package atd.domein;
 
-public class User {
-	private int id;
-	private String naam;
-	private String username;
-	private Privilege priv;
-	
+import com.thoughtworks.selenium.webdriven.commands.GetAlert;
+
+public class User extends AccountWrapper{
+	private double uurloon;
 	// Dit moet hernoemd worden naar monteur, maar ergens zitten problemen
 	
 	public User(int id, String naam, String username, Privilege priv){
-		this.id = id;
-		this.naam = naam;
-		this.username = username;
-		this.priv = priv;
+		super(id,naam,username,priv);
 	}
-
-	public String getNaam() {
-		return naam;
-	}
-
-	public void setNaam(String naam) {
-		this.naam = naam;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public Privilege getPriv() {
-		return priv;
-	}
-
-	public void setPriv(Privilege priv) {
-		this.priv = priv;
-	}
-
-	public int getId() {
-		return id;
+	
+	public double getSalaris(){
+		return uurloon;
 	}
 }

@@ -36,21 +36,34 @@ public class WerkplaatsService {
 		return afspraakDAO.getAlleAfspraken();
 	}
 
-	// ophalen van alle afspraken die de monteur heeft openstaan
 	public ArrayList<Afspraak> getAfsprakenMonteur(User user) {
 		return afspraakDAO.getAfsprakenMonteur(user);
 	}
 
-	// ophalen van afgeronde afspraken
 	public ArrayList<Afspraak> getAfgerondeAfspraken() {
-		return afspraakDAO.getAfgerondeAfspraken();
+		ArrayList<Afspraak> afgerondeAfsparken = getAlleAfspraken();
+		for (Iterator<Afspraak> it = afgerondeAfsparken.iterator(); it
+				.hasNext();) {
+			Afspraak afspraak = it.next();
+			if (afspraak.getStatus().equals(AfspraakStatus.AFGEROND)) {
+				it.remove();
+			}
+		}
+		return afspraken;
 	}
 
-	// ophalen alle nieuwe afspraken
 	public ArrayList<Afspraak> getNieuwAfspraken() {
-		return afspraakDAO.getNieuwAfspraken();
+		ArrayList<Afspraak> afgerondeAfsparken = getAlleAfspraken();
+		for (Iterator<Afspraak> it = afgerondeAfsparken.iterator(); it
+				.hasNext();) {
+			Afspraak afspraak = it.next();
+			if (afspraak.getStatus().equals(AfspraakStatus.NIEUW)) {
+				it.remove();
+			}
+		}
+		return afspraken;
 	}
-	
+
 	public void onderdeelToevoegen(int onderdeelID, Afspraak afspraak,
 			int aantal) {
 		Onderdeel onderdeel;
@@ -79,6 +92,6 @@ public class WerkplaatsService {
 	}
 
 	public void afspraakAfgerond(Afspraak afspraak) {
-		
+
 	}
 }

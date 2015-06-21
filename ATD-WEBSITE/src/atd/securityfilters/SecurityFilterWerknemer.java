@@ -26,6 +26,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import atd.domein.AccountWrapper;
+import atd.domein.Privilege;
+import atd.domein.User;
+
 public class SecurityFilterWerknemer implements Filter {
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
@@ -36,10 +40,10 @@ public class SecurityFilterWerknemer implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest r2 = (HttpServletRequest) req;
 		HttpServletResponse httpResponse = (HttpServletResponse) resp;
-		
-		if (r2.getSession().getAttribute("username") == null) {
+		AccountWrapper gebruiker = (AccountWrapper) r2.getSession().getAttribute("username");
+		if (r2.getSession().getAttribute("username") == null || gebruiker.getPriv() == Privilege.KLANT){
 			r2.setAttribute("redirect", r2.getRequestURI());
-			r2.getRequestDispatcher("/login/login.jsp").forward(req, resp);
+			r2.getRequestDispatcher("/login/forbidden.jsp").forward(req, resp);
 			return;
 		} else {
 			chain.doFilter(req, resp);
