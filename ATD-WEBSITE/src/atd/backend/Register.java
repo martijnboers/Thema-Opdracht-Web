@@ -122,10 +122,11 @@ public class Register extends HttpServlet {
 				rd.forward(req, resp);
 				return;
 			}
-
-			Auto deAuto = new Auto(0, kenteken, merk, type);
-			AutoDAO.setAuto(deAuto);
-			Klant k = new Klant(0, realName, username, postcode, email, deAuto, Privilege.KLANT);
+			
+			AutoDAO.setAuto(new Auto(0, kenteken, merk, type));
+			System.out.println(AutoDAO.searchAuto(kenteken).getId());
+			System.out.println(AutoDAO.searchAuto(kenteken).getKenteken());
+			Klant k = new Klant(0, realName, username, postcode, email, AutoDAO.searchAuto(kenteken), Privilege.KLANT);
 			KlantenDAO.setKlant(k, wachtwoord);
 			sendRegMail(k);
 			req.setAttribute("error", "<div class=\"alert alert-success\" role=\"alert\"> <span class=\"sr-only\">Info:</span> Gebruiker "
