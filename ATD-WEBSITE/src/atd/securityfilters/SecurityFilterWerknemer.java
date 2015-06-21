@@ -42,7 +42,6 @@ public class SecurityFilterWerknemer implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) resp;
 		AccountWrapper gebruiker = (AccountWrapper) r2.getSession().getAttribute("username");
 		if (r2.getSession().getAttribute("username") == null || gebruiker.getPriv() == Privilege.KLANT){
-//		if (true){
 			r2.setAttribute("redirect", r2.getRequestURI());
 			r2.getRequestDispatcher("/login/forbidden.jsp").forward(req, resp);
 			return;
