@@ -40,13 +40,9 @@ public class Werkplaats extends HttpServlet {
 
 		boolean update = false;
 		User user = (User) req.getSession().getAttribute("username");
-		String aantal = req.getParameter("nieuwAantal");
-		String onderdeel = req.getParameter("nieuwOnderdeel");
-		String menu = req.getParameter("menu");
 
 		String run = req.getParameter("run");
-		System.out.println(run);
-		// System.out.println(user.getNaam());
+		String aanmelden = req.getParameter("aanmelden");
 
 		if (run == null) {
 			// niks
@@ -54,15 +50,17 @@ public class Werkplaats extends HttpServlet {
 			req.setAttribute("inbehandelingAfspraak",
 					service.getAfsprakenMonteur(user));
 			update = true;
+
+			// nieuwe klussen ophalen waar een monteur zich op kan aanmelden
 		} else if (run.equals("nieuw")) {
 			req.setAttribute("nieuweAfspraak", service.getNieuwAfspraken());
 			update = true;
+
+			// alle klussen ophalen die afgerond zijn
 		} else if (run.equals("afgerond")) {
 			req.setAttribute("afgerondeAfspraak",
 					service.getAfgerondeAfspraken());
 			update = true;
-		} else if (run.equals("aanmelden")) {
-
 		} else if (run.equals("bestellen")) {
 
 		} else if (run.equals("afronden")) {
@@ -70,6 +68,10 @@ public class Werkplaats extends HttpServlet {
 			System.out.println("afronden");
 		}
 
+		// aanmelden bij een klus
+		if (aanmelden != null) {
+			
+		}
 		if (update) {
 			rd = req.getRequestDispatcher("/werkplaats/werkplaats.jsp");
 			rd.forward(req, resp);

@@ -78,7 +78,7 @@ public class KlantenDAO {
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.setString(1, klantIn.getUsername());
 			preparedStmt.setString(2, password);
-			preparedStmt.setString(3, klantIn.getNaam());
+			preparedStmt.setString(3, klantIn.getVolledigeNaam());
 			preparedStmt.setString(4, klantIn.getPostcode());
 			preparedStmt.setString(5, klantIn.getEmail());
 			preparedStmt.setInt(6, klantIn.getDeAuto().getId());
