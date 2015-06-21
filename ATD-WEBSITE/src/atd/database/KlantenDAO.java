@@ -48,9 +48,6 @@ public class KlantenDAO {
 
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
-	public static void main(String[] args) {
-		
-	}
 	/**
 	 * Maakt nieuwe Klant gebruiker aan in host
 	 * 

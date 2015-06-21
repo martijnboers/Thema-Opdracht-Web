@@ -113,6 +113,16 @@
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     
+     <filter>
+        <filter-name>FilterForSecurityHost</filter-name>
+        <filter-class>atd.securityfilters.SecurityFilterHost</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FilterForSecurityHost</filter-name>
+        <url-pattern>/config/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
     
     <servlet>
         <servlet-name>BlogPost</servlet-name>

@@ -124,8 +124,6 @@ public class Register extends HttpServlet {
 			}
 			
 			AutoDAO.setAuto(new Auto(0, kenteken, merk, type));
-			System.out.println(AutoDAO.searchAuto(kenteken).getId());
-			System.out.println(AutoDAO.searchAuto(kenteken).getKenteken());
 			Klant k = new Klant(0, realName, username, postcode, email, AutoDAO.searchAuto(kenteken), Privilege.KLANT);
 			KlantenDAO.setKlant(k, wachtwoord);
 			sendRegMail(k);

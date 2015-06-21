@@ -26,7 +26,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SecurityFilterBasic implements Filter {
+import atd.domein.AccountWrapper;
+import atd.domein.Privilege;
+import atd.domein.User;
+
+public class SecurityFilterHost implements Filter {
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
 		/* Filter is being placed into service, do nothing. */
@@ -36,12 +40,15 @@ public class SecurityFilterBasic implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest r2 = (HttpServletRequest) req;
 		HttpServletResponse httpResponse = (HttpServletResponse) resp;
-		
-		if (r2.getSession().getAttribute("username") == null) {
-			r2.setAttribute("redirect", r2.getRequestURI());
-			System.out.println(r2.getRequestURI());
-			r2.getRequestDispatcher("/login/login.jsp").forward(req, resp);
-			return;
+		System.out.println(r2.getRemoteAddr());
+
+		// Ik kan niet twee keer not equals gebruiken?
+		if (!r2.getRemoteAddr().equals("127.0.0.1")) {
+			if (!r2.getRemoteAddr().equals("0:0:0:0:0:0:0:1")) {
+				r2.setAttribute("redirect", r2.getRequestURI());
+				r2.getRequestDispatcher("/login/forbidden.jsp").forward(req, resp);
+				return;
+			}
 		} else {
 			chain.doFilter(req, resp);
 		}
