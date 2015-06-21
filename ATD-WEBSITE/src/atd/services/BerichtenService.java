@@ -12,11 +12,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package atd.database;
+package atd.services;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import atd.database.BerichtenDAO;
 import atd.domein.Bericht;
 import atd.domein.StatusDB;
 import atd.domein.User;
@@ -42,5 +43,9 @@ public class BerichtenService {
 
 	public ArrayList<Bericht> getAlleBerichten() throws SQLException{
 		return berichtenDAO.getAllBerichten();
+	}
+	
+	public ArrayList<Bericht> getAlleBerichtenUser(int id) throws SQLException{
+		return berichtenDAO.getAllBerichtenUser(id);
 	}
 }

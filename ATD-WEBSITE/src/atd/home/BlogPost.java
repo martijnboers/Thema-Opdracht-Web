@@ -25,8 +25,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import atd.database.BerichtenService;
 import atd.domein.User;
+import atd.services.BerichtenService;
 
 /**
  * @author martijn

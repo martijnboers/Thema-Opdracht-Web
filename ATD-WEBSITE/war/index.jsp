@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<%@ page import="atd.database.BerichtenService"%>
+<%@ page import="atd.services.BerichtenService"%>
 <%@ page import="atd.domein.Bericht"%>
 <%
 	BerichtenService berichtenService = new BerichtenService();
@@ -18,22 +18,7 @@
 <body>
 
 	<jsp:include page="/include/header.jsp" />
-	<h2>Maak nieuw bericht</h2>
-	<br>
-	<form action="/ATD-WEBSITE/BlogPost.do" method="POST">
-
-		<div class="input-group">
-			<span class="input-group-addon" style="width: 150px"
-				id="basic-addon1"> Bericht </span> <input type="text"
-				class="form-control" name="bericht" placeholder="Input text"
-				aria-describedby="basic-addon1">
-		</div>
-		<input type="submit" value="Bericht toevoegen"
-			class="btn btn-success btn-lg pull-right">
-	</form>
-	<br>
-	<br>
-	<h2>Nieuwe berichten:</h2>
+	<h2>Uw berichten:</h2>
 	<br>
 
 	<!-- Met EL -->

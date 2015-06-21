@@ -12,33 +12,42 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package atd.home;
+
+package atd.securityfilters;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
-import javax.servlet.RequestDispatcher;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import atd.services.BerichtenService;
-
-/**
- * @author martijn
- *
- */
-public class DeletePost extends HttpServlet {
-	private BerichtenService berichtenService = new BerichtenService();
-	
+public class SecurityFilterWerknemer implements Filter {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int id = Integer.valueOf(req.getParameter("id"));
-		berichtenService.removeBericht(id);
-		RequestDispatcher rd = null;
-		rd = req.getRequestDispatcher("/index.jsp");
-		Logger.getLogger("atd.log").info("Bericht: " + id + "  is verwijderd");
-		rd.forward(req, resp);
+	public void init(FilterConfig arg0) throws ServletException {
+		/* Filter is being placed into service, do nothing. */
+	}
+
+	@Override
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest r2 = (HttpServletRequest) req;
+		HttpServletResponse httpResponse = (HttpServletResponse) resp;
+		
+		if (r2.getSession().getAttribute("username") == null) {
+			r2.setAttribute("redirect", r2.getRequestURI());
+			r2.getRequestDispatcher("/login/login.jsp").forward(req, resp);
+			return;
+		} else {
+			chain.doFilter(req, resp);
+		}
+	}
+
+	@Override
+	public void destroy() {
+		/* Filter is being taken out of service, do nothing. */
 	}
 }

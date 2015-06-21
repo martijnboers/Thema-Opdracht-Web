@@ -185,4 +185,49 @@ public class BerichtenDAO {
 		}
 		return null;
 	}
+	
+	/**
+	 * Geeft alle Berichten voor een user (id) in de host terug als ArrayList
+	 * 
+	 * @return ArrayList<Klant>
+	 * @throws SQLException
+	 */
+	public ArrayList<Bericht> getAllBerichtenUser(int id) throws SQLException {
+		ArrayList<Bericht> alleBerichten = new ArrayList<>();
+		try {
+			config = new URL(CONFIG_URL).openStream();
+			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT * FROM Berichten WHERE User='" + id + "' ORDER BY id DESC LIMIT 0, 6");
+
+			while (rs.next()) {
+				alleBerichten.add(new Bericht(rs.getInt(1), rs.getString(2), rs
+						.getString(3), usersDAO.getUser(rs.getInt(4))));
+			}
+			return alleBerichten;
+
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		return null;
+	}
 }
