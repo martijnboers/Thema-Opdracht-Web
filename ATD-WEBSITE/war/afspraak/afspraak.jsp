@@ -17,38 +17,38 @@
 	<p>Hier kan een klant een afspraak maken</p>
 	<div class="afspraakmaken">
 		<form action="/ATD-WEBSITE/Afspraak.do" method="POST">
-			<form action="/ATD-WEBSITE/Afspraak.do" method="POST">
 
-				<p>Om een afraak te maken bij ATD dient u een account aan te
-					maken, Geef hier onder uw gegevens op een gewenste datum voor een
-					afspraak</p>
-				<div class="row">
-					<div class="col-md-6">
-						<h3>Auto info</h3>
-						<ul>
-							<li>${sessionScope.username.deAuto.merk}</li>
-							<li>${sessionScope.username.deAuto.type}</li>
-							<li>${sessionScope.username.deAuto.kenteken}</li>
-						</ul>
-					</div>
-					<div class="col-md-6">
-						<h3>Datum</h3>
-						<p>Wanneer komt u langs</p>
-						<input class="form-control" type="text" id="datepicker_vertrek"
-							name="datum">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="comment">Omschrijving:</label>
-					<textarea name="omschrijving" class="form-control" rows="5"
-						id="comment"></textarea>
-				</div>
 
-				<input type="submit" value="Bevestig"
-					class="btn btn-success btn-lg pull-right">
-			</form>
-			${requestScope.errorReg}
+			<p>Om een afraak te maken bij ATD dient u een account aan te
+				maken, Geef hier onder uw gegevens op een gewenste datum voor een
+				afspraak</p>
+			<div class="row">
+				<div class="col-md-6">
+					<h3>Auto info</h3>
+					<ul>
+						<li>${sessionScope.username.deAuto.merk}</li>
+						<li>${sessionScope.username.deAuto.type}</li>
+						<li>${sessionScope.username.deAuto.kenteken}</li>
+					</ul>
+				</div>
+				<div class="col-md-6">
+					<h3>Datum</h3>
+					<p>Wanneer komt u langs</p>
+					<input class="form-control" type="text" id="datepicker_vertrek"
+						name="datum">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="comment">Omschrijving:</label>
+				<textarea name="omschrijving" class="form-control" rows="5"
+					id="comment"></textarea>
+			</div>
+
+			<input type="submit" name="run" value="bevestig"
+				class="btn btn-success btn-lg pull-right">
 		</form>
+		${requestScope.errorReg}
+
 	</div>
 
 	<jsp:include page="/include/footer.jsp" />

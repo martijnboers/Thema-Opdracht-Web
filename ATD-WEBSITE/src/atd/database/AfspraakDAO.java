@@ -63,14 +63,14 @@ public class AfspraakDAO {
 					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
-			String query = "INSERT INTO Afspraak(Klant, Monteur, Auto, Datum, Omschrijving) VALUES(?, ?, ?, ?, ?)";
+			String query = "INSERT INTO Afspraken(Klant_ID, Auto_ID, Datum, Omschrijving, Status) VALUES(?, ?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.setInt(1, afspraak.getKlant().getId());
-			preparedStmt.setInt(2, afspraak.getMonteur().getId());
-			preparedStmt.setInt(1, afspraak.getAuto().getId());
-			preparedStmt.setDate(1, new java.sql.Date(afspraak.getDatum()
+			preparedStmt.setInt(2, afspraak.getAuto().getId());
+			preparedStmt.setDate(3, new java.sql.Date(afspraak.getDatum()
 					.getTime()));
-			preparedStmt.setInt(1, afspraak.getKlant().getId());
+			preparedStmt.setString(4, afspraak.getOmschrijving());
+			preparedStmt.setString(5, "NIEUW");
 			preparedStmt.execute();
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {

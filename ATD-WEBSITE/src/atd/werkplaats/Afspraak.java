@@ -48,11 +48,9 @@ public class Afspraak extends HttpServlet {
 		String datum = req.getParameter("datum");
 		String run = req.getParameter("run");
 
-		System.out.println("klant" + klant);
 		if (run == null) {
-			// niks
+
 		} else if (run.equals("bevestig")) {
-			System.out.println("Nieuwe afspraak toevoegen");
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			Date date;
 			try {

@@ -15,20 +15,8 @@
 
 	<jsp:include page="/include/header.jsp" />
 	<h1>Werkplaats</h1>
-	<h2>Voeg bericht aan afspraak toe</h2>
-	TODO: Meegeven voor welke klant het bericht is
-	<br>
-	<form action="/ATD-WEBSITE/BlogPost.do" method="POST">
 
-		<div class="input-group">
-			<span class="input-group-addon" style="width: 150px"
-				id="basic-addon1"> Bericht </span> <input type="text"
-				class="form-control" name="bericht" placeholder="Input text"
-				aria-describedby="basic-addon1">
-		</div>
-		<input type="submit" value="Bericht toevoegen"
-			class="btn btn-success btn-lg pull-right">
-	</form>
+
 	<p>hier komen de afspraken / reparaties die gedaan moeten worden</p>
 	<form action="/ATD-WEBSITE/Werkplaats.do" method="POST">
 
