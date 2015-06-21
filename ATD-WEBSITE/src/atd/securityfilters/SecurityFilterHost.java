@@ -40,7 +40,6 @@ public class SecurityFilterHost implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest r2 = (HttpServletRequest) req;
 		HttpServletResponse httpResponse = (HttpServletResponse) resp;
-		System.out.println(r2.getRemoteAddr());
 
 		// Ik kan niet twee keer not equals gebruiken?
 		if (!r2.getRemoteAddr().equals("127.0.0.1")) {

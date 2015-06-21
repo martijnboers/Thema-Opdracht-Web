@@ -39,7 +39,6 @@ public class SecurityFilterBasic implements Filter {
 		
 		if (r2.getSession().getAttribute("username") == null) {
 			r2.setAttribute("redirect", r2.getRequestURI());
-			System.out.println(r2.getRequestURI());
 			r2.getRequestDispatcher("/login/login.jsp").forward(req, resp);
 			return;
 		} else {
