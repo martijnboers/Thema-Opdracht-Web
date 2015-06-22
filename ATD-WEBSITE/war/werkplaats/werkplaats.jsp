@@ -95,27 +95,17 @@
 						<table class="table table-striped">
 							<thead>
 								<tr>
-									<th>ID</th>
 									<th>Naam</th>
 									<th>Aantal</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>43</td>
-									<td>Schroef</td>
-									<td>43</td>
-								</tr>
-								<tr>
-									<td>12</td>
-									<td>Motor</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>923</td>
-									<td>Bumber</td>
-									<td>1</td>
-								</tr>
+								<c:forEach var="Onderdeel" items="${Afspraak.alleOnderdelen}">
+									<tr>
+										<td>${Onderdeel.naam}</td>
+										<td>${Onderdeel.aantal}</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 						<div class="col-md-6 pull-right">
