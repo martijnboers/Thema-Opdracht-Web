@@ -123,10 +123,9 @@ $(document).ready(
 // langzaam laad..
 $(document).ready(
 		function() {
-			$('#prijs').each(
+			$('#dePrijs').each(
 					function() {
 						var a = $(this).text();
-
 						$(this).replaceWith(
 								"<p>"
 										+ accounting.formatMoney(a, "€", 2,

@@ -149,7 +149,7 @@
 							<div class="col-md-6">
 								<p>
 									status <span class="label label-warning">${Afspraak.statusString}
-									</span>
+									</span> </br> <strong>datum</strong> ${Afspraak.dateString}
 								</p>
 								<h4>Afspraak nr. ${Afspraak.ID}</h4>
 								<p>${Afspraak.omschrijving}</p>
@@ -226,7 +226,7 @@
 										<tr>
 											<td>${Onderdeel.naam}</td>
 											<td>${Onderdeel.aantal}</td>
-											<td id="prijs">${Onderdeel.prijs}</td>
+											<td id="dePrijs">${Onderdeel.prijs}</td>
 										</tr>
 									</c:forEach>
 								</tbody>

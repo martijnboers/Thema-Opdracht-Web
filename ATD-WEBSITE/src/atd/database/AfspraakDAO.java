@@ -357,6 +357,7 @@ public class AfspraakDAO {
 
 			while (rs.next()) {
 
+				@SuppressWarnings("static-access")
 				Klant klant = klantenDAO.getKlant(rs.getInt(2));
 				User user = userDAO.getUser(rs.getInt(3));
 				Auto auto = autoDAO.getAutoByID(rs.getInt(4));
