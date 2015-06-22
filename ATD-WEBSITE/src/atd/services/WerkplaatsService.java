@@ -16,14 +16,12 @@ package atd.services;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import atd.database.AfspraakDAO;
 import atd.database.GebruikteOnderdelenDAO;
 import atd.database.OnderdelenDAO;
 import atd.database.UsersDAO;
 import atd.domein.Afspraak;
-import atd.domein.AfspraakStatus;
 import atd.domein.Onderdeel;
 import atd.domein.User;
 

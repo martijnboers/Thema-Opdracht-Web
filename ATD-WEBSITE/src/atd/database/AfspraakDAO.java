@@ -291,6 +291,12 @@ public class AfspraakDAO {
 
 	}
 
+	/**
+	 * Een afspraak ophalen met ID
+	 * 
+	 * @param Id
+	 * @return Afspraak
+	 */
 	public Afspraak getAfspraakByID(int Id) {
 
 		try {
@@ -340,6 +346,12 @@ public class AfspraakDAO {
 		return null;
 	}
 
+	/**
+	 * alle afspraken die zijn afgerond, het is nog niet netjes dat alles gedaan
+	 * word vanuit de DAO het zou eigenlijk moeten met services
+	 * 
+	 * @return Afspraak
+	 */
 	public ArrayList<Afspraak> getAfgerondeAfspraken() {
 
 		ArrayList<Afspraak> alleAfspraken = new ArrayList<>();
@@ -369,11 +381,15 @@ public class AfspraakDAO {
 						omschrijving, status);
 				afspraak.setId(rs.getInt(1));
 				afspraak.setUren(rs.getInt(8));
+
+				// kosten van de monteur berekennen
 				double bedrag = user.getUurloon() * rs.getInt(8);
 
-				if (gebruikteOnderdelenDAO.getOnderdelen(afspraak) != null) {
-					ArrayList<Onderdeel> onderdelen = gebruikteOnderdelenDAO
-							.getOnderdelen(afspraak);
+				ArrayList<Onderdeel> onderdelen = gebruikteOnderdelenDAO
+						.getOnderdelen(afspraak);
+				// kijken of er daadwerkelijk onderdelen zijn gebruikt bij de
+				// reparatie.
+				if (onderdelen != null) {
 					for (Onderdeel onderdeel : onderdelen) {
 						bedrag += onderdeel.getPrijs() * onderdeel.getAantal();
 					}
