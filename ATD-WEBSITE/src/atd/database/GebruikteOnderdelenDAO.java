@@ -51,8 +51,7 @@ public class GebruikteOnderdelenDAO {
 	 * @param onderdeelIn
 	 * @return
 	 */
-	public boolean setOnderdeel(Onderdeel onderdeel, Afspraak afspraak,
-			int aantal) {
+	public boolean setOnderdeel(int onderdeelId, int afspraakId, int aantal) {
 		boolean result = false;
 		try {
 			config = new URL(CONFIG_URL).openStream();
@@ -64,12 +63,8 @@ public class GebruikteOnderdelenDAO {
 					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
-			String query = "INSERT INTO `GebruikteOnderdeel`( `Klant_ID`, `Onderdeel_ID`, `aantal`) VALUES ('"
-					+ afspraak.getID()
-					+ "','"
-					+ onderdeel.getID()
-					+ "',"
-					+ aantal + ")";
+			String query = "INSERT INTO `GebruiktOnderdeel`( `Afspraak_ID`, `Onderdeel_ID`, `aantal`) VALUES ('"
+					+ afspraakId + "','" + onderdeelId + "'," + aantal + ")";
 
 			if (st.executeUpdate(query) == 1) {
 				result = true;
@@ -119,9 +114,13 @@ public class GebruikteOnderdelenDAO {
 					+ afspraak.getID() + "");
 
 			while (rs.next()) {
-				Onderdeel ond = onderdelenDAO.getOnderdeel(rs.getInt(3));
-				ond.setAantal(rs.getInt(4));
-				alleOnderdelen.add(ond);
+
+				if (onderdelenDAO.getOnderdeel(rs.getInt(3)) != null) {
+					Onderdeel ond = onderdelenDAO.getOnderdeel(rs.getInt(3));
+					ond.setAantal(rs.getInt(4));
+					alleOnderdelen.add(ond);
+				}
+
 			}
 			return alleOnderdelen;
 

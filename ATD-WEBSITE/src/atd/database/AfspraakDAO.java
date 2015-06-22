@@ -123,8 +123,11 @@ public class AfspraakDAO {
 				Afspraak afspraak = new Afspraak(klant, user, auto, datum,
 						omschrijving, status);
 				afspraak.setId(rs.getInt(1));
-				afspraak.setAlleOnderdelen(gebruikteOnderdelenDAO
-						.getOnderdelen(afspraak));
+
+				if (gebruikteOnderdelenDAO.getOnderdelen(afspraak) != null) {
+					afspraak.setAlleOnderdelen(gebruikteOnderdelenDAO
+							.getOnderdelen(afspraak));
+				}
 				alleAfspraken.add(afspraak);
 			}
 			return alleAfspraken;
