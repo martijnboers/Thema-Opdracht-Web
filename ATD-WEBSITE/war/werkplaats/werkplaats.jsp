@@ -226,7 +226,7 @@
 										<tr>
 											<td>${Onderdeel.naam}</td>
 											<td>${Onderdeel.aantal}</td>
-											<td id="dePrijs">${Onderdeel.prijs}</td>
+											<td class="prijs">${Onderdeel.prijs}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -234,7 +234,7 @@
 						</div>
 						<h4 class="pull-right">
 							<strong>totaal prijs</strong>
-							<div id="prijs">${Afspraak.totaalPrijs}</div>
+							<div class="totaalPrijs">${Afspraak.totaalPrijs}</div>
 						</h4>
 					</div>
 				</c:forEach>

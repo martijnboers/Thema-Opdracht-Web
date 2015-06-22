@@ -106,7 +106,7 @@ $(document).ready(
 		function() {
 			$('#onderdelen-table tr').each(
 					function() {
-						$(this).find('#prijs').each(
+						$(this).find('.prijs').each(
 								function() {
 									var a = $(this).text();
 
@@ -121,14 +121,11 @@ $(document).ready(
 // geld bedragen omzetten op de afgeronde afspraken pagina,
 // hij werkt alleen op de eerste 2, ik denk dat het komt doordat de DOM zo
 // langzaam laad..
-$(document).ready(
-		function() {
-			$('#dePrijs').each(
-					function() {
-						var a = $(this).text();
-						$(this).replaceWith(
-								"<p>"
-										+ accounting.formatMoney(a, "€", 2,
-												".", ",") + "</p>");
-					})
-		});
+// !!credits to marty voor tips
+$(function() {
+	$(".totaalPrijs").each(function() {
+		var a = $(this).text(), el = $("<td></td>");
+		el.text(accounting.formatMoney(a, "€", 2, ".", ","));
+		$(this).replaceWith(el);
+	})
+});
