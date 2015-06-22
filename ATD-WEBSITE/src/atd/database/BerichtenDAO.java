@@ -48,6 +48,13 @@ public class BerichtenDAO {
 	private UsersDAO usersDAO = new UsersDAO();
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
+	public static void main(String[] args) throws SQLException {
+		BerichtenDAO b = new BerichtenDAO();
+		ArrayList<Bericht> ber = b.getAllBerichtenUser(29);
+		for (Bericht x : ber){
+			System.out.println(x.getBericht());
+		}
+	}
 	/**
 	 * Maakt nieuwe bericht aan in host
 	 * 
@@ -205,7 +212,7 @@ public class BerichtenDAO {
 							+ prop.getProperty("database"),
 					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Berichten WHERE User='" + id + "' ORDER BY id DESC LIMIT 0, 6");
+			rs = st.executeQuery("SELECT * FROM Berichten WHERE Klant='" + id + "' ORDER BY id DESC LIMIT 0, 6");
 
 			while (rs.next()) {
 				alleBerichten.add(new Bericht(rs.getInt(1), rs.getString(2), rs

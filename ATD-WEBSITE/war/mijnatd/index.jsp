@@ -5,9 +5,13 @@
 <html>
 <%@ page import="atd.services.BerichtenService"%>
 <%@ page import="atd.domein.Bericht"%>
+<%@ page import="atd.domein.Klant"%>
 <%
 	BerichtenService berichtenService = new BerichtenService();
 	request.setAttribute("berichtenService", berichtenService);
+	Klant k = (Klant)request.getSession().getAttribute("username");
+	request.setAttribute("userId", k.getId());
+	int userId = k.getId();
 %>
 
 <head>
@@ -22,7 +26,7 @@
 	<br>
 
 	<!-- Met EL -->
-	<c:forEach var="Bericht" items="${berichtenService.alleBerichten}">
+	<c:forEach var="Bericht" items="${berichtenService.getAlleBerichtenUser(userId)}">
 		<div class="jumbotron">
 			</p>
 			<p>
@@ -30,7 +34,7 @@
 					href="DeletePost.do?id=${Bericht.id }">x</a> ${Bericht.bericht}
 			</p>
 			<p>
-				<em><small>- ${Bericht.owner.naam} @ ${Bericht.date} </small></em>
+				<em><small>Monteur: ${Bericht.owner.naam} @ ${Bericht.date} </small></em>
 			</p>
 		</div>
 		<br>

@@ -47,6 +47,7 @@ public class BerichtenService {
 	}
 	
 	public ArrayList<Bericht> getAlleBerichtenUser(int id) throws SQLException{
+		System.out.println(id);
 		return berichtenDAO.getAllBerichtenUser(id);
 	}
 }
