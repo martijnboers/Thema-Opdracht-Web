@@ -5,14 +5,15 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
+import atd.domein.Auto;
 import atd.domein.Privilege;
 import atd.domein.User;
-
+import atd.domein.Klant;
 public class UserTest {
 
 	@Test
 	public void UserTest() {
-		User Testuser = new User(0, null, null, null);
+		Klant Testuser = new Klant(0, "test", "testusername", "1234AB", "testemail", null, Privilege.KLANT);
 		
 		String naam = "test";
 		assertNotNull(naam);
@@ -25,6 +26,16 @@ public class UserTest {
 		int id = Testuser.getId();
 		assertNotNull(id);
 		assertEquals(id, Testuser.getId());
+		
+		String postcode = "1234AB";
+		Testuser.setPostcode(postcode);
+		assertNotNull(postcode);
+		assertEquals(postcode, Testuser.getPostcode());
+		
+		String email = "testemail";
+		Testuser.setEmail(email);
+		assertNotNull(email);
+		assertEquals(email, Testuser.getEmail());
 		
 		Privilege priv = Privilege.KLANT;
 		assertNotNull(priv);

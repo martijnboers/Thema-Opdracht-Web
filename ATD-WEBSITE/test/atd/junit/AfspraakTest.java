@@ -11,36 +11,38 @@ import org.junit.Test;
 import atd.database.AfspraakDAO;
 import atd.domein.Afspraak;
 import atd.domein.AfspraakStatus;
+import atd.domein.Auto;
+import atd.domein.Klant;
+import atd.domein.User;
 
 
 public class AfspraakTest {
 
-	@Before
-	public void start() {
-
-	}
-
 	@Test
 	public void AfspraakTest() {
-		Afspraak Testafspraak = new Afspraak(null, null, null, null, null, null);
+		Klant klant = new Klant(0, null, null, null, null, null, null);
+		java.util.Date datum = new Date(0);
+		Auto auto = new Auto(0, null, null, null);
+		User monteur = new User(0, null, null, null);
+		Afspraak Testafspraak = new Afspraak(klant, monteur, auto, datum, "omschrijving", AfspraakStatus.NIEUW);
 
 		int id = Testafspraak.getID();
 		assertNotNull(id);
 		assertEquals(id, Testafspraak.getID());
 
-		Object klant = Testafspraak.getKlant();
+		klant = Testafspraak.getKlant();
 		assertNotNull(klant);
 		assertEquals(klant, Testafspraak.getKlant());
 
-		Object user = Testafspraak.getMonteur();
-		assertNotNull(user);
-		assertEquals(user, Testafspraak.getMonteur());
+		monteur = Testafspraak.getMonteur();
+		assertNotNull(monteur);
+		assertEquals(monteur, Testafspraak.getMonteur());
 
-		Object auto = Testafspraak.getAuto();
+		auto = Testafspraak.getAuto();
 		assertNotNull(auto);
 		assertEquals(auto, Testafspraak.getAuto());
 
-		Date datum = (Date) Testafspraak.getDatum();
+		datum = (Date) Testafspraak.getDatum();
 		assertNotNull(datum);
 		assertEquals(datum, Testafspraak.getDatum());
 
