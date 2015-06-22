@@ -41,92 +41,94 @@
 			<c:when test="${inbehandelingAfspraak != null}">
 				<c:forEach var="Afspraak" items="${inbehandelingAfspraak}">
 					<div class="afspraak">
-						<div class="row">
-							<div class="col-md-6">
-								<p>
-									status <span class="label label-success">${Afspraak.statusString}
-									</span>
-								</p>
+						<form action="/ATD-WEBSITE/Werkplaats.do" method="POST">
+							<div class="row">
+								<div class="col-md-6">
+									<p>
+										status <span class="label label-success">${Afspraak.statusString}
+										</span>
+									</p>
 
-								<h4>Afspraak nr. ${Afspraak.ID}</h4>
-								<p>${Afspraak.omschrijving}</p>
+									<h4>Afspraak nr. ${Afspraak.ID}</h4>
+									<p>${Afspraak.omschrijving}</p>
+								</div>
+								<div class="col-md-6">
+									<h4>Klant info</h4>
+									<ul>
+										<li>${Afspraak.klant.username}</li>
+										<li>${Afspraak.klant.email}</li>
+										<li>${Afspraak.klant.postcode}</li>
+									</ul>
+								</div>
 							</div>
-							<div class="col-md-6">
-								<h4>Klant info</h4>
-								<ul>
-									<li>${Afspraak.klant.username}</li>
-									<li>${Afspraak.klant.email}</li>
-									<li>${Afspraak.klant.postcode}</li>
-								</ul>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<h4>Auto info</h4>
-								<ul>
-									<li>${Afspraak.auto.merk}</li>
-									<li>${Afspraak.auto.kenteken}</li>
-									<li>${Afspraak.auto.type}</li>
-								</ul>
-							</div>
-							<div class="col-md-6">
+							<div class="row">
+								<div class="col-md-6">
+									<h4>Auto info</h4>
+									<ul>
+										<li>${Afspraak.auto.merk}</li>
+										<li>${Afspraak.auto.kenteken}</li>
+										<li>${Afspraak.auto.type}</li>
+									</ul>
+								</div>
+								<div class="col-md-6">
 
-								<div class="form-group">
-									<label for="sel1">Selecteer onderdeel (kies een):</label> <select
-										name="nieuwOnderdeel" class="form-control" id="sel1">
-										<c:forEach var="Onderdeel"
-											items="${OnderdelenDAO.getAllOnderdelen()}">
-											<option value="${Onderdeel.ID}">${Onderdeel.naam}</option>
-										</c:forEach>
-									</select>
-									<div class="input-group">
-										<div class="input-group-addon">Aantal</div>
-										<input type="text" class="form-control" name="aantal"
-											placeholder="ex. 43">
+									<div class="form-group">
+										<label for="sel1">Selecteer onderdeel (kies een):</label> <select
+											name="nieuwOnderdeel" class="form-control" id="sel1">
+											<c:forEach var="Onderdeel"
+												items="${OnderdelenDAO.getAllOnderdelen()}">
+												<option value="${Onderdeel.ID}">${Onderdeel.naam}</option>
+											</c:forEach>
+										</select>
+										<div class="input-group">
+											<div class="input-group-addon">Aantal</div>
+											<input type="text" class="form-control" name="nieuwAantal"
+												placeholder="ex. 43">
 
+										</div>
 									</div>
-								</div>
-								<button name="toevoegen" value="${Afspraak.ID}" type="submit"
-									class="btn btn-primary pull-right">Toevoegen</button>
+									<button name="toevoegen" value="${Afspraak.ID}" type="submit"
+										class="btn btn-primary pull-right">Toevoegen</button>
 
-							</div>
-						</div>
-						<c:choose>
-							<c:when test="${!Afspraak.alleOnderdelen.isEmpty()}">
-								<table class="table table-striped">
-									<thead>
+								</div>
+						</form>
+					</div>
+					<c:choose>
+						<c:when test="${!Afspraak.alleOnderdelen.isEmpty()}">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Naam</th>
+										<th>Aantal</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="Onderdeel" items="${Afspraak.alleOnderdelen}">
 										<tr>
-											<th>Naam</th>
-											<th>Aantal</th>
+											<td>${Onderdeel.naam}</td>
+											<td>${Onderdeel.aantal}</td>
 										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="Onderdeel" items="${Afspraak.alleOnderdelen}">
-											<tr>
-												<td>${Onderdeel.naam}</td>
-												<td>${Onderdeel.aantal}</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</c:when>
-							<c:otherwise>
-								<div class="alert alert-info" role="alert">
-									<p>Deze klus heeft nog geen onderdelen gebruikt</p>
-								</div>
-							</c:otherwise>
-						</c:choose>
-						<div class="col-md-6 pull-right">
-							<p>aantal gewerkte uren</p>
-							<div class="input-group">
-								<input type="text" class="form-control"> <span
-									class="input-group-btn">
-									<button name="run" value="afronden" class="btn btn-default"
-										type="submit">afronden</button>
-								</span>
+									</c:forEach>
+								</tbody>
+							</table>
+						</c:when>
+						<c:otherwise>
+							<div class="alert alert-info" role="alert">
+								<p>Deze klus heeft nog geen onderdelen gebruikt</p>
 							</div>
-
+						</c:otherwise>
+					</c:choose>
+					<div class="col-md-6 pull-right">
+						<p>aantal gewerkte uren</p>
+						<div class="input-group">
+							<input type="text" class="form-control"> <span
+								class="input-group-btn">
+								<button name="run" value="afronden" class="btn btn-default"
+									type="submit">afronden</button>
+							</span>
 						</div>
+
+					</div>
 
 					</div>
 

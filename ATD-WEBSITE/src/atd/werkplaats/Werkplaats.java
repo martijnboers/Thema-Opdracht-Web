@@ -46,7 +46,7 @@ public class Werkplaats extends HttpServlet {
 		String afspraakId = req.getParameter("toevoegen");
 
 		String onderdeelId = req.getParameter("nieuwOnderdeel");
-		String aantal = req.getParameter("aantal");
+		String aantal = req.getParameter("nieuwAantal");
 
 		if (run == null) {
 			// niks
@@ -70,10 +70,22 @@ public class Werkplaats extends HttpServlet {
 		} else if (run.equals("afronden")) {
 
 		}
+
+		/**
+		 * Onderdelen toevoegen aan een.
+		 */
 		if (afspraakId != null) {
-			service.onderdeelToevoegen(Integer.parseInt(onderdeelId),
-					Integer.parseInt(afspraakId), Integer.parseInt(aantal));
-			update = true;
+			if (afspraakId == null || afspraakId.isEmpty()
+					&& onderdeelId == null || onderdeelId.isEmpty()
+					&& aantal == null || aantal.isEmpty()) {
+				update = false;
+			} else {
+				service.onderdeelToevoegen(Integer.parseInt(onderdeelId),
+						Integer.parseInt(afspraakId), Integer.parseInt(aantal));
+				req.setAttribute("inbehandelingAfspraak",
+						service.getAfsprakenMonteur(user));
+				update = true;
+			}
 		}
 		/**
 		 * user id opalen en afspraak ID uit het button veld mee halen
