@@ -139,7 +139,7 @@ public class UsersDAO {
 					priv = Privilege.KLANT;
 				}
 				return new User(rs.getInt(1), rs.getString(2), rs.getString(3),
-						priv, rs.getDouble(5));
+						priv, rs.getDouble(6));
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
@@ -183,7 +183,7 @@ public class UsersDAO {
 
 			while (rs.next()) {
 				Privilege priv = Privilege.KLANT;
-				switch (rs.getInt(4)) {
+				switch (rs.getInt(6)) {
 				case 1:
 					priv = Privilege.ADMIN;
 					break;
@@ -345,7 +345,7 @@ public class UsersDAO {
 					priv = Privilege.KLANT;
 				}
 				return new User(rs.getInt(1), rs.getString(2), rs.getString(3),
-						priv, rs.getDouble(5));
+						priv, rs.getDouble(6));
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {

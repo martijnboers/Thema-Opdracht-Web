@@ -83,7 +83,7 @@ public class Register extends HttpServlet {
 			}
 			
 			// Hier moet nog een uurloon veld komen
-			UsersDAO.setUser(new User(0, realName, username, Privilege.MONTEUR, 10), wachtwoord);
+			UsersDAO.setUser(new User(0, realName, username, Privilege.MONTEUR, 10.00), wachtwoord);
 			req.setAttribute("error",
 					"<div class=\"alert alert-success\" role=\"alert\"> <span class=\"sr-only\">Info:</span> nieuwe gebruiker is aangemaakt </div>");
 			rd = req.getRequestDispatcher("login/login.jsp");
