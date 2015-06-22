@@ -367,6 +367,10 @@ public class AfspraakDAO {
 						omschrijving, status);
 				afspraak.setId(rs.getInt(1));
 				afspraak.setUren(rs.getInt(8));
+				if (gebruikteOnderdelenDAO.getOnderdelen(afspraak) != null) {
+					afspraak.setAlleOnderdelen(gebruikteOnderdelenDAO
+							.getOnderdelen(afspraak));
+				}
 				alleAfspraken.add(afspraak);
 			}
 			return alleAfspraken;

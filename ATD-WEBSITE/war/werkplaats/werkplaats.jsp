@@ -98,7 +98,7 @@
 					<c:choose>
 						<c:when test="${!Afspraak.alleOnderdelen.isEmpty()}">
 							<div class="panel panel-default">
-								<div class="panel-heading">monteur details</div>
+								<div class="panel-heading">onderdelen details</div>
 								<table class="table table-striped" id="onderdelen-table">
 
 									<thead>
@@ -205,6 +205,28 @@
 										<td>${Afspraak.uren}</td>
 									</tr>
 
+								</tbody>
+							</table>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">onderdelen details</div>
+							<table class="table table-striped" id="onderdelen-table">
+
+								<thead>
+									<tr>
+										<th>Naam</th>
+										<th>Aantal</th>
+										<th>Prijs/stk</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="Onderdeel" items="${Afspraak.alleOnderdelen}">
+										<tr>
+											<td>${Onderdeel.naam}</td>
+											<td>${Onderdeel.aantal}</td>
+											<td id="prijs">${Onderdeel.prijs}</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
