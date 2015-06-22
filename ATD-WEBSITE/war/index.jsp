@@ -10,13 +10,12 @@
 	Privilege priv = account.getPriv();
 
 	if (priv == Privilege.KLANT) {
-		response.setHeader("Location", "ATD-WEBSITE/mijnatd/index.jsp");
-		out.print("Klant");
+		response.sendRedirect("mijnatd/index.jsp");
 	} else if (priv == Privilege.MONTEUR) {
-		out.print("Monteur");
+		response.sendRedirect("werkplaats/werkplaats.jsp");
 	} else if (priv == Privilege.ADMIN) {
-		out.print("Admin");
+		response.sendRedirect("werkplaats/werkplaats.jsp");
 	} else if (priv == Privilege.UNAUTHENTICATED){
-		out.print("Unauth");
+		response.sendRedirect("login/login.jsp");
 	}
 %>
