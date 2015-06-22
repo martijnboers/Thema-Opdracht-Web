@@ -47,8 +47,7 @@ public class Werkplaats extends HttpServlet {
 
 		String onderdeelId = req.getParameter("nieuwOnderdeel");
 		String aantal = req.getParameter("aantal");
-		System.out.println("afspraak ID " + afspraakId + " onderdeel ID "
-				+ onderdeelId + " aantal " + aantal);
+
 		if (run == null) {
 			// niks
 		} else if (run.equals("inbehandeling")) {
@@ -70,16 +69,18 @@ public class Werkplaats extends HttpServlet {
 
 		} else if (run.equals("afronden")) {
 
-			System.out.println("afronden");
 		}
 		if (afspraakId != null) {
-
+			service.onderdeelToevoegen(Integer.parseInt(onderdeelId),
+					Integer.parseInt(afspraakId), Integer.parseInt(aantal));
+			update = true;
 		}
 		/**
 		 * user id opalen en afspraak ID uit het button veld mee halen
 		 */
 		if (aanmelden != null) {
 			service.setInbehandeling(user.getId(), Integer.parseInt(aanmelden));
+			update = true;
 		}
 		if (update) {
 			rd = req.getRequestDispatcher("/werkplaats/werkplaats.jsp");

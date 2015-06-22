@@ -62,19 +62,12 @@ public class WerkplaatsService {
 
 	/**
 	 * 
-	 * @param onderdeelID
-	 * @param afspraak
+	 * @param onderdeelId
+	 * @param afspraakId
 	 * @param aantal
 	 */
-	public void onderdeelToevoegen(int onderdeelID, Afspraak afspraak,
-			int aantal) {
-		Onderdeel onderdeel;
-		try {
-			onderdeel = onderdeelDAO.getOnderdeel(onderdeelID);
-			gebruikteOnderdelenDAO.setOnderdeel(onderdeel, afspraak, aantal);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void onderdeelToevoegen(int onderdeelId, int afspraakId, int aantal) {
+		gebruikteOnderdelenDAO.setOnderdeel(onderdeelId, afspraakId, aantal);
 
 	}
 

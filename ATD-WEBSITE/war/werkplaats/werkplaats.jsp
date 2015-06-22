@@ -91,22 +91,31 @@
 
 							</div>
 						</div>
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Naam</th>
-									<th>Aantal</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="Onderdeel" items="${Afspraak.alleOnderdelen}">
-									<tr>
-										<td>${Onderdeel.naam}</td>
-										<td>${Onderdeel.aantal}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+						<c:choose>
+							<c:when test="${!Afspraak.alleOnderdelen.isEmpty()}">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Naam</th>
+											<th>Aantal</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="Onderdeel" items="${Afspraak.alleOnderdelen}">
+											<tr>
+												<td>${Onderdeel.naam}</td>
+												<td>${Onderdeel.aantal}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</c:when>
+							<c:otherwise>
+								<div class="alert alert-info" role="alert">
+									<p>Deze klus heeft nog geen onderdelen gebruikt</p>
+								</div>
+							</c:otherwise>
+						</c:choose>
 						<div class="col-md-6 pull-right">
 							<p>aantal gewerkte uren</p>
 							<div class="input-group">
