@@ -23,21 +23,21 @@
 
 		<div class="btn-group btn-group-justified" role="group"
 			aria-label="...">
-			<div class="btn-group" role="group">
+			<div class="knop btn-group" role="group">
 				<button type="submit" name="run" value="inbehandeling"
-					class="btn btn-success ladda-button" data-style="expand-left">
+					class="knop btn btn-success ladda-button" data-style="expand-left">
 					<span class="ladda-label">Inbehandeling</span>
 				</button>
 			</div>
 			<div class="btn-group" role="group">
 				<button type="submit" name="run" value="nieuw"
-					class="btn btn-success ladda-button" data-style="expand-left">
+					class="knop btn btn-success ladda-button" data-style="expand-left">
 					<span class="ladda-label">Nieuw</span>
 				</button>
 			</div>
 			<div class="btn-group" role="group">
 				<button type="submit" name="run" value="afgerond"
-					class="btn btn-success ladda-button" data-style="expand-left">
+					class="knop btn btn-success ladda-button" data-style="expand-left">
 					<span class="ladda-label">Afgerond</span>
 				</button>
 			</div>
