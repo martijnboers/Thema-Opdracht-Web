@@ -102,7 +102,7 @@ $(document).ready(
 						$(this).find('#prijs').each(
 								function() {
 									var a = $(this).text();
-									alert(a);
+
 									$(this).replaceWith(
 											"<td>"
 													+ accounting.formatMoney(a,
