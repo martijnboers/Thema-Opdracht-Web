@@ -96,7 +96,6 @@ public class Werkplaats extends HttpServlet {
 			// values checken of ze niet leeg zijn.
 			if (afronden == null || afronden.isEmpty() && uren == null
 					|| uren.isEmpty()) {
-				System.out.println("afronden is niet goed ingevuld");
 				update = false;
 			} else {
 				// parsen van de strings en naar de service sturen.
@@ -127,7 +126,7 @@ public class Werkplaats extends HttpServlet {
 		} else {
 			req.setAttribute(
 					"error",
-					"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> Vul al de velden correct in </div>");
+					"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Error:</span> De velden zijn niet correct ingevuld! probeer het nog eens </div>");
 			rd = req.getRequestDispatcher("/werkplaats/werkplaats.jsp");
 			rd.forward(req, resp);
 		}

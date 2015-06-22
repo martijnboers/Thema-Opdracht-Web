@@ -47,8 +47,8 @@
 							<div class="row">
 								<div class="col-md-6">
 									<p>
-										status <span class="label label-success">${Afspraak.statusString}
-										</span>
+										<strong>status</strong> <span class="label label-success">${Afspraak.statusString}
+										</span> </br> <strong>datum</strong> ${Afspraak.dateString}
 									</p>
 
 									<h4>Afspraak nr. ${Afspraak.ID}</h4>
@@ -130,9 +130,9 @@
 							</span>
 						</div>
 					</div>
-					<!-- error ophalen -->
-		${requestScope.error}
+
 					</div>
+
 				</c:forEach>
 			</c:when>
 			<c:when test="${nieuweAfspraak != null}">
@@ -183,6 +183,15 @@
 								</ul>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<h3>Monteur</h3>
+								<p>
+									<strong>${Afspraak.monteur.naam}</strong>
+								</p>
+							</div>
+							<div class="col-md-6"></div>
+						</div>
 					</div>
 				</c:forEach>
 			</c:when>
@@ -193,7 +202,8 @@
 
 			</c:otherwise>
 		</c:choose>
-
+		<!-- error ophalen -->
+		${requestScope.error}
 		<jsp:include page="/include/footer.jsp" />
 		</div>
 		<script src="${pageContext.request.contextPath}/js/jquery-1.11.2.js"></script>

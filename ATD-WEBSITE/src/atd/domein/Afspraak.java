@@ -14,6 +14,8 @@
  *******************************************************************************/
 package atd.domein;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -79,13 +81,11 @@ public class Afspraak {
 		return afspraakID;
 	}
 
-	// public boolean setOnderdeel(Onderdeel onderdeel) {
-	// onderdelen.add(onderdeel);
-	// if (onderdelen.contains(onderdeel)) {
-	// return true;
-	// } else
-	// return false;
-	// }
+	public String getDateString() {
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		String deDatum = df.format(datum);
+		return deDatum;
+	}
 
 	public void setAlleOnderdelen(ArrayList<Onderdeel> alleOnderdelen) {
 		onderdelen = alleOnderdelen;
