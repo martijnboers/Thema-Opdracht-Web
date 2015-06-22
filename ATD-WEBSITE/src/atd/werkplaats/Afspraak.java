@@ -15,6 +15,7 @@
 package atd.werkplaats;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,8 +39,7 @@ public class Afspraak extends HttpServlet {
 	 * gewenste format
 	 * */
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		AfspraakService service = ServiceProvider.getAfspraakService();
 
 		boolean update = false;
@@ -51,17 +51,18 @@ public class Afspraak extends HttpServlet {
 		if (run == null) {
 
 		} else if (run.equals("bevestig")) {
-			if (datum == null || datum.isEmpty() && omschrijving == null
-					|| omschrijving.isEmpty()) {
+			if (datum == null || datum.isEmpty() && omschrijving == null || omschrijving.isEmpty()) {
 				update = false;
 			} else {
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 				Date date;
 				try {
 					date = df.parse(datum);
-					service.nieuweAfspraak(klant, klant.getDeAuto().getId(),
-							date, omschrijving);
+					service.nieuweAfspraak(klant, klant.getDeAuto().getId(), date, omschrijving);
 				} catch (ParseException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -70,14 +71,12 @@ public class Afspraak extends HttpServlet {
 		}
 
 		if (update) {
-			req.setAttribute(
-					"msg",
+			req.setAttribute("msg",
 					"<div class=\"alert alert-success\" role=\"alert\"> <span class=\"sr-only\">Gelukt:</span>We hebben uw afspraak ontvangen!</div>");
 			rd = req.getRequestDispatcher("/afspraak/afspraak.jsp");
 			rd.forward(req, resp);
 		} else {
-			req.setAttribute(
-					"msg",
+			req.setAttribute("msg",
 					"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Fout:</span> Zorg dat u de datum en een omschrijving opgeeft!</div>");
 			rd = req.getRequestDispatcher("/afspraak/afspraak.jsp");
 			rd.forward(req, resp);

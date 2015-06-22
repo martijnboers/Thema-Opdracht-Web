@@ -33,6 +33,7 @@ public class WerkplaatsService {
 	private UsersDAO userDAO = new UsersDAO();
 	private OnderdelenDAO onderdeelDAO = new OnderdelenDAO();
 	private ArrayList<Afspraak> afspraken = new ArrayList<>();
+	private BerichtenService ber = new BerichtenService();
 
 	/**
 	 * Alle afspraken van de ingelogde monteur ophalen
@@ -100,6 +101,12 @@ public class WerkplaatsService {
 			User user = userDAO.getUser(monteurID);
 			Afspraak afspraak = afspraakDAO.getAfspraakByID(afspraakID);
 			afspraakDAO.setAfspraakInbehandeling(afspraak, user);
+			
+			java.util.Date dt = new java.util.Date();
+			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String confTime = sdf.format(dt);
+			ber.setBericht("Uw afspraak is verwerkt en uw auto wordt gerepareerd door " + user.getNaam() + "", confTime, user, afspraak.getKlant());
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -115,5 +122,10 @@ public class WerkplaatsService {
 	public void afspraakAfgerond(int afspraak, int uren) {
 		Afspraak afgerondeAfspraak = afspraakDAO.getAfspraakByID(afspraak);
 		afspraakDAO.setAfspraakAfronden(afgerondeAfspraak, uren);
+		
+		java.util.Date dt = new java.util.Date();
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String confTime = sdf.format(dt);
+		ber.setBericht("Uw auto is gemaakt en u kunt hem ophalen", confTime, afgerondeAfspraak.getMonteur(), afgerondeAfspraak.getKlant());
 	}
 }

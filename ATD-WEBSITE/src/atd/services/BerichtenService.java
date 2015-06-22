@@ -17,6 +17,8 @@ package atd.services;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import atd.database.BerichtenDAO;
 import atd.domein.Bericht;
 import atd.domein.Klant;
@@ -32,7 +34,7 @@ public class BerichtenService {
 
 	public StatusDB setBericht(String bericht, String tijd, User user, Klant klant) {
 		if (!bericht.equals("") && !tijd.equals("") && user != null) {
-			return berichtenDAO.setBericht(bericht, tijd, user, klant);
+			return berichtenDAO.setBericht(StringEscapeUtils.escapeHtml4(bericht), tijd, user, klant);
 		} else {
 			return StatusDB.INCORRECT;
 		}

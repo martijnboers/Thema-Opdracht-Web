@@ -71,7 +71,7 @@ public class BerichtenDAO {
 					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
-			String query = "INSERT INTO Berichten(Bericht, Tijd, User) VALUES(?, ?, ?, ?)";
+			String query = "INSERT INTO Berichten(Bericht, Tijd, User, Klant) VALUES(?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.setString(1, bericht);
 			preparedStmt.setString(2, tijd);

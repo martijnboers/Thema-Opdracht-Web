@@ -31,7 +31,7 @@
 			</p>
 			<p>
 				<a style="float: right; display: inline-block; margin: -60px -47px;"
-					href="DeletePost.do?id=${Bericht.id }">x</a> ${Bericht.bericht}
+					href="/ATD-WEBSITE/DeletePost.do?id=${Bericht.id }">x</a> ${Bericht.bericht}
 			</p>
 			<p>
 				<em><small>Monteur: ${Bericht.owner.naam} @ ${Bericht.date} </small></em>
