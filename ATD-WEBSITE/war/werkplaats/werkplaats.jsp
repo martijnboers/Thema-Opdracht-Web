@@ -97,22 +97,28 @@
 					</div>
 					<c:choose>
 						<c:when test="${!Afspraak.alleOnderdelen.isEmpty()}">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>Naam</th>
-										<th>Aantal</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="Onderdeel" items="${Afspraak.alleOnderdelen}">
+							<div class="panel panel-default">
+								<div class="panel-heading">monteur details</div>
+								<table class="table table-striped" id="onderdelen-table">
+
+									<thead>
 										<tr>
-											<td>${Onderdeel.naam}</td>
-											<td>${Onderdeel.aantal}</td>
+											<th>Naam</th>
+											<th>Aantal</th>
+											<th>Prijs/stk</th>
 										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
+									</thead>
+									<tbody>
+										<c:forEach var="Onderdeel" items="${Afspraak.alleOnderdelen}">
+											<tr>
+												<td>${Onderdeel.naam}</td>
+												<td>${Onderdeel.aantal}</td>
+												<td id="prijs">${Onderdeel.prijs}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
 						</c:when>
 						<c:otherwise>
 							<div class="alert alert-info" role="alert">
@@ -183,14 +189,24 @@
 								</ul>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<h3>Monteur</h3>
-								<p>
-									<strong>${Afspraak.monteur.naam}</strong>
-								</p>
-							</div>
-							<div class="col-md-6"></div>
+						<div class="panel panel-default">
+							<div class="panel-heading">monteur details</div>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Monteur</th>
+										<th>Uren</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>${Afspraak.monteur.naam}</td>
+										<td>${Afspraak.uren}</td>
+									</tr>
+
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</c:forEach>
@@ -208,5 +224,7 @@
 		</div>
 		<script src="${pageContext.request.contextPath}/js/jquery-1.11.2.js"></script>
 		<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+		<script src="${pageContext.request.contextPath}/js/accounting.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 </html>
