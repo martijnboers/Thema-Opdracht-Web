@@ -30,8 +30,7 @@ public class VoorraadService {
 				int intAantal = Integer.parseInt(aantal);
 				int intId = Integer.parseInt(id);
 
-				if (onderdelenDAO.updateOnderdeel(
-						onderdelenDAO.getOnderdeel(intId), intAantal)) {
+				if (onderdelenDAO.updateOnderdeel(onderdelenDAO.getOnderdeel(intId), intAantal)) {
 					return true;
 				}
 			} catch (SQLException e) {
@@ -46,12 +45,8 @@ public class VoorraadService {
 			return false;
 		} else {
 			try {
-				int nieuwAantal = onderdelenDAO.getOnderdeel(
-						Integer.parseInt(id)).getVoorraad()
-						+ Integer.parseInt(aantal);
-				if (onderdelenDAO.updateOnderdeel(
-						onderdelenDAO.getOnderdeel(Integer.parseInt(id)),
-						nieuwAantal)) {
+				int nieuwAantal = onderdelenDAO.getOnderdeel(Integer.parseInt(id)).getVoorraad() + Integer.parseInt(aantal);
+				if (onderdelenDAO.updateOnderdeel(onderdelenDAO.getOnderdeel(Integer.parseInt(id)), nieuwAantal)) {
 					return true;
 				}
 			} catch (SQLException e) {
@@ -61,22 +56,28 @@ public class VoorraadService {
 		}
 	}
 
-	public boolean addOnderdeel(String naam, String type, String aantal,
-			String prijs) {
-		if (naam.isEmpty() || naam == null && type.isEmpty() || type == null
-				&& aantal.isEmpty() || aantal == null && prijs.isEmpty()
+	public boolean addOnderdeel(String naam, String type, String aantal, String prijs) {
+		if (naam.isEmpty() || naam == null && type.isEmpty() || type == null && aantal.isEmpty() || aantal == null && prijs.isEmpty()
 				|| prijs == null) {
 			return false;
 		} else {
-			System.out.println("nieuw onderdeel");
 			double doublePrijs = Double.parseDouble(prijs);
 			int intAantal = Integer.parseInt(aantal);
-			Onderdeel onderdeel = new Onderdeel(naam, type, intAantal,
-					doublePrijs);
+			Onderdeel onderdeel = new Onderdeel(naam, type, intAantal, doublePrijs);
 			if (onderdelenDAO.setOnderdeel(onderdeel)) {
 				return true;
 			}
 			return false;
 		}
 	}
+
+	public Onderdeel getOnderdeel(int id) throws SQLException {
+		if (id == 0) {
+			return null;
+		} else {
+			return onderdelenDAO.getOnderdeel(id);
+
+		}
+	}
+
 }

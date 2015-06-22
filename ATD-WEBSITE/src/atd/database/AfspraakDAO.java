@@ -31,8 +31,10 @@ import atd.domein.Afspraak;
 import atd.domein.AfspraakStatus;
 import atd.domein.Auto;
 import atd.domein.Klant;
+import atd.domein.Onderdeel;
 import atd.domein.StatusDB;
 import atd.domein.User;
+import atd.services.VoorraadService;
 
 /**
  * @author Martijn/klaas
@@ -52,6 +54,8 @@ public class AfspraakDAO {
 	private UsersDAO userDAO = new UsersDAO();
 	private AutoDAO autoDAO = new AutoDAO();
 	private GebruikteOnderdelenDAO gebruikteOnderdelenDAO = new GebruikteOnderdelenDAO();
+	private VoorraadService voorraad = new VoorraadService();
+	private GebruikteOnderdelenDAO alleOnderdelen = gebruikteOnderdelenDAO;
 
 	public StatusDB setAfspraak(Afspraak afspraak) {
 		try {
@@ -269,6 +273,10 @@ public class AfspraakDAO {
 					+ afspraak.getID()
 					+ "";
 			st.execute(updateQuery);
+			ArrayList<Onderdeel> onderdelen = alleOnderdelen.getOnderdelen(afspraak);
+			for (Onderdeel x : onderdelen){
+				voorraad.updateOnderdeel(String.valueOf(x.getID()), String.valueOf(x.getVoorraad() - x.getAantal()));
+			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
