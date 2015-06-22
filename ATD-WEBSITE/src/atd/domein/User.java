@@ -20,11 +20,12 @@ public class User extends AccountWrapper{
 	private double uurloon;
 	// Dit moet hernoemd worden naar monteur, maar ergens zitten problemen
 	
-	public User(int id, String naam, String username, Privilege priv){
+	public User(int id, String naam, String username, Privilege priv, double uurloon){
 		super(id,naam,username,priv);
+		this.uurloon = uurloon;
 	}
 	
-	public double getSalaris(){
+	public double getUurloon(){
 		return uurloon;
 	}
 }

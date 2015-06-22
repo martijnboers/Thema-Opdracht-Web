@@ -26,6 +26,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.sun.jna.platform.win32.Netapi32Util.UserInfo;
+
 import atd.domein.Privilege;
 import atd.domein.StatusDB;
 import atd.domein.User;
@@ -74,12 +76,13 @@ public class UsersDAO {
 			} else if (usrIn.getPriv() == Privilege.MONTEUR) {
 				priv = 2;
 			}
-			String query = "INSERT INTO Users(username, naam, priv, password) VALUES(?, ?, ?, ?)";
+			String query = "INSERT INTO Users(username, naam, priv, password, uurloon) VALUES(?, ?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.setString(1, usrIn.getUsername());
 			preparedStmt.setString(2, usrIn.getNaam());
 			preparedStmt.setInt(3, priv);
 			preparedStmt.setString(4, password);
+			preparedStmt.setDouble(5, usrIn.getUurloon());
 			preparedStmt.execute();
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
@@ -136,7 +139,7 @@ public class UsersDAO {
 					priv = Privilege.KLANT;
 				}
 				return new User(rs.getInt(1), rs.getString(2), rs.getString(3),
-						priv);
+						priv, rs.getDouble(5));
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
@@ -191,7 +194,7 @@ public class UsersDAO {
 					priv = Privilege.KLANT;
 				}
 				allUsers.add(new User(rs.getInt(1), rs.getString(2), rs
-						.getString(3), priv));
+						.getString(3), priv, rs.getDouble(5)));
 			}
 			return allUsers;
 
@@ -342,7 +345,7 @@ public class UsersDAO {
 					priv = Privilege.KLANT;
 				}
 				return new User(rs.getInt(1), rs.getString(2), rs.getString(3),
-						priv);
+						priv, rs.getDouble(5));
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
