@@ -25,19 +25,22 @@
 			aria-label="...">
 			<div class="knop btn-group" role="group">
 				<button type="submit" name="run" value="inbehandeling"
-					class="knop btn btn-success ladda-button" data-style="expand-left">
+					class="knop btn btn-default ladda-button"
+					data-spinner-color="#006400" data-style="expand-left">
 					<span class="ladda-label">Inbehandeling</span>
 				</button>
 			</div>
 			<div class="btn-group" role="group">
 				<button type="submit" name="run" value="nieuw"
-					class="knop btn btn-success ladda-button" data-style="expand-left">
+					class="knop btn btn-default ladda-button"
+					data-spinner-color="#006400" data-style="expand-left">
 					<span class="ladda-label">Nieuw</span>
 				</button>
 			</div>
 			<div class="btn-group" role="group">
 				<button type="submit" name="run" value="afgerond"
-					class="knop btn btn-success ladda-button" data-style="expand-left">
+					class="knop btn btn-default ladda-button"
+					data-spinner-color="#006400" data-style="expand-left">
 					<span class="ladda-label">Afgerond</span>
 				</button>
 			</div>
