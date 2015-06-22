@@ -15,12 +15,10 @@ public class UserTest {
 		User Testuser = new User(0, null, null, null);
 		
 		String naam = "test";
-		Testuser.setNaam(naam);
 		assertNotNull(naam);
 		assertEquals(naam, Testuser.getNaam());
 		
 		String username = "testusername";
-		Testuser.setUsername(username);
 		assertNotNull(username);
 		assertEquals(username, Testuser.getUsername());
 		
@@ -29,7 +27,6 @@ public class UserTest {
 		assertEquals(id, Testuser.getId());
 		
 		Privilege priv = Privilege.KLANT;
-		Testuser.setPriv(priv);
 		assertNotNull(priv);
 		assertEquals(priv, Testuser.getPriv());
 	}
@@ -37,7 +34,6 @@ public class UserTest {
 		User Testuser = new User(1, "test", "testusername", null);
 		
 		Privilege priv = Privilege.ADMIN;
-		Testuser.setPriv(priv);
 		assertNotNull(priv);
 		assertEquals(priv, Testuser.getPriv());
 	}
@@ -45,7 +41,6 @@ public class UserTest {
 		User Testuser = new User(1, "test", "testusername", null);
 		
 		Privilege priv = Privilege.MONTEUR;
-		Testuser.setPriv(priv);
 		assertNotNull(priv);
 		assertEquals(priv, Testuser.getPriv());
 	}

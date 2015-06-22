@@ -3,19 +3,14 @@ package atd.junit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import org.junit.Before;
 import org.junit.Test;
 
-import atd.database.OnderdelenDAO;
 import atd.domein.Onderdeel;
 
 public class OnderdeelTest {
 
 	@Test
-	public void OnderdeelTest() throws SQLException {
+	public void OnderdeelTest(){
 		Onderdeel Testonderdeel = new Onderdeel("testonderdeel", "testtype", 0, 0);
 		
 		String naam = Testonderdeel.getNaam();

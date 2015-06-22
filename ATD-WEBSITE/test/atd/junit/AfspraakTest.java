@@ -22,7 +22,7 @@ public class AfspraakTest {
 
 	@Test
 	public void AfspraakTest() {
-		Afspraak Testafspraak = new Afspraak(0, null, null, null, null, null, null);
+		Afspraak Testafspraak = new Afspraak(null, null, null, null, null, null);
 
 		int id = Testafspraak.getID();
 		assertNotNull(id);
@@ -56,7 +56,7 @@ public class AfspraakTest {
 	}
 
 	public void AfspraakTest2() {
-		Afspraak Testafspraak = new Afspraak(0, null, null, null, null, null,
+		Afspraak Testafspraak = new Afspraak(null, null, null, null, null,
 				null);
 
 		AfspraakStatus status = AfspraakStatus.INBEHANDELING;
@@ -67,7 +67,7 @@ public class AfspraakTest {
 	}
 
 	public void AfspraakTest3() {
-		Afspraak Testafspraak = new Afspraak(0, null, null, null, null, null,
+		Afspraak Testafspraak = new Afspraak(null, null, null, null, null,
 				null);
 
 		AfspraakStatus status = AfspraakStatus.AFGEROND;
