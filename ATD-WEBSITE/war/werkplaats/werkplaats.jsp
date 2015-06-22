@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Werkplaats</title>
 <jsp:include page="/include/style.jsp" />
+
 </head>
 <body>
 
@@ -24,15 +25,21 @@
 			aria-label="...">
 			<div class="btn-group" role="group">
 				<button type="submit" name="run" value="inbehandeling"
-					class="btn btn-default">Inbehandeling</button>
+					class="btn btn-success ladda-button" data-style="expand-left">
+					<span class="ladda-label">Inbehandeling</span>
+				</button>
 			</div>
 			<div class="btn-group" role="group">
 				<button type="submit" name="run" value="nieuw"
-					class="btn btn-default">Nieuw</button>
+					class="btn btn-success ladda-button" data-style="expand-left">
+					<span class="ladda-label">Nieuw</span>
+				</button>
 			</div>
 			<div class="btn-group" role="group">
 				<button type="submit" name="run" value="afgerond"
-					class="btn btn-default">Afgerond</button>
+					class="btn btn-success ladda-button" data-style="expand-left">
+					<span class="ladda-label">Afgerond</span>
+				</button>
 			</div>
 
 		</div>
@@ -113,7 +120,7 @@
 											<tr>
 												<td>${Onderdeel.naam}</td>
 												<td>${Onderdeel.aantal}</td>
-												<td id="prijs">${Onderdeel.prijs}</td>
+												<td class="prijs">${Onderdeel.prijs}</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -137,122 +144,121 @@
 								</span>
 							</div>
 						</div>
-
-						</div>
-					</form>
-				</c:forEach>
-			</c:when>
-			<c:when test="${nieuweAfspraak != null}">
-				<c:forEach var="Afspraak" items="${nieuweAfspraak}">
-					<div class="afspraak">
-						<div class="row">
-							<div class="col-md-6">
-								<p>
-									status <span class="label label-warning">${Afspraak.statusString}
-									</span> </br> <strong>datum</strong> ${Afspraak.dateString}
-								</p>
-								<h4>Afspraak nr. ${Afspraak.ID}</h4>
-								<p>${Afspraak.omschrijving}</p>
-							</div>
-							<div class="col-md-6">
-								<h4>Auto info</h4>
-								<ul>
-									<li>${Afspraak.auto.merk}</li>
-									<li>${Afspraak.auto.kenteken}</li>
-									<li>${Afspraak.auto.type}</li>
-								</ul>
-							</div>
-						</div>
-						<button class="btn btn-warning pull-right" name="aanmelden"
-							value="${Afspraak.ID}" type="submit">Aanmelden</button>
-
+			</div>
+	</form>
+	</c:forEach>
+	</c:when>
+	<c:when test="${nieuweAfspraak != null}">
+		<c:forEach var="Afspraak" items="${nieuweAfspraak}">
+			<div class="afspraak">
+				<div class="row">
+					<div class="col-md-6">
+						<p>
+							status <span class="label label-warning">${Afspraak.statusString}
+							</span> </br> <strong>datum</strong> ${Afspraak.dateString}
+						</p>
+						<h4>Afspraak nr. ${Afspraak.ID}</h4>
+						<p>${Afspraak.omschrijving}</p>
 					</div>
-				</c:forEach>
-			</c:when>
-			<c:when test="${afgerondeAfspraak != null}">
-				<c:forEach var="Afspraak" items="${afgerondeAfspraak}">
-					<div class="afspraak">
-						<div class="row">
-							<div class="col-md-6">
-								<p>
-									status <span class="label label-default">${Afspraak.statusString}
-									</span>
-								</p>
-								<h4>Afspraak nr. ${Afspraak.ID}</h4>
-								<p>${Afspraak.omschrijving}</p>
-							</div>
-							<div class="col-md-6">
-								<h4>Auto info</h4>
-								<ul>
-									<li>${Afspraak.auto.merk}</li>
-									<li>${Afspraak.auto.kenteken}</li>
-									<li>${Afspraak.auto.type}</li>
-								</ul>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">monteur details</div>
-							<table class="table">
-								<thead>
-									<tr>
-										<th>Monteur</th>
-										<th>Uren</th>
-										<th>Uur loon</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>${Afspraak.monteur.naam}</td>
-										<td>${Afspraak.uren}</td>
-										<td>${Afspraak.monteur.uurloon}</td>
-									</tr>
-
-								</tbody>
-							</table>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">onderdelen details</div>
-							<table class="table table-striped" id="onderdelen-table">
-
-								<thead>
-									<tr>
-										<th>Naam</th>
-										<th>Aantal</th>
-										<th>Prijs/stk</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="Onderdeel" items="${Afspraak.alleOnderdelen}">
-										<tr>
-											<td>${Onderdeel.naam}</td>
-											<td>${Onderdeel.aantal}</td>
-											<td class="prijs">${Onderdeel.prijs}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-						<h4 class="pull-right">
-							<strong>totaal prijs</strong>
-							<div class="totaalPrijs">${Afspraak.totaalPrijs}</div>
-						</h4>
+					<div class="col-md-6">
+						<h4>Auto info</h4>
+						<ul>
+							<li>${Afspraak.auto.merk}</li>
+							<li>${Afspraak.auto.kenteken}</li>
+							<li>${Afspraak.auto.type}</li>
+						</ul>
 					</div>
-				</c:forEach>
-			</c:when>
-			<c:otherwise>
-				<div class="alert alert-info" role="alert">
-					<p>Kies in het menu een afspraak die je wil bekijken</p>
 				</div>
+				<button class="btn btn-warning pull-right" name="aanmelden"
+					value="${Afspraak.ID}" type="submit">Aanmelden</button>
 
-			</c:otherwise>
-		</c:choose>
-		<!-- error ophalen -->
-		${requestScope.error}
-		<jsp:include page="/include/footer.jsp" />
+			</div>
+		</c:forEach>
+	</c:when>
+	<c:when test="${afgerondeAfspraak != null}">
+		<c:forEach var="Afspraak" items="${afgerondeAfspraak}">
+			<div class="afspraak">
+				<div class="row">
+					<div class="col-md-6">
+						<p>
+							status <span class="label label-default">${Afspraak.statusString}
+							</span>
+						</p>
+						<h4>Afspraak nr. ${Afspraak.ID}</h4>
+						<p>${Afspraak.omschrijving}</p>
+					</div>
+					<div class="col-md-6">
+						<h4>Auto info</h4>
+						<ul>
+							<li>${Afspraak.auto.merk}</li>
+							<li>${Afspraak.auto.kenteken}</li>
+							<li>${Afspraak.auto.type}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">monteur details</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Monteur</th>
+								<th>Uren</th>
+								<th>Uur loon</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>${Afspraak.monteur.naam}</td>
+								<td>${Afspraak.uren}</td>
+								<td>${Afspraak.monteur.uurloon}</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">onderdelen details</div>
+					<table class="table table-striped" id="onderdelen-table">
+
+						<thead>
+							<tr>
+								<th>Naam</th>
+								<th>Aantal</th>
+								<th>Prijs/stk</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="Onderdeel" items="${Afspraak.alleOnderdelen}">
+								<tr>
+									<td>${Onderdeel.naam}</td>
+									<td>${Onderdeel.aantal}</td>
+									<td class="prijs">${Onderdeel.prijs}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<h4 class="pull-right">
+					<strong>totaal prijs</strong>
+					<div class="totaalPrijs">${Afspraak.totaalPrijs}</div>
+				</h4>
+			</div>
+		</c:forEach>
+	</c:when>
+	<c:otherwise>
+		<div class="alert alert-info" role="alert">
+			<p>Kies in het menu een afspraak die je wil bekijken</p>
 		</div>
-		<script src="${pageContext.request.contextPath}/js/jquery-1.11.2.js"></script>
-		<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-		<script src="${pageContext.request.contextPath}/js/accounting.min.js"></script>
-		<script src="${pageContext.request.contextPath}/js/main.js"></script>
+
+	</c:otherwise>
+	</c:choose>
+	<!-- error ophalen -->
+	${requestScope.error}
+	<jsp:include page="/include/footer.jsp" />
+	</div>
+	<script src="${pageContext.request.contextPath}/js/jquery-1.11.2.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+	<script src="${pageContext.request.contextPath}/js/accounting.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 </html>
