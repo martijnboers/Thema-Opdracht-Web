@@ -114,7 +114,7 @@ public class KlantenDAO {
 	 * @return Klant
 	 * @throws SQLException
 	 */
-	public Klant getKlant(int id) throws SQLException {
+	public static Klant getKlant(int id) throws SQLException {
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);

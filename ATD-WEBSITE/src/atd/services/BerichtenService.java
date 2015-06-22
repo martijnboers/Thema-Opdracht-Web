@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import atd.database.BerichtenDAO;
 import atd.domein.Bericht;
+import atd.domein.Klant;
 import atd.domein.StatusDB;
 import atd.domein.User;
 
@@ -29,9 +30,9 @@ public class BerichtenService {
 		//
 	}
 
-	public StatusDB setBericht(String bericht, String tijd, User user) {
+	public StatusDB setBericht(String bericht, String tijd, User user, Klant klant) {
 		if (!bericht.equals("") && !tijd.equals("") && user != null) {
-			return berichtenDAO.setBericht(bericht, tijd, user);
+			return berichtenDAO.setBericht(bericht, tijd, user, klant);
 		} else {
 			return StatusDB.INCORRECT;
 		}

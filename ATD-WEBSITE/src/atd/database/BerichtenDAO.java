@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import atd.domein.Bericht;
+import atd.domein.Klant;
 import atd.domein.StatusDB;
 import atd.domein.User;
 
@@ -52,7 +53,7 @@ public class BerichtenDAO {
 	 * 
 	 * @return StatusDB Status
 	 */
-	public StatusDB setBericht(String bericht, String tijd, User user) {
+	public StatusDB setBericht(String bericht, String tijd, User user, Klant klant) {
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);
@@ -63,11 +64,12 @@ public class BerichtenDAO {
 					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
 
-			String query = "INSERT INTO Berichten(Bericht, Tijd, User) VALUES(?, ?, ?)";
+			String query = "INSERT INTO Berichten(Bericht, Tijd, User) VALUES(?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.setString(1, bericht);
 			preparedStmt.setString(2, tijd);
 			preparedStmt.setInt(3, user.getId());
+			preparedStmt.setInt(4, klant.getId());
 			preparedStmt.execute();
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
@@ -162,7 +164,7 @@ public class BerichtenDAO {
 
 			while (rs.next()) {
 				alleBerichten.add(new Bericht(rs.getInt(1), rs.getString(2), rs
-						.getString(3), usersDAO.getUser(rs.getInt(4))));
+						.getString(3), usersDAO.getUser(rs.getInt(4)), KlantenDAO.getKlant(rs.getInt(5))));
 			}
 			return alleBerichten;
 
@@ -207,7 +209,7 @@ public class BerichtenDAO {
 
 			while (rs.next()) {
 				alleBerichten.add(new Bericht(rs.getInt(1), rs.getString(2), rs
-						.getString(3), usersDAO.getUser(rs.getInt(4))));
+						.getString(3), usersDAO.getUser(rs.getInt(4)), KlantenDAO.getKlant(rs.getInt(5))));
 			}
 			return alleBerichten;
 

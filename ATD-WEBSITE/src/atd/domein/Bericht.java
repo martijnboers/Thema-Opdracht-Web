@@ -19,10 +19,12 @@ public class Bericht {
 	private int id;
 	private String bericht;
 	private User owner;
+	private Klant klant;
 	private String date;
 	
-	public Bericht(int id, String bericht, String date, User owner){
+	public Bericht(int id, String bericht, String date, User owner, Klant klant){
 		this.id = id;
+		this.klant = klant;
 		this.date = date;
 		this.setBericht(bericht);
 		this.setOwner(owner);
@@ -30,6 +32,10 @@ public class Bericht {
 
 	public String getBericht() {
 		return bericht;
+	}
+	
+	public Klant getKlant(){
+		return klant;
 	}
 
 	public void setBericht(String bericht) {

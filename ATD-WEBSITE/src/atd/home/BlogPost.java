@@ -49,7 +49,8 @@ public class BlogPost extends HttpServlet {
 		String currentTime = sdf.format(dt);
 
 		User user = (User) req.getSession().getAttribute("username");
-		BerichtenService.setBericht(StringEscapeUtils.escapeHtml4(bericht), currentTime, user);
+		// Deze moet later verwerkt worden in KlantenBinding
+		//BerichtenService.setBericht(StringEscapeUtils.escapeHtml4(bericht), currentTime, user);
 		RequestDispatcher rd = null;
 
 		Logger.getLogger("atd.log").info("Bericht: " + bericht + " door " + user.getNaam() + " is geplaatst");
