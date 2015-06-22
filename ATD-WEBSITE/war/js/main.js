@@ -86,7 +86,23 @@ $(document).ready(
 						$(this).find('#prijs').each(
 								function() {
 									var a = $(this).text();
+									$(this).replaceWith(
+											"<td>"
+													+ accounting.formatMoney(a,
+															"€", 2, ".", ",")
+													+ "</td>");
+								})
+					})
+		});
 
+$(document).ready(
+		function() {
+			$('#onderdelen-table tr').each(
+					function() {
+						$(this).find('#prijs').each(
+								function() {
+									var a = $(this).text();
+									alert(a);
 									$(this).replaceWith(
 											"<td>"
 													+ accounting.formatMoney(a,

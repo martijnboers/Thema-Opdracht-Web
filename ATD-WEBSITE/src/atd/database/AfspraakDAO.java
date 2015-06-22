@@ -366,6 +366,7 @@ public class AfspraakDAO {
 				Afspraak afspraak = new Afspraak(klant, user, auto, datum,
 						omschrijving, status);
 				afspraak.setId(rs.getInt(1));
+				afspraak.setUren(rs.getInt(8));
 				alleAfspraken.add(afspraak);
 			}
 			return alleAfspraken;

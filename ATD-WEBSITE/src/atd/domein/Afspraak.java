@@ -26,6 +26,7 @@ public class Afspraak {
 	private Date datum;
 	private String omschrijving;
 	private AfspraakStatus status;
+	private int uren;
 	private int afspraakID;
 	private ArrayList<Onderdeel> onderdelen = new ArrayList<>();
 
@@ -79,6 +80,14 @@ public class Afspraak {
 
 	public int getID() {
 		return afspraakID;
+	}
+
+	public void setUren(int uur) {
+		this.uren = uur;
+	}
+
+	public int getUren() {
+		return uren;
 	}
 
 	public String getDateString() {
