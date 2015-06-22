@@ -15,5 +15,5 @@
 package atd.domein;
 
 public enum Privilege {
-	ADMIN, MONTEUR, KLANT
+	ADMIN, MONTEUR, KLANT, UNAUTHENTICATED
 }
