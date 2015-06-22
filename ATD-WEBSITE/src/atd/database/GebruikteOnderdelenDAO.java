@@ -42,7 +42,7 @@ public class GebruikteOnderdelenDAO {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
-
+	private OnderdelenDAO onderdelenDAO = new OnderdelenDAO();
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
@@ -115,13 +115,12 @@ public class GebruikteOnderdelenDAO {
 							+ prop.getProperty("database"),
 					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM ");
+			rs = st.executeQuery("SELECT * FROM  `GebruiktOnderdeel` WHERE Afspraak_ID ="
+					+ afspraak.getID() + "");
 
 			while (rs.next()) {
-
-				Onderdeel ond = new Onderdeel(rs.getString(2), rs.getString(3),
-						rs.getInt(4), rs.getDouble(5));
-				ond.setID(rs.getInt(1));
+				Onderdeel ond = onderdelenDAO.getOnderdeel(rs.getInt(2));
+				ond.setAantal(rs.getInt(3));
 				alleOnderdelen.add(ond);
 			}
 			return alleOnderdelen;
@@ -145,5 +144,4 @@ public class GebruikteOnderdelenDAO {
 		}
 		return null;
 	}
-
 }

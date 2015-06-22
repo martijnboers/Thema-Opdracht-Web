@@ -26,6 +26,7 @@ public class Onderdeel {
 	private String naam;
 	private String type;
 	private int voorraad;
+	private int aantal;
 	private double prijs;
 
 	public Onderdeel(String naam, String type, int voorraad, double prijs) {
@@ -57,5 +58,13 @@ public class Onderdeel {
 
 	public int getID() {
 		return id;
+	}
+
+	public void setAantal(int aant) {
+		this.aantal = aant;
+	}
+
+	public int getAantal() {
+		return aantal;
 	}
 }

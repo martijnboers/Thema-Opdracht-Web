@@ -79,12 +79,16 @@ public class Afspraak {
 		return afspraakID;
 	}
 
-	public boolean setOnderdeel(Onderdeel onderdeel) {
-		onderdelen.add(onderdeel);
-		if (onderdelen.contains(onderdeel)) {
-			return true;
-		} else
-			return false;
+	// public boolean setOnderdeel(Onderdeel onderdeel) {
+	// onderdelen.add(onderdeel);
+	// if (onderdelen.contains(onderdeel)) {
+	// return true;
+	// } else
+	// return false;
+	// }
+
+	public void setAlleOnderdelen(ArrayList<Onderdeel> alleOnderdelen) {
+		onderdelen = alleOnderdelen;
 	}
 
 	public ArrayList<Onderdeel> getAlleOnderdelen() {

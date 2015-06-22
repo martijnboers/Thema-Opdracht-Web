@@ -35,15 +35,6 @@ public class WerkplaatsService {
 	private ArrayList<Afspraak> afspraken = new ArrayList<>();
 
 	/**
-	 * Alle afspraken ophalen
-	 * 
-	 * @return alle afspraken
-	 */
-	public ArrayList<Afspraak> getAlleAfspraken() {
-		return afspraakDAO.getAlleAfspraken();
-	}
-
-	/**
 	 * Alle afspraken van de ingelogde monteur ophalen
 	 * 
 	 * @param user

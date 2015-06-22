@@ -51,6 +51,7 @@ public class AfspraakDAO {
 	private KlantenDAO klantenDAO = new KlantenDAO();
 	private UsersDAO userDAO = new UsersDAO();
 	private AutoDAO autoDAO = new AutoDAO();
+	private GebruikteOnderdelenDAO gebruikteOnderdelenDAO = new GebruikteOnderdelenDAO();
 
 	public StatusDB setAfspraak(Afspraak afspraak) {
 		try {
@@ -94,56 +95,6 @@ public class AfspraakDAO {
 		return StatusDB.UNKOWN;
 	}
 
-	public ArrayList<Afspraak> getAlleAfspraken() {
-		ArrayList<Afspraak> alleAfspraken = new ArrayList<>();
-
-		try {
-			config = new URL(CONFIG_URL).openStream();
-			prop.load(config);
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(
-					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
-							+ prop.getProperty("database"),
-					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
-			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM Afspraken");
-
-			while (rs.next()) {
-				int id = rs.getInt(1);
-				Klant klant = klantenDAO.getKlant(rs.getInt(2));
-				User user = userDAO.getUser(rs.getInt(3));
-				Auto auto = autoDAO.getAutoByID(rs.getInt(4));
-				Date datum = new java.util.Date(rs.getDate(5).getTime());
-				String omschrijving = rs.getString(6);
-				AfspraakStatus status = AfspraakStatus.valueOf(rs.getString(7));
-
-				Afspraak afspraak = new Afspraak(klant, user, auto, datum,
-						omschrijving, status);
-				afspraak.setId(rs.getInt(1));
-				alleAfspraken.add(afspraak);
-			}
-			return alleAfspraken;
-
-		} catch (SQLException | IOException | ClassNotFoundException ex) {
-			System.out.println(ex.getMessage());
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (st != null) {
-					st.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException ex) {
-				System.out.println(ex.getMessage());
-			}
-		}
-		return null;
-	}
-
 	public ArrayList<Afspraak> getAfsprakenMonteur(User monteur) {
 
 		ArrayList<Afspraak> alleAfspraken = new ArrayList<>();
@@ -162,6 +113,7 @@ public class AfspraakDAO {
 
 			while (rs.next()) {
 
+				int id = rs.getInt(1);
 				Klant klant = klantenDAO.getKlant(rs.getInt(2));
 				User user = userDAO.getUser(rs.getInt(3));
 				Auto auto = autoDAO.getAutoByID(rs.getInt(4));
@@ -172,6 +124,8 @@ public class AfspraakDAO {
 				Afspraak afspraak = new Afspraak(klant, user, auto, datum,
 						omschrijving, status);
 				afspraak.setId(rs.getInt(1));
+				afspraak.setAlleOnderdelen(gebruikteOnderdelenDAO
+						.getOnderdelen(afspraak));
 				alleAfspraken.add(afspraak);
 			}
 			return alleAfspraken;
