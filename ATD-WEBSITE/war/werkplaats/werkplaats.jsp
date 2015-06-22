@@ -17,7 +17,7 @@
 	<h1>Werkplaats</h1>
 
 
-	<p>hier komen de afspraken / reparaties die gedaan moeten worden</p>
+	<p>Bekijk hier de afspraken</p>
 	<form action="/ATD-WEBSITE/Werkplaats.do" method="POST">
 
 		<div class="btn-group btn-group-justified" role="group"
@@ -82,7 +82,7 @@
 										(in dollars)</label>
 									<div class="input-group">
 										<div class="input-group-addon">Aantal</div>
-										<input type="text" class="form-control" value="nieuwAantal"
+										<input type="text" class="form-control" name="nieuwAantal"
 											placeholder="ex. 43">
 
 									</div>
@@ -189,7 +189,10 @@
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
-				<p>Kies in het menu een afspraak die je wil bekijken</p>
+				<div class="alert alert-info" role="alert">
+					<p>Kies in het menu een afspraak die je wil bekijken</p>
+				</div>
+
 			</c:otherwise>
 		</c:choose>
 		<jsp:include page="/include/footer.jsp" />

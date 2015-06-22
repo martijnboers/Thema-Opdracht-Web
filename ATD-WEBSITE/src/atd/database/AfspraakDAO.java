@@ -247,6 +247,98 @@ public class AfspraakDAO {
 		return null;
 	}
 
+	/**
+	 * afspraak updaten naar in behandeling
+	 * 
+	 * @param afspraak
+	 * @param monteur
+	 */
+	public void setAfspraakInbehandeling(Afspraak afspraak, User monteur) {
+		Statement statement = null;
+		try {
+			config = new URL(CONFIG_URL).openStream();
+			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			st = con.createStatement();
+			String updateQuery = "UPDATE  `autotaaldienst`.`Afspraken` SET  `Monteur_ID` =  '"
+					+ monteur.getId()
+					+ "',`Status` =  'INBEHANDELING' WHERE  `Afspraken`.`id` ="
+					+ afspraak.getID() + ";";
+			st.execute(updateQuery);
+
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+
+	}
+
+	public Afspraak getAfspraakByID(int Id) {
+
+		try {
+			config = new URL(CONFIG_URL).openStream();
+			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT * FROM `Afspraken` WHERE id ='" + Id
+					+ "'");
+
+			while (rs.next()) {
+
+				Klant klant = klantenDAO.getKlant(rs.getInt(2));
+				User user = userDAO.getUser(rs.getInt(3));
+				Auto auto = autoDAO.getAutoByID(rs.getInt(4));
+				Date datum = new java.util.Date(rs.getDate(5).getTime());
+				String omschrijving = rs.getString(6);
+				AfspraakStatus status = AfspraakStatus.valueOf(rs.getString(7));
+
+				Afspraak afspraak = new Afspraak(klant, user, auto, datum,
+						omschrijving, status);
+				afspraak.setId(rs.getInt(1));
+				return afspraak;
+			}
+
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		return null;
+	}
+
 	public ArrayList<Afspraak> getAfgerondeAfspraken() {
 
 		ArrayList<Afspraak> alleAfspraken = new ArrayList<>();

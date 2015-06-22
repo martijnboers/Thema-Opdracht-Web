@@ -68,9 +68,11 @@ public class Werkplaats extends HttpServlet {
 			System.out.println("afronden");
 		}
 
-		// aanmelden bij een klus
+		/**
+		 * user id opalen en afspraak ID uit het button veld mee halen
+		 */
 		if (aanmelden != null) {
-			
+			service.setInbehandeling(user.getId(), Integer.parseInt(aanmelden));
 		}
 		if (update) {
 			rd = req.getRequestDispatcher("/werkplaats/werkplaats.jsp");
