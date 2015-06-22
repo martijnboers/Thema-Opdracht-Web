@@ -14,42 +14,34 @@
  *******************************************************************************/
 package atd.junit;
 
-import java.io.Serializable;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-public class AutoTest implements Serializable {
-	private int id;
-	private String kenteken;
-	private String merk;
-	private String type;
+import org.junit.Test;
 
-	public AutoTest(int id, String kenteken, String merk, String type) {
-		this.id = id;
-		this.kenteken = kenteken;
-		this.setMerk(merk);
-		this.setType(type);
-	}
+import atd.domein.Auto;
+public class AutoTest {
 
-	public String getKenteken() {
-		return kenteken;
-	}
-
-	public String getMerk() {
-		return merk;
-	}
-
-	public void setMerk(String merk) {
-		this.merk = merk;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public int getId() {
-		return id;
+	@Test
+	public void AutoTest() {
+		Auto Testauto = new Auto(0, "12-ab-1", "volvo", "type");
+		
+		int id = Testauto.getId();
+		assertNotNull(id);
+		assertEquals(id, Testauto.getId());
+		
+		String kenteken = Testauto.getKenteken();
+		assertNotNull(kenteken);
+		assertEquals(kenteken, Testauto.getKenteken());
+		
+		String merk = Testauto.getMerk();
+		Testauto.setMerk(merk);
+		assertNotNull(merk);
+		assertEquals(merk, Testauto.getMerk());
+		
+		String type = Testauto.getType();
+		Testauto.setType(type);
+		assertNotNull(type);
+		assertEquals(type, Testauto.getType());
 	}
 }

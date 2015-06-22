@@ -42,14 +42,14 @@ public class UserTest {
 		assertEquals(priv, Testuser.getPriv());
 	}
 	public void UserTest2(){
-		User Testuser = new User(1, "test", "testusername", null);
+		User Testuser = new User(1, "test", "testusername", null, 0);
 		
 		Privilege priv = Privilege.ADMIN;
 		assertNotNull(priv);
 		assertEquals(priv, Testuser.getPriv());
 	}
 	public void UserTest3(){
-		User Testuser = new User(1, "test", "testusername", null);
+		User Testuser = new User(1, "test", "testusername", null, 0);
 		
 		Privilege priv = Privilege.MONTEUR;
 		assertNotNull(priv);
