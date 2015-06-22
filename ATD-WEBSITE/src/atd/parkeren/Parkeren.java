@@ -15,6 +15,7 @@
 package atd.parkeren;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,17 +27,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import atd.database.UsersDAO;
+import atd.domein.AccountWrapper;
 import atd.domein.Klant;
 import atd.domein.Reservering;
+import atd.domein.User;
+import atd.services.BerichtenService;
 import atd.services.ParkerenService;
 import atd.services.ServiceProvider;
 
 public class Parkeren extends HttpServlet {
 	RequestDispatcher rd = null;
+	private BerichtenService ber = new BerichtenService();
+	private UsersDAO users = new UsersDAO();
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ParkerenService service = ServiceProvider.getParkerenService();
 		String run = req.getParameter("run");
 		boolean update = false;
@@ -45,8 +51,7 @@ public class Parkeren extends HttpServlet {
 		String datum_vertrek = req.getParameter("datum_vertrek");
 		Klant klant = (Klant) req.getSession().getAttribute("username");
 		if (run.equals("reserveren")) {
-			if (datum_aankomst == null || datum_aankomst.isEmpty()
-					&& datum_vertrek == null || datum_vertrek.isEmpty()) {
+			if (datum_aankomst == null || datum_aankomst.isEmpty() && datum_vertrek == null || datum_vertrek.isEmpty()) {
 				update = false;
 			} else {
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -54,13 +59,20 @@ public class Parkeren extends HttpServlet {
 
 					Date aankomst = df.parse(datum_aankomst);
 					Date vertrek = df.parse(datum_vertrek);
-					Reservering reservering = new Reservering(klant, aankomst,
-							vertrek, false);
+					Reservering reservering = new Reservering(klant, aankomst, vertrek, false);
 					if (service.reserveerParkeerplaats(reservering)) {
 						update = true;
+
+						java.util.Date dt = new java.util.Date();
+						java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						String confTime = sdf.format(dt);
+						ber.setBericht("Uw heeft een parkeerplaats gereserveerd voor " + datum_aankomst + " tot " + datum_vertrek, confTime,
+								users.getUser(1), (Klant) req.getSession().getAttribute("username"));
 					}
 
 				} catch (ParseException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
@@ -70,11 +82,11 @@ public class Parkeren extends HttpServlet {
 			req.setAttribute(
 					"msg",
 					"<div class=\"alert alert-success\" role=\"alert\"> <span class=\"sr-only\">Succes:</span> De reservering is gelukt! op uw dashboard kunt u de factuur terug vinden</div>");
+
 			rd = req.getRequestDispatcher("/parkeren/parkeren.jsp");
 			rd.forward(req, resp);
 		} else {
-			req.setAttribute(
-					"msg",
+			req.setAttribute("msg",
 					"<div class=\"alert alert-danger\" role=\"alert\"> <span class=\"sr-only\">Fout:</span> Deze datum is helaas niet beschikbaar</div>");
 			rd = req.getRequestDispatcher("/parkeren/parkeren.jsp");
 			rd.forward(req, resp);
