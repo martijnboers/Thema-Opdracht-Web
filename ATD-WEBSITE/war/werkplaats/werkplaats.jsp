@@ -37,10 +37,12 @@
 
 		</div>
 
+
 		<c:choose>
 			<c:when test="${inbehandelingAfspraak != null}">
 				<c:forEach var="Afspraak" items="${inbehandelingAfspraak}">
 					<div class="afspraak">
+						<!-- aparte form voor elk veld -->
 						<form action="/ATD-WEBSITE/Werkplaats.do" method="POST">
 							<div class="row">
 								<div class="col-md-6">
@@ -121,18 +123,16 @@
 					<div class="col-md-6 pull-right">
 						<p>aantal gewerkte uren</p>
 						<div class="input-group">
-							<input type="text" class="form-control"> <span
+							<input type="text" name="uren" class="form-control"> <span
 								class="input-group-btn">
-								<button name="run" value="afronden" class="btn btn-default"
-									type="submit">afronden</button>
+								<button name="afronden" value="${Afspraak.ID}"
+									class="btn btn-default" type="submit">afronden</button>
 							</span>
 						</div>
-
 					</div>
-
+					<!-- error ophalen -->
+		${requestScope.error}
 					</div>
-
-
 				</c:forEach>
 			</c:when>
 			<c:when test="${nieuweAfspraak != null}">
@@ -193,6 +193,7 @@
 
 			</c:otherwise>
 		</c:choose>
+
 		<jsp:include page="/include/footer.jsp" />
 		</div>
 		<script src="${pageContext.request.contextPath}/js/jquery-1.11.2.js"></script>

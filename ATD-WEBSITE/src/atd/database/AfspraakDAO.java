@@ -246,6 +246,50 @@ public class AfspraakDAO {
 
 	}
 
+	/**
+	 * afspraak afronden en de gewerke uren setten
+	 * 
+	 * @param afspraak
+	 * @param monteur
+	 */
+	public void setAfspraakAfronden(Afspraak afspraak, int uren) {
+
+		try {
+			config = new URL(CONFIG_URL).openStream();
+			prop.load(config);
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(
+					"jdbc:mysql://" + prop.getProperty("host") + ":3306/"
+							+ prop.getProperty("database"),
+					prop.getProperty("dbuser"), prop.getProperty("dbpassword"));
+			st = con.createStatement();
+			String updateQuery = "UPDATE  `autotaaldienst`.`Afspraken` SET  `Status` =  'AFGEROND',`Uren` =  '"
+					+ uren
+					+ "' WHERE  `Afspraken`.`id` ="
+					+ afspraak.getID()
+					+ "";
+			st.execute(updateQuery);
+
+		} catch (SQLException | IOException | ClassNotFoundException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+
+	}
+
 	public Afspraak getAfspraakByID(int Id) {
 
 		try {

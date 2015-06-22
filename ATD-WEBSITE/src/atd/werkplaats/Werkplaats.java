@@ -44,10 +44,15 @@ public class Werkplaats extends HttpServlet {
 		String run = req.getParameter("run");
 		String aanmelden = req.getParameter("aanmelden");
 		String afspraakId = req.getParameter("toevoegen");
+		String afronden = req.getParameter("afronden");
 
+		String uren = req.getParameter("uren");
 		String onderdeelId = req.getParameter("nieuwOnderdeel");
 		String aantal = req.getParameter("nieuwAantal");
 
+		/**
+		 * run voor het zetten van verschillende arraylists met afspraken
+		 */
 		if (run == null) {
 			// niks
 		} else if (run.equals("inbehandeling")) {
@@ -65,16 +70,12 @@ public class Werkplaats extends HttpServlet {
 			req.setAttribute("afgerondeAfspraak",
 					service.getAfgerondeAfspraken());
 			update = true;
-		} else if (run.equals("bestellen")) {
-
-		} else if (run.equals("afronden")) {
-
 		}
-
 		/**
-		 * Onderdelen toevoegen aan een.
+		 * Onderdelen toevoegen aan een afspraak
 		 */
 		if (afspraakId != null) {
+			// values checken
 			if (afspraakId == null || afspraakId.isEmpty()
 					&& onderdeelId == null || onderdeelId.isEmpty()
 					&& aantal == null || aantal.isEmpty()) {
@@ -88,10 +89,36 @@ public class Werkplaats extends HttpServlet {
 			}
 		}
 		/**
-		 * user id opalen en afspraak ID uit het button veld mee halen
+		 * Als een monteur op afroden clickt zal de afspraak + het aan uren
+		 * worden afgerond.
+		 */
+		if (afronden != null) {
+			// values checken of ze niet leeg zijn.
+			if (afronden == null || afronden.isEmpty() && uren == null
+					|| uren.isEmpty()) {
+				System.out.println("afronden is niet goed ingevuld");
+				update = false;
+			} else {
+				// parsen van de strings en naar de service sturen.
+				service.afspraakAfgerond(Integer.parseInt(afronden),
+						Integer.parseInt(uren));
+				// afgeronden uren laten zien
+				req.setAttribute("afgerondeAfspraak",
+						service.getAfgerondeAfspraken());
+				update = true;
+			}
+		}
+		/**
+		 * user id opalen en afspraak ID uit het button veld mee halen hoeft
+		 * niet afgevangen te worden want het is een button, als je dat fout kan
+		 * doen mag je niet op het internet.
 		 */
 		if (aanmelden != null) {
 			service.setInbehandeling(user.getId(), Integer.parseInt(aanmelden));
+			// door sturen naar de monteur zijn taken.
+
+			req.setAttribute("inbehandelingAfspraak",
+					service.getAfsprakenMonteur(user));
 			update = true;
 		}
 		if (update) {

@@ -106,7 +106,14 @@ public class WerkplaatsService {
 
 	}
 
-	public void afspraakAfgerond(Afspraak afspraak) {
-
+	/**
+	 * hier word een afspraak afgerond en de uren op de afspraak gezet
+	 * 
+	 * @param afspraak
+	 * @param uren
+	 */
+	public void afspraakAfgerond(int afspraak, int uren) {
+		Afspraak afgerondeAfspraak = afspraakDAO.getAfspraakByID(afspraak);
+		afspraakDAO.setAfspraakAfronden(afgerondeAfspraak, uren);
 	}
 }
