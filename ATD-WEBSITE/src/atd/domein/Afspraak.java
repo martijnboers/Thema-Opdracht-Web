@@ -28,6 +28,7 @@ public class Afspraak {
 	private AfspraakStatus status;
 	private int uren;
 	private int afspraakID;
+	private double totaalBedrag;
 	private ArrayList<Onderdeel> onderdelen = new ArrayList<>();
 
 	public Afspraak(Klant klant, User monteur, Auto auto, Date datum,
@@ -102,5 +103,13 @@ public class Afspraak {
 
 	public ArrayList<Onderdeel> getAlleOnderdelen() {
 		return onderdelen;
+	}
+
+	public void setTotaalPrijs(double bedrag) {
+		this.totaalBedrag = bedrag;
+	}
+
+	public double getTotaalPrijs() {
+		return totaalBedrag;
 	}
 }

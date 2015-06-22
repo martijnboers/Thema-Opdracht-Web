@@ -1,3 +1,5 @@
+//pikaday word gebruikt voor het maken van de afspraak en het reserveren. 
+//Hij geeft een string mee in het REQ die we makkelijk parsen in de servlet. 
 var picker = new Pikaday({
 	field : document.getElementById('datepicker_aankomst'),
 	firstDay : 1,
@@ -31,7 +33,8 @@ $("td").click(function() {
 	$(this).parents("tr").toggleClass("highlight-table", this.clicked);
 
 });
-
+// disablen van velden voor users, die hoeven geen auto op te geven natuurlijk
+// dus die velden zijn afgesloten.
 $('#checkbox').change(function() {
 	if (this.checked) {
 		document.getElementById('block1').disabled = true;
@@ -49,6 +52,9 @@ $('#checkbox').change(function() {
 	}
 });
 
+// invullen van de geselecteerde row en setten in de velden, uit die velden kan
+// vervolgens de IDs en info gehaald worden voor het updaten en aanpassen van de
+// voorraad, werkt netjes en is makkelijk.
 (function() {
 	if (window.addEventListener) {
 		window.addEventListener('load', run, false);
@@ -78,7 +84,8 @@ $('#checkbox').change(function() {
 	}
 
 })();
-
+// voorraad tabellen de bedragen omzetten van de DAO doubles naar euro bedragen
+// (hoeft er niks in de backend gedaan te worden
 $(document).ready(
 		function() {
 			$('#voorraad-table tr').each(
@@ -94,7 +101,7 @@ $(document).ready(
 								})
 					})
 		});
-
+// formatten van het geld in de gebruikte onderdelen van de reparatie.
 $(document).ready(
 		function() {
 			$('#onderdelen-table tr').each(
@@ -109,5 +116,20 @@ $(document).ready(
 															"€", 2, ".", ",")
 													+ "</td>");
 								})
+					})
+		});
+// geld bedragen omzetten op de afgeronde afspraken pagina,
+// hij werkt alleen op de eerste 2, ik denk dat het komt doordat de DOM zo
+// langzaam laad..
+$(document).ready(
+		function() {
+			$('#prijs').each(
+					function() {
+						var a = $(this).text();
+
+						$(this).replaceWith(
+								"<p>"
+										+ accounting.formatMoney(a, "€", 2,
+												".", ",") + "</p>");
 					})
 		});

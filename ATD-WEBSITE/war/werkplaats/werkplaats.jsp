@@ -126,19 +126,20 @@
 							</div>
 						</c:otherwise>
 					</c:choose>
-					<div class="col-md-6 pull-right">
-						<p>aantal gewerkte uren</p>
-						<div class="input-group">
-							<input type="text" name="uren" class="form-control"> <span
-								class="input-group-btn">
-								<button name="afronden" value="${Afspraak.ID}"
-									class="btn btn-default" type="submit">afronden</button>
-							</span>
+					<form action="/ATD-WEBSITE/Werkplaats.do" method="POST">
+						<div class="col-md-6 pull-right">
+							<p>aantal gewerkte uren</p>
+							<div class="input-group">
+								<input type="text" name="uren" class="form-control"> <span
+									class="input-group-btn">
+									<button name="afronden" value="${Afspraak.ID}"
+										class="btn btn-default" type="submit">afronden</button>
+								</span>
+							</div>
 						</div>
-					</div>
 
-					</div>
-
+						</div>
+					</form>
 				</c:forEach>
 			</c:when>
 			<c:when test="${nieuweAfspraak != null}">
@@ -196,13 +197,14 @@
 									<tr>
 										<th>Monteur</th>
 										<th>Uren</th>
-
+										<th>Uur loon</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td>${Afspraak.monteur.naam}</td>
 										<td>${Afspraak.uren}</td>
+										<td>${Afspraak.monteur.uurloon}</td>
 									</tr>
 
 								</tbody>
@@ -230,6 +232,10 @@
 								</tbody>
 							</table>
 						</div>
+						<h4 class="pull-right">
+							<strong>totaal prijs</strong>
+							<div id="prijs">${Afspraak.totaalPrijs}</div>
+						</h4>
 					</div>
 				</c:forEach>
 			</c:when>

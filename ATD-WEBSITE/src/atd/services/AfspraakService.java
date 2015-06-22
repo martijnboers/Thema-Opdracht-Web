@@ -44,10 +44,13 @@ public class AfspraakService {
 		Afspraak afspraak = new Afspraak(klant, null, auto, datum,
 				omschrijving, AfspraakStatus.NIEUW);
 		afspraakDAO.setAfspraak(afspraak);
-		
+
 		java.util.Date dt = new java.util.Date();
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(
+				"yyyy-MM-dd HH:mm:ss");
 		String confTime = sdf.format(dt);
-		ber.setBericht("Uw afspraak voor " + datum.toString() + " is ingepland en wordt verwerkt", confTime, users.getUser(1), klant);
+		ber.setBericht("Uw afspraak voor " + datum.toString()
+				+ " is ingepland en wordt verwerkt", confTime,
+				users.getUser(1), klant);
 	}
 }

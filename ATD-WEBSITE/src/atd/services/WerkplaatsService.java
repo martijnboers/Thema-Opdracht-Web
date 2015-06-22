@@ -128,4 +128,6 @@ public class WerkplaatsService {
 		String confTime = sdf.format(dt);
 		ber.setBericht("Uw auto is gemaakt en u kunt hem ophalen", confTime, afgerondeAfspraak.getMonteur(), afgerondeAfspraak.getKlant());
 	}
+	
+	
 }

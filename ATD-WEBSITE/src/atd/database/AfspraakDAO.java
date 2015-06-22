@@ -31,6 +31,7 @@ import atd.domein.Afspraak;
 import atd.domein.AfspraakStatus;
 import atd.domein.Auto;
 import atd.domein.Klant;
+import atd.domein.Onderdeel;
 import atd.domein.StatusDB;
 import atd.domein.User;
 
@@ -367,10 +368,18 @@ public class AfspraakDAO {
 						omschrijving, status);
 				afspraak.setId(rs.getInt(1));
 				afspraak.setUren(rs.getInt(8));
+				double bedrag = user.getUurloon() * rs.getInt(8);
+
 				if (gebruikteOnderdelenDAO.getOnderdelen(afspraak) != null) {
+					ArrayList<Onderdeel> onderdelen = gebruikteOnderdelenDAO
+							.getOnderdelen(afspraak);
+					for (Onderdeel onderdeel : onderdelen) {
+						bedrag += onderdeel.getPrijs() * onderdeel.getAantal();
+					}
 					afspraak.setAlleOnderdelen(gebruikteOnderdelenDAO
 							.getOnderdelen(afspraak));
 				}
+				afspraak.setTotaalPrijs(bedrag);
 				alleAfspraken.add(afspraak);
 			}
 			return alleAfspraken;
