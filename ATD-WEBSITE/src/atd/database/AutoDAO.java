@@ -137,7 +137,7 @@ public class AutoDAO {
 		return null;
 	}
 
-	public static Auto getAutoByID(int id) {
+	public Auto getAutoByID(int id) {
 		try {
 			config = new URL(CONFIG_URL).openStream();
 			prop.load(config);

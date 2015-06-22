@@ -43,7 +43,12 @@ public class Werkplaats extends HttpServlet {
 
 		String run = req.getParameter("run");
 		String aanmelden = req.getParameter("aanmelden");
+		String afspraakId = req.getParameter("toevoegen");
 
+		String onderdeelId = req.getParameter("nieuwOnderdeel");
+		String aantal = req.getParameter("aantal");
+		System.out.println("afspraak ID " + afspraakId + " onderdeel ID "
+				+ onderdeelId + " aantal " + aantal);
 		if (run == null) {
 			// niks
 		} else if (run.equals("inbehandeling")) {
@@ -67,7 +72,9 @@ public class Werkplaats extends HttpServlet {
 
 			System.out.println("afronden");
 		}
+		if (afspraakId != null) {
 
+		}
 		/**
 		 * user id opalen en afspraak ID uit het button veld mee halen
 		 */

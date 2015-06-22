@@ -78,16 +78,15 @@
 											items="${OnderdelenDAO.getAllOnderdelen()}">
 											<option value="${Onderdeel.ID}">${Onderdeel.naam}</option>
 										</c:forEach>
-									</select> <label class="sr-only" for="exampleInputAmount">Amount
-										(in dollars)</label>
+									</select>
 									<div class="input-group">
 										<div class="input-group-addon">Aantal</div>
-										<input type="text" class="form-control" name="nieuwAantal"
+										<input type="text" class="form-control" name="aantal"
 											placeholder="ex. 43">
 
 									</div>
 								</div>
-								<button name="run" value="bestellen" type="submit"
+								<button name="toevoegen" value="${Afspraak.ID}" type="submit"
 									class="btn btn-primary pull-right">Toevoegen</button>
 
 							</div>
@@ -95,27 +94,17 @@
 						<table class="table table-striped">
 							<thead>
 								<tr>
-									<th>ID</th>
 									<th>Naam</th>
 									<th>Aantal</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>43</td>
-									<td>Schroef</td>
-									<td>43</td>
-								</tr>
-								<tr>
-									<td>12</td>
-									<td>Motor</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>923</td>
-									<td>Bumber</td>
-									<td>1</td>
-								</tr>
+								<c:forEach var="Onderdeel" items="${Afspraak.alleOnderdelen}">
+									<tr>
+										<td>${Onderdeel.naam}</td>
+										<td>${Onderdeel.aantal}</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 						<div class="col-md-6 pull-right">

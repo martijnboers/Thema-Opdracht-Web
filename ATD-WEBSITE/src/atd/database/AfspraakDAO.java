@@ -113,7 +113,6 @@ public class AfspraakDAO {
 
 			while (rs.next()) {
 
-				int id = rs.getInt(1);
 				Klant klant = klantenDAO.getKlant(rs.getInt(2));
 				User user = userDAO.getUser(rs.getInt(3));
 				Auto auto = autoDAO.getAutoByID(rs.getInt(4));

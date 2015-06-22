@@ -45,7 +45,7 @@ public class KlantenDAO {
 
 	private static Properties prop = new Properties();
 	private static InputStream config = null;
-
+	private static AutoDAO autoDAO = new AutoDAO();
 	private static final String CONFIG_URL = "http://localhost:8080/ATD-WEBSITE/config/database.properties";
 
 	/**
@@ -140,7 +140,7 @@ public class KlantenDAO {
 				}
 				return new Klant(rs.getInt(1), rs.getString(4),
 						rs.getString(3), rs.getString(4), rs.getString(6),
-						AutoDAO.getAutoByID(rs.getInt(7)), priv);
+						autoDAO.getAutoByID(rs.getInt(7)), priv);
 			}
 
 		} catch (SQLException | IOException | ClassNotFoundException ex) {
@@ -197,7 +197,7 @@ public class KlantenDAO {
 
 				allKlanten.add(new Klant(rs.getInt(0), rs.getString(4), rs
 						.getString(3), rs.getString(4), rs.getString(5),
-						AutoDAO.getAutoByID(rs.getInt(7)), priv));
+						autoDAO.getAutoByID(rs.getInt(7)), priv));
 			}
 			return allKlanten;
 
@@ -349,7 +349,7 @@ public class KlantenDAO {
 
 				return new Klant(rs.getInt(1), rs.getString(4),
 						rs.getString(3), rs.getString(4), rs.getString(5),
-						AutoDAO.getAutoByID(rs.getInt(7)), priv);
+						autoDAO.getAutoByID(rs.getInt(7)), priv);
 
 			}
 
