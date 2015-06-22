@@ -18,7 +18,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class onderdeeltest {
+public class afspraaktest {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -31,16 +31,15 @@ public class onderdeeltest {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get(baseUrl + "/ATD-WEBSITE/index.jsp");
 		driver.findElement(By.name("username")).clear();
-		driver.findElement(By.name("username")).sendKeys("mees");
+		driver.findElement(By.name("username")).sendKeys("klantje");
 		driver.findElement(By.name("password")).clear();
-		driver.findElement(By.name("password")).sendKeys("mees");
+		driver.findElement(By.name("password")).sendKeys("klant");
 		driver.findElement(By.xpath("//input[@value='aanmelden']")).click();
-	    driver.findElement(By.linkText("Voorraad")).click();
 	}
 
 	@Test
 	public void testCsv() throws Exception {
-		String csvFile = "test/atd/selenium/onderdeeltest.csv";
+		String csvFile = "test/atd/selenium/Inloggenuser.csv";
 		BufferedReader br = null;
 		String line = "";
 		String cvsSplitBy = ",";
@@ -52,17 +51,28 @@ public class onderdeeltest {
 
 				// use comma as separator
 				String[] entry = line.split(cvsSplitBy);
-				
-				driver.findElement(By.name("nieuwOnderdeelNaam")).clear();
-				driver.findElement(By.name("nieuwOnderdeelNaam")).sendKeys(entry[0]);
-				driver.findElement(By.name("nieuwOnderdeelType")).clear();
-				driver.findElement(By.name("nieuwOnderdeelType")).sendKeys(entry[1]);
-				driver.findElement(By.name("nieuwOnderdeelPrijs")).clear();
-				driver.findElement(By.name("nieuwOnderdeelPrijs")).sendKeys(entry[2]);
-				driver.findElement(By.name("nieuwOnderdeelAantal")).clear();
-				driver.findElement(By.name("nieuwOnderdeelAantal")).sendKeys(entry[3]);
-			    driver.findElement(By.name("run")).click();
-				//driver.findElement(By.xpath("//input[@value='Nieuw onderdeel']")).click();
+
+				driver.findElement(By.linkText("Afspraak plannen")).click();
+				driver.findElement(By.id("datepicker_vertrek")).clear();
+			    driver.findElement(By.id("datepicker_vertrek")).sendKeys("2015-06-23");
+			    driver.findElement(By.name("omschrijving")).clear();
+				driver.findElement(By.name("omschrijving")).sendKeys("kapot");
+				driver.findElement(By.xpath("//input[@value='bevestig']")).click();
+				driver.findElement(By.id("datepicker_vertrek")).clear();
+			    driver.findElement(By.id("datepicker_vertrek")).sendKeys();
+			    driver.findElement(By.name("omschrijving")).clear();
+				driver.findElement(By.name("omschrijving")).sendKeys("kapot");
+				driver.findElement(By.xpath("//input[@value='bevestig']")).click();
+				driver.findElement(By.id("datepicker_vertrek")).clear();
+			    driver.findElement(By.id("datepicker_vertrek")).sendKeys("2015-06-23");
+			    driver.findElement(By.name("omschrijving")).clear();
+				driver.findElement(By.name("omschrijving")).sendKeys();
+				driver.findElement(By.xpath("//input[@value='bevestig']")).click();
+				driver.findElement(By.id("datepicker_vertrek")).clear();
+			    driver.findElement(By.id("datepicker_vertrek")).sendKeys("2015-06-20");
+			    driver.findElement(By.name("omschrijving")).clear();
+				driver.findElement(By.name("omschrijving")).sendKeys("kapot");
+				driver.findElement(By.xpath("//input[@value='bevestig']")).click();
 			}
 
 		} catch (FileNotFoundException e) {

@@ -23,7 +23,7 @@ public class AfspraakTest {
 		Klant klant = new Klant(0, null, null, null, null, null, null);
 		java.util.Date datum = new Date(0);
 		Auto auto = new Auto(0, null, null, null);
-		User monteur = new User(0, null, null, null);
+		User monteur = new User(0, null, null, null, 0);
 		Afspraak Testafspraak = new Afspraak(klant, monteur, auto, datum, "omschrijving", AfspraakStatus.NIEUW);
 
 		int id = Testafspraak.getID();
