@@ -119,8 +119,8 @@ public class GebruikteOnderdelenDAO {
 					+ afspraak.getID() + "");
 
 			while (rs.next()) {
-				Onderdeel ond = onderdelenDAO.getOnderdeel(rs.getInt(2));
-				ond.setAantal(rs.getInt(3));
+				Onderdeel ond = onderdelenDAO.getOnderdeel(rs.getInt(3));
+				ond.setAantal(rs.getInt(4));
 				alleOnderdelen.add(ond);
 			}
 			return alleOnderdelen;

@@ -78,16 +78,15 @@
 											items="${OnderdelenDAO.getAllOnderdelen()}">
 											<option value="${Onderdeel.ID}">${Onderdeel.naam}</option>
 										</c:forEach>
-									</select> <label class="sr-only" for="exampleInputAmount">Amount
-										(in dollars)</label>
+									</select>
 									<div class="input-group">
 										<div class="input-group-addon">Aantal</div>
-										<input type="text" class="form-control" name="nieuwAantal"
+										<input type="text" class="form-control" name="aantal"
 											placeholder="ex. 43">
 
 									</div>
 								</div>
-								<button name="run" value="bestellen" type="submit"
+								<button name="toevoegen" value="${Afspraak.ID}" type="submit"
 									class="btn btn-primary pull-right">Toevoegen</button>
 
 							</div>

@@ -30,11 +30,12 @@ public class AfspraakService {
 	private GebruikteOnderdelenDAO gebruikteOnderdelenDAO = new GebruikteOnderdelenDAO();
 	private AfspraakDAO afspraakDAO = new AfspraakDAO();
 	private OnderdelenDAO onderdeelDAO = new OnderdelenDAO();
+	private AutoDAO autoDAO = new AutoDAO();
 	private ArrayList<Afspraak> afspraken = new ArrayList<>();
 
 	public void nieuweAfspraak(Klant klant, int autoId, Date datum,
 			String omschrijving) {
-		Auto auto = AutoDAO.getAutoByID(autoId);
+		Auto auto = autoDAO.getAutoByID(autoId);
 		System.out.println(auto.getId());
 		Afspraak afspraak = new Afspraak(klant, null, auto, datum,
 				omschrijving, AfspraakStatus.NIEUW);
